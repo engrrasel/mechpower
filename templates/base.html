@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+{% block title %}
+MechPower
+{% endblock %}
+
+</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oxanium:wght@300;400;600;700;800&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="{% static 'css/styles.css' %}">
+
+{% block extra_css %}
+{% endblock %}
+
+</head>
+
+<body>
+
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
+
+{% include 'includes/header.html' %}
+
+{% block content %}
+{% endblock %}
+
+{% include 'includes/footer.html' %}
+
+<script src="{% static 'js/script.js' %}">
+</script>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% url 'home' as home_url %}
+
+<nav>
+
+  <a href="{{home_url}}" class="nav-logo">
+      Mech<span>Power</span>
+  </a>
+
+  <ul class="nav-links">
+
+    <li>
+      <a href="{% if request.path == home_url %}#about{% else %}{{home_url}}#about{% endif %}">
+        About
+      </a>
+    </li>
+
+    <li>
+      <a href="{% if request.path == home_url %}#services{% else %}{{home_url}}#services{% endif %}">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="{% if request.path == home_url %}#sectors{% else %}{{home_url}}#sectors{% endif %}">
+        Sectors
+      </a>
+    </li>
+
+    <li>
+      <a href="{% if request.path == home_url %}#blog{% else %}{{home_url}}#blog{% endif %}">
+        Blog
+      </a>
+    </li>
+
+    <li>
+      <a href="{% url 'quiz' %}" class="nav-skill-link">
+        ⚡ FREE SKILL TEST
+      </a>
+    </li>
+
+    <li>
+      <a href="{% if request.path == home_url %}#contact{% else %}{{home_url}}#contact{% endif %}">
+        Contact
+      </a>
+    </li>
+
+  </ul>
+
+  <button
+  class="nav-cta"
+
+  onclick="
+  window.location.href='{{home_url}}#contact'
+  ">
+
+  Get a Quote
+
+  </button>
+
+</nav>

@@ -49,21 +49,49 @@ class Blog(models.Model):
 
 
 class QuizSubmission(models.Model):
-    name = models.CharField(max_length=150)
-    email = models.EmailField()
-    phone = models.CharField(max_length=30)
 
-    quiz_name = models.CharField(max_length=100)
+    name=models.CharField(
+        max_length=150
+    )
 
-    score = models.IntegerField()
-    percentage = models.IntegerField()
+    email=models.EmailField()
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    phone=models.CharField(
+        max_length=30
+    )
+
+    quiz_name=models.CharField(
+        max_length=100
+    )
+
+    score=models.IntegerField(
+        default=0
+    )
+
+    total=models.IntegerField(
+        default=0
+    )
+
+    percentage=models.IntegerField(
+        default=0
+    )
+
+    answers=models.JSONField(
+        default=list,
+        blank=True
+    )
+
+    created_at=models.DateTimeField(
+        auto_now_add=True
+    )
+
 
     def __str__(self):
-        return f"{self.name} - {self.percentage}%"
-    
 
+        return (
+            f"{self.name} - "
+            f"{self.score}/{self.total}"
+        )
 
 
 class Quiz(models.Model):

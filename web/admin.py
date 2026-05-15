@@ -9,22 +9,63 @@ from .models import (
 )
 
 
-class QuestionInline(admin.TabularInline):
-    model = Question
-    extra = 1
+class QuestionInline(
+    admin.TabularInline
+):
+    model=Question
+    extra=1
 
 
-class QuizAdmin(admin.ModelAdmin):
-    inlines = [QuestionInline]
+@admin.register(
+Quiz
+)
+class QuizAdmin(
+admin.ModelAdmin
+):
+
+    inlines=[
+    QuestionInline
+    ]
 
 
-admin.site.register(Project)
+@admin.register(
+QuizSubmission
+)
+class QuizSubmissionAdmin(
+admin.ModelAdmin
+):
 
-admin.site.register(Blog)
+    list_display=(
 
-admin.site.register(QuizSubmission)
+        'name',
+        'quiz_name',
+        'score',
+        'percentage',
+        'created_at'
+
+    )
+
+    search_fields=(
+
+        'name',
+        'email',
+        'phone'
+
+    )
+
+    list_filter=(
+
+        'quiz_name',
+        'created_at'
+
+    )
+
+
 
 admin.site.register(
-    Quiz,
-    QuizAdmin
+Project
+)
+
+admin.site.register(
+Blog
 )

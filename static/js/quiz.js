@@ -1,163 +1,102 @@
-let currentQuiz = 0;
-let currentQuestion = 0;
-let answers = [];
+let currentQuiz=0;
+let currentQuestion=0;
+let answers=[];
 
-const quizContainer =
-document.querySelector('.quiz-grid');
+const quizContainer=
+document.querySelector(
+'.quiz-grid'
+);
+
 
 
 function startQuiz(index){
 
-    currentQuiz = index;
-    currentQuestion = 0;
-    answers = [];
+currentQuiz=index;
 
-    history.pushState(
-    {
-        quizOpen:true,
-        quiz:index
-    },
-    "",
-    "?quiz="+index
-    );
+currentQuestion=0;
 
-    renderQuestion();
+answers=[];
+
+
+history.pushState(
+{
+quizOpen:true,
+quiz:index
+},
+"",
+"?quiz="+index
+);
+
+
+renderQuestion();
 
 }
 
 
 
-/* =======================
-   QUESTION RENDER
-======================= */
+/* ======================
+QUESTION
+====================== */
 
 function renderQuestion(){
 
-    const quiz =
-    QUIZZES[currentQuiz];
+const quiz=
+QUIZZES[currentQuiz];
 
-    if(!quiz) return;
-
-    const question =
-    quiz.questions[currentQuestion];
-
-    const progress =
-    (
-    (currentQuestion+1)
-    /
-    quiz.questions.length
-    )*100;
+if(!quiz) return;
 
 
-quizContainer.innerHTML = `
-
-<div class="quiz-layout">
-
-    <div class="quiz-top">
-
-        <div class="quiz-progress-wrap">
-
-            <div class="quiz-progress-text">
-
-                <span>
-
-                Question
-                ${currentQuestion+1}
-
-                </span>
-
-                <span>
-
-                ${quiz.questions.length}
-                Total
-
-                </span>
-
-            </div>
-
-            <div class="progress">
-
-                <div
-                class="progress-fill"
-
-                style="
-                width:${progress}%">
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+const question=
+quiz.questions[currentQuestion];
 
 
-
-    <div class="question-box">
-
-        <div class="quiz-title">
-
-            ${quiz.title}
-
-        </div>
+const progress=
+(
+(currentQuestion+1)
+/
+quiz.questions.length
+)*100;
 
 
-        <div class="question-number">
+/* header progress update */
 
-            Question
-            ${currentQuestion+1}
+const header=
+document.querySelector(
+'#headerProgress'
+);
 
-        </div>
+if(header){
 
+header.innerHTML=`
 
-        <div class="question-text">
+<div class="quiz-progress-text">
 
-            ${question.q}
+<span>
 
-        </div>
+Question
+${currentQuestion+1}
 
+</span>
 
-        <div class="options-wrap">
+<span>
 
-            ${renderOptions(question)}
+${quiz.questions.length}
+Total
 
-        </div>
+</span>
 
-
-        <div class="quiz-actions">
-
-        ${
-        currentQuestion>0
-
-        ?
-
-        `
-        <button
-        class="nav-btn"
-        onclick="prevQuestion()">
-
-        ← Previous
-
-        </button>
-        `
-
-        :
-
-        `<div></div>`
-        }
+</div>
 
 
-        <button
-        class="skip-btn"
-        onclick="nextQuestion()">
+<div class="progress">
 
-        Skip →
+<div
+class="progress-fill"
 
-        </button>
+style="
+width:${progress}%">
 
-        </div>
-
-    </div>
+</div>
 
 </div>
 
@@ -167,20 +106,109 @@ quizContainer.innerHTML = `
 
 
 
-/* =======================
-   OPTIONS
-======================= */
+/* quiz render */
+
+quizContainer.innerHTML=`
+
+<div class="quiz-layout">
+
+<div class="question-box">
+
+
+<div class="quiz-title">
+
+${quiz.title}
+
+</div>
+
+
+<div class="question-number">
+
+Question
+${currentQuestion+1}
+
+</div>
+
+
+<div class="question-text">
+
+${question.q}
+
+</div>
+
+
+<div class="options-wrap">
+
+${renderOptions(question)}
+
+</div>
+
+
+<div class="quiz-actions">
+
+${
+currentQuestion>0
+
+?
+
+`
+<button
+class="nav-btn"
+onclick="prevQuestion()">
+
+← Previous
+
+</button>
+`
+
+:
+
+`<div></div>`
+
+}
+
+
+<button
+class="skip-btn"
+onclick="nextQuestion()">
+
+Skip →
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+
+
+
+/* ======================
+OPTIONS
+====================== */
 
 function renderOptions(question){
 
 return question.options
-.map((option,index)=>`
+.map(
+(option,index)=>`
 
 <button
 
 class="
 option-btn
-${answers[currentQuestion]===index?'selected':''}
+${answers[currentQuestion]===index
+?
+'selected'
+:
+''
+}
 "
 
 onclick="
@@ -189,7 +217,9 @@ ${index}
 )
 ">
 
-<div class="option-badge">
+<div
+class="
+option-badge">
 
 ${["A","B","C","D"][index]}
 
@@ -203,36 +233,51 @@ ${option}
 
 </button>
 
-`)
+`
+)
 .join('');
 
 }
 
 
 
-/* =======================
-   ANSWER
-======================= */
+/* ======================
+SELECT
+====================== */
 
 function selectAnswer(answer){
 
-answers[currentQuestion]=answer;
+answers[currentQuestion]=
+answer;
+
+
+/* re-render for highlight */
+
+renderQuestion();
+
+
+/* delay then next */
+
+setTimeout(()=>{
 
 goNext();
+
+},500);
 
 }
 
 
 
-/* =======================
-   NAVIGATION
-======================= */
+/* ======================
+NEXT
+====================== */
 
 function nextQuestion(){
 
 goNext();
 
 }
+
 
 
 function goNext(){
@@ -262,6 +307,10 @@ showLeadForm();
 
 
 
+/* ======================
+PREV
+====================== */
+
 function prevQuestion(){
 
 if(
@@ -278,9 +327,9 @@ renderQuestion();
 
 
 
-/* =======================
-   RESULT
-======================= */
+/* ======================
+RESULT
+====================== */
 
 function showLeadForm(){
 
@@ -288,17 +337,19 @@ quizContainer.innerHTML=`
 
 <div class="lead-box">
 
+<div class="lead-icon">
+🎓
+</div>
+
 <h1>
 
-🎓 Get Result & Certificate
+Get Result & Certificate
 
 </h1>
 
 <p>
 
-Complete your information
-to unlock your score
-and receive certificate
+Complete your information to unlock your score and receive your certificate.
 
 </p>
 
@@ -307,10 +358,12 @@ and receive certificate
 id="name"
 placeholder="Full Name">
 
+
 <input
 id="email"
 type="email"
 placeholder="Email Address">
+
 
 <input
 id="phone"
@@ -318,6 +371,7 @@ placeholder="Phone Number">
 
 
 <button
+class="result-btn"
 onclick="submitLead()">
 
 See Result →
@@ -332,7 +386,8 @@ See Result →
 
 
 
-function submitLead(){
+
+async function submitLead(){
 
 const name=
 document
@@ -342,7 +397,6 @@ document
 .value
 .trim();
 
-
 const email=
 document
 .getElementById(
@@ -350,7 +404,6 @@ document
 )
 .value
 .trim();
-
 
 const phone=
 document
@@ -376,18 +429,143 @@ return;
 }
 
 
-alert(
-'ধন্যবাদ 🎉'
+let score=0;
+
+
+const questions=
+QUIZZES[currentQuiz]
+.questions;
+
+
+questions.forEach(
+(q,index)=>{
+
+if(
+answers[index]
+===
+q.correct
+){
+
+score++;
+
+}
+
+});
+
+
+const percentage=
+Math.round(
+(score/questions.length)
+*100
+);
+
+
+const payload={
+
+name:name,
+
+email:email,
+
+phone:phone,
+
+quiz:
+QUIZZES[currentQuiz]
+.title,
+
+score:score,
+
+total:
+questions.length,
+
+percentage:
+percentage,
+
+answers:
+answers
+
+};
+
+
+try{
+
+const response=
+await fetch(
+
+"/save-quiz/",
+
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":
+"application/json"
+
+},
+
+body:
+JSON.stringify(
+payload)
+
+}
 
 );
+
+
+const data=
+await response.json();
+
+
+if(data.success){
+
+quizContainer.innerHTML=`
+
+<div class="lead-box">
+
+<h1>
+
+🎉 Result
+
+</h1>
+
+<h2>
+
+${score}/${questions.length}
+
+</h2>
+
+<p>
+
+Score:
+${percentage}%
+
+</p>
+
+</div>
+
+`;
+
+}
+
+}catch(error){
+
+alert(
+"Submit failed"
+);
+
+console.log(error);
+
+}
 
 }
 
 
 
-/* =======================
-   BACK BUTTON
-======================= */
+
+/* ======================
+BACK BUTTON
+====================== */
 
 window.addEventListener(
 'popstate',
@@ -399,7 +577,9 @@ window.location.search
 );
 
 const quiz=
-params.get("quiz");
+params.get(
+"quiz"
+);
 
 
 if(
@@ -416,9 +596,9 @@ location.reload();
 
 
 
-/* =======================
-   RELOAD
-======================= */
+/* ======================
+PAGE LOAD
+====================== */
 
 document.addEventListener(
 'DOMContentLoaded',

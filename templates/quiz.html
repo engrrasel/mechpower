@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Free Skill Test
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+rel="stylesheet"
+href="{% static 'css/quiz.css' %}">
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<section class="quiz-page">
+
+<div class="container">
+
+
+<!-- HEADER -->
+
+<div class="quiz-page-head">
+
+    <div class="quiz-head-left">
+
+        <p class="quiz-label">
+
+        Knowledge Assessment
+
+        </p>
+
+
+        <h1>
+
+        Free Skill Test
+
+        </h1>
+
+
+        <p class="quiz-sub">
+
+        Test your professional knowledge and receive your certificate after completion.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- Progress -->
+
+    <div
+    class="quiz-progress-wrap"
+    id="headerProgress">
+
+        <div
+        class="quiz-progress-text">
+
+            <span>
+
+            Available
+
+            </span>
+
+            <span>
+
+            {{quizzes.count}}
+            Quiz
+
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div
+            class="progress-fill"
+            style="width:100%">
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- QUIZ GRID -->
+
+<div class="quiz-grid">
+
+{% for quiz in quizzes %}
+
+<div
+class="quiz-card"
+onclick="
+startQuiz(
+{{forloop.counter0}}
+)
+">
+
+<div class="quiz-card-top">
+
+<div class="quiz-badge">
+
+{{ quiz.short_title }}
+
+</div>
+
+</div>
+
+
+
+<h2>
+
+{{ quiz.title }}
+
+</h2>
+
+
+<p>
+
+{{quiz.questions.count}}
+
+Questions Available
+
+</p>
+
+
+<button
+type="button">
+
+Start Assessment →
+
+</button>
+
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+
+</div>
+
+</section>
+
+
+
+
+
+<script>
+
+const QUIZZES=[
+
+{% for quiz in quizzes %}
+
+{
+
+title:
+`{{quiz.title|escapejs}}`,
+
+
+shortTitle:
+`{{quiz.short_title|escapejs}}`,
+
+
+questions:[
+
+{% for q in quiz.questions.all %}
+
+{
+
+q:
+`{{q.question|escapejs}}`,
+
+
+options:[
+
+`{{q.option_a|escapejs}}`,
+`{{q.option_b|escapejs}}`,
+`{{q.option_c|escapejs}}`,
+`{{q.option_d|escapejs}}`
+
+],
+
+
+correct:
+{{q.correct}},
+
+
+explanation:
+`{{q.explanation|escapejs}}`
+
+},
+
+{% endfor %}
+
+]
+
+},
+
+{% endfor %}
+
+];
+
+</script>
+
+{% endblock %}
+
+
+
+
+{% block extra_js %}
+
+<script
+src="{% static 'js/quiz.js' %}">
+</script>
+
+{% endblock %}

@@ -459,48 +459,78 @@ MechPower Home
         </div>
       </div>
 
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="f-group">
-            <label class="f-label">Full Name</label>
-            <input class="f-input" type="text" placeholder="Your full name">
-          </div>
-          <div class="f-group">
-            <label class="f-label">Company</label>
-            <input class="f-input" type="text" placeholder="Company name">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="f-group">
-            <label class="f-label">Email</label>
-            <input class="f-input" type="email" placeholder="your@email.com">
-          </div>
-          <div class="f-group">
-            <label class="f-label">Phone</label>
-            <input class="f-input" type="tel" placeholder="+880 ...">
-          </div>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Service Interest</label>
-          <select class="f-select f-input">
-            <option value="">— Select a service —</option>
-            <option>Industrial Spare Parts Supply</option>
-            <option>Industrial Solar System</option>
-            <option>EPC Contract</option>
-            <option>Energy & Power Solutions</option>
-            <option>Rooftop Solar</option>
-            <option>Emergency Parts Delivery</option>
-            <option>General Inquiry</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label class="f-label">Project Details / Message</label>
-          <textarea class="f-textarea" placeholder="Describe your project, requirement, or inquiry..."></textarea>
-        </div>
-        <button class="btn-submit" onclick="alert('Thank you! We will contact you within 24 hours.')">
-          Send Inquiry →
-        </button>
-      </div>
+<div class="contact-form">
+
+<form method="POST">
+{% csrf_token %}
+
+<div class="form-row">
+    <div class="f-group">
+        <label class="f-label">Full Name</label>
+        <input class="f-input"
+               type="text"
+               name="full_name"
+               placeholder="Your full name">
+    </div>
+
+    <div class="f-group">
+        <label class="f-label">Company</label>
+        <input class="f-input"
+               type="text"
+               name="company"
+               placeholder="Company name">
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="f-group">
+        <label class="f-label">Email</label>
+        <input class="f-input"
+               type="email"
+               name="email"
+               placeholder="your@email.com">
+    </div>
+
+    <div class="f-group">
+        <label class="f-label">Phone</label>
+        <input class="f-input"
+               type="tel"
+               name="phone"
+               placeholder="+880 ...">
+    </div>
+</div>
+
+<div class="f-group">
+    <label class="f-label">Service Interest</label>
+
+    <select class="f-select f-input"
+            name="service">
+        <option value="">— Select a service —</option>
+        <option>Industrial Spare Parts Supply</option>
+        <option>Industrial Solar System</option>
+        <option>EPC Contract</option>
+        <option>Energy & Power Solutions</option>
+    </select>
+</div>
+
+<div class="f-group">
+    <label class="f-label">
+        Project Details / Message
+    </label>
+
+    <textarea class="f-textarea"
+              name="message"
+              placeholder="Describe your project">
+    </textarea>
+</div>
+
+<button type="submit" class="btn-submit">
+    Send Inquiry →
+</button>
+
+</form>
+
+</div>
     </div>
   </div>
 </section>

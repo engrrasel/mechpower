@@ -1215,3 +1215,35 @@ opacity:1 !important;
 visibility:visible !important;
 transform:translateY(0) !important;
 }
+
+.contact-form form{
+    width:100%;
+}
+
+.contact-wrap{
+    display:grid;
+    grid-template-columns:1fr 1.4fr;
+    gap:50px;
+    align-items:start;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.f-group{
+    margin-bottom:15px;
+}
+
+.f-input,
+.f-textarea,
+.f-select{
+    width:100%;
+    box-sizing:border-box;
+}
+
+.f-textarea{
+    min-height:140px;
+}

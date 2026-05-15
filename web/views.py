@@ -1,25 +1,16 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Project, Blog
-
-from .models import Quiz
-
-import json
-
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import QuizSubmission
+from .models import (
+    Project,
+    Blog,
+    Quiz,
+    Contact,
+    QuizSubmission
+)
 
-
-
-def home(request):
-    projects = Project.objects.all().order_by('-created_at')
-    blogs = Blog.objects.all().order_by('-created_at')
-
-    return render(request,'index.html',{
-        'projects':projects,
-        'blogs':blogs
-    })
+import json
 
 def blog_detail(request, slug):
     blog = get_object_or_404(
@@ -90,3 +81,33 @@ def save_quiz(request):
     return JsonResponse({
         "success": False
     })
+
+
+
+
+def home(request):
+
+    if request.method == "POST":
+
+        Contact.objects.create(
+            full_name=request.POST.get("full_name"),
+            company=request.POST.get("company"),
+            email=request.POST.get("email"),
+            phone=request.POST.get("phone"),
+            service=request.POST.get("service"),
+            message=request.POST.get("message"),
+        )
+
+        return redirect('/')
+
+    projects = Project.objects.all().order_by('-created_at')
+    blogs = Blog.objects.all().order_by('-created_at')
+
+    return render(
+        request,
+        'index.html',
+        {
+            'projects': projects,
+            'blogs': blogs
+        }
+    )

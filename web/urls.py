@@ -4,11 +4,10 @@ from .views import (
     home,
     blog_detail,
     quiz_page,
-    save_quiz
+    save_quiz,
 )
 
-
-urlpatterns=[
+urlpatterns = [
 
     path(
         '',

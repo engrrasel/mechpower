@@ -23,31 +23,76 @@ class Project(models.Model):
 
 
 
+
+from django.db import models
+from django.utils.text import slugify
+
+
 class Blog(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(blank=True, unique=True)
+
+    MEDIA_CHOICES = (
+        ('image', 'Image'),
+        ('video', 'YouTube Video'),
+    )
+
+    title = models.CharField(
+        max_length=200
+    )
+
+    slug = models.SlugField(
+        blank=True,
+        unique=True
+    )
+
+    media_type = models.CharField(
+        max_length=20,
+        choices=MEDIA_CHOICES,
+        default='image'
+    )
+
+    image = models.ImageField(
+        upload_to='blogs/',
+        blank=True,
+        null=True
+    )
+
+    youtube_link = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    facebook_link = models.URLField(
+        blank=True,
+        null=True
+    )
+
+    tiktok_link = models.URLField(
+        blank=True,
+        null=True
+    )
 
     short_description = models.TextField()
-    image = models.ImageField(upload_to='blogs/')
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def save(self,*args,**kwargs):
+
         if not self.slug:
-            generated_slug = slugify(self.title)
+            self.slug = slugify(
+                self.title
+            )
 
-            if not generated_slug:
-                generated_slug = str(uuid.uuid4())[:8]
-
-            self.slug = generated_slug
-
-        super().save(*args,**kwargs)
+        super().save(
+            *args,
+            **kwargs
+        )
 
     def __str__(self):
         return self.title
     
-
-
+    
 class QuizSubmission(models.Model):
 
     name=models.CharField(

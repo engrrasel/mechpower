@@ -11,9 +11,6 @@
 
 <div class="blog-hero">
 
-{% if blog.media_type == 'video' and youtube_id %}
-
-<div class="video-wrapper">
 
 {% if blog.media_type == 'video' and youtube_id %}
 
@@ -21,17 +18,13 @@
 
     <iframe
         class="hero-video"
-        src="https://www.youtube.com/embed/{{ youtube_id }}?si=0&playsinline=1&rel=0"
+        src="https://www.youtube.com/embed/{{ youtube_id }}?playsinline=1&rel=0"
         title="YouTube video player"
         frameborder="0"
         referrerpolicy="strict-origin-when-cross-origin"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
     </iframe>
-
-</div>
-
-{% endif %}
 
 </div>
 
@@ -42,6 +35,9 @@ src="{{ blog.image.url }}"
 class="hero-img">
 
 {% endif %}
+
+</div>
+
 
 
 <div class="hero-overlay"></div>
@@ -158,10 +154,13 @@ overflow:hidden;
 }
 
 
+/* Video */
+
 .video-wrapper{
 position:absolute;
 inset:0;
 overflow:hidden;
+z-index:1;
 }
 
 .hero-video{
@@ -173,6 +172,8 @@ opacity:1;
 }
 
 
+/* Image */
+
 .hero-img{
 width:100%;
 height:100%;
@@ -180,18 +181,8 @@ object-fit:cover;
 filter:brightness(.3);
 }
 
-.video-wrapper{
-position:absolute;
-inset:0;
-z-index:1;
-}
 
-.hero-video{
-width:100%;
-height:100%;
-border:none;
-pointer-events:auto;
-}
+/* Overlay */
 
 .hero-overlay{
 position:absolute;
@@ -205,16 +196,12 @@ rgba(11,15,23,.3),
 transparent
 );
 
-pointer-events:none; /* খুব গুরুত্বপূর্ণ */
+pointer-events:none;
 z-index:2;
 }
 
-.hero-content{
-position:absolute;
-z-index:10;
-}
 
-
+/* Content */
 
 .hero-content{
 
@@ -224,8 +211,7 @@ left:50%;
 
 bottom:70px;
 
-transform:
-translateX(-50%);
+transform:translateX(-50%);
 
 width:min(1200px,90%);
 
@@ -308,7 +294,7 @@ color:#cfcfcf;
 .social-links{
 display:flex;
 gap:10px;
-flex-wrap:nowrap;   /* এক লাইনে রাখবে */
+flex-wrap:nowrap;
 align-items:center;
 }
 
@@ -333,17 +319,15 @@ transition:.3s;
 
 
 .social-btn:hover{
-
-transform:
-translateY(-3px);
-
+transform:translateY(-3px);
 }
 
 
 .blog-container{
 width:min(950px,92%);
 margin:auto;
-margin-top:-20px; /* -60 থেকে কমালাম */
+
+margin-top:1px;
 
 position:relative;
 z-index:100;
@@ -359,8 +343,7 @@ padding:55px;
 border-radius:30px;
 
 box-shadow:
-0 20px 70px
-rgba(0,0,0,.35);
+0 20px 70px rgba(0,0,0,.35);
 
 }
 
@@ -413,20 +396,19 @@ gap:15px;
 
 .hero-right{
 width:100%;
-display:flex;
 justify-content:flex-start;
 }
 
 .social-links{
-display:flex;
+
 justify-content:flex-start;
-flex-wrap:nowrap;   /* এক লাইনে */
 gap:10px;
 
 max-width:100%;
 overflow-x:auto;
 
 -webkit-overflow-scrolling:touch;
+
 scrollbar-width:none;
 }
 
@@ -435,9 +417,13 @@ display:none;
 }
 
 .social-btn{
+
 flex:0 0 auto;
+
 white-space:nowrap;
+
 padding:10px 14px;
+
 font-size:13px;
 }
 
@@ -449,21 +435,12 @@ font-size:34px;
 padding:30px;
 }
 
-}
-
-.blog-container{
-margin-top:1 px; /* negative সরিয়ে নিচে নামালাম */
-}
-
-.hero-content{
-bottom:30px; /* একটু উপরে */
-}
-
 .hero-right{
 margin-top:10px;
 }
 
 }
+
 </style>
 
 {% endblock %}

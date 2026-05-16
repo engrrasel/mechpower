@@ -109,6 +109,33 @@ def home(request):
 
 
 # Blog Detail
+from django.shortcuts import render, get_object_or_404
+from urllib.parse import urlparse, parse_qs
+
+
+def get_youtube_id(url):
+
+    parsed = urlparse(url)
+
+    # youtube.com/watch?v=xxxx
+    if "youtube.com" in parsed.netloc:
+
+        return parse_qs(
+            parsed.query
+        ).get(
+            "v",
+            [None]
+        )[0]
+
+    # youtu.be/xxxx
+    elif "youtu.be" in parsed.netloc:
+
+        return parsed.path.lstrip("/")
+
+    return None
+
+
+
 def blog_detail(request, slug):
 
     blog = get_object_or_404(

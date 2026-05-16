@@ -3,6 +3,7 @@ Django settings for mechpower project.
 """
 
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,9 +12,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 # =========================
 
-SECRET_KEY = 'django-insecure-_zrerj9=*owlndt*y^l(0ny0d!rea4jm@vy277d)v7=dkv%nkr'
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "django-insecure-dev-key"
+)
 
-DEBUG = False
+DEBUG = os.environ.get(
+    "DEBUG",
+    "True"
+) == "True"
+
 
 ALLOWED_HOSTS = [
     "mechpower.net",
@@ -34,6 +42,12 @@ SECURE_PROXY_SSL_HEADER = (
     "HTTP_X_FORWARDED_PROTO",
     "https"
 )
+
+USE_X_FORWARDED_HOST = True
+
+
+# iframe / embed support
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 
 # =========================

@@ -222,11 +222,11 @@ max-width:700px;
 
 
 .hero-right{
-width:320px;
 display:flex;
 justify-content:flex-end;
+align-items:center;
+flex-shrink:0;
 }
-
 
 
 .blog-badge{
@@ -279,15 +279,10 @@ color:#cfcfcf;
 
 
 .social-links{
-
 display:flex;
-
-flex-wrap:wrap;
-
 gap:10px;
-
-justify-content:flex-end;
-
+flex-wrap:nowrap;   /* এক লাইনে রাখবে */
+align-items:center;
 }
 
 
@@ -319,17 +314,12 @@ translateY(-3px);
 
 
 .blog-container{
-
 width:min(950px,92%);
-
 margin:auto;
-
-margin-top:-60px;
+margin-top:-20px; /* -60 থেকে কমালাম */
 
 position:relative;
-
 z-index:100;
-
 }
 
 
@@ -388,21 +378,40 @@ height:450px;
 }
 
 .hero-content{
-
 flex-direction:column;
-
 align-items:flex-start;
-
 bottom:30px;
-
+gap:15px;
 }
 
 .hero-right{
 width:100%;
+display:flex;
+justify-content:flex-start;
 }
 
 .social-links{
+display:flex;
 justify-content:flex-start;
+flex-wrap:nowrap;   /* এক লাইনে */
+gap:10px;
+
+max-width:100%;
+overflow-x:auto;
+
+-webkit-overflow-scrolling:touch;
+scrollbar-width:none;
+}
+
+.social-links::-webkit-scrollbar{
+display:none;
+}
+
+.social-btn{
+flex:0 0 auto;
+white-space:nowrap;
+padding:10px 14px;
+font-size:13px;
 }
 
 .blog-title{
@@ -415,6 +424,19 @@ padding:30px;
 
 }
 
+.blog-container{
+margin-top:1 px; /* negative সরিয়ে নিচে নামালাম */
+}
+
+.hero-content{
+bottom:30px; /* একটু উপরে */
+}
+
+.hero-right{
+margin-top:10px;
+}
+
+}
 </style>
 
 {% endblock %}

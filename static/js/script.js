@@ -1,4 +1,22 @@
 ﻿/* ==========================
+   MOBILE MENU
+========================== */
+
+const menuBtn = document.getElementById("menuToggle");
+const mobileNav = document.querySelector(".nav-links");
+
+if(menuBtn && mobileNav){
+
+menuBtn.onclick = ()=>{
+
+mobileNav.classList.toggle("show");
+
+};
+
+}
+
+
+/* ==========================
    CUSTOM CURSOR
 ========================== */
 
@@ -50,9 +68,7 @@ e.target.closest(
 
 );
 
-if(
-target
-){
+if(target){
 
 cur.style.width='20px';
 cur.style.height='20px';
@@ -74,9 +90,7 @@ e.target.closest(
 
 );
 
-if(
-target
-){
+if(target){
 
 cur.style.width='12px';
 cur.style.height='12px';
@@ -96,40 +110,25 @@ cur.style.height='12px';
 function initReveal(){
 
 const reveals=
-document.querySelectorAll(
-'.reveal'
-);
+document.querySelectorAll('.reveal');
 
+reveals.forEach(el=>{
 
-reveals.forEach(
-el=>{
-
-el.classList.add(
-'visible'
-);
+el.classList.add('visible');
 
 });
 
 }
 
-
 document.addEventListener(
 'DOMContentLoaded',
-()=>{
-
-initReveal();
-
-});
-
+initReveal
+);
 
 window.addEventListener(
 'load',
-()=>{
-
-initReveal();
-
-});
-
+initReveal
+);
 
 
 /* ==========================
@@ -137,10 +136,7 @@ initReveal();
 ========================== */
 
 document
-.querySelectorAll(
-'a[href^="#"]'
-)
-
+.querySelectorAll('a[href^="#"]')
 .forEach(anchor=>{
 
 anchor.addEventListener(
@@ -149,30 +145,33 @@ function(e){
 
 const target=
 document.querySelector(
-this.getAttribute(
-'href'
-)
+this.getAttribute('href')
 );
 
-if(
-target
-){
+if(target){
 
 e.preventDefault();
 
 target.scrollIntoView({
 
-behavior:
-'smooth'
+behavior:'smooth'
 
 });
+
+
+if(mobileNav){
+
+mobileNav.classList.remove(
+'show'
+);
+
+}
 
 }
 
 });
 
 });
-
 
 
 /* ==========================
@@ -184,7 +183,7 @@ document.querySelectorAll(
 'section[id]'
 );
 
-const navLinks=
+const activeLinks=
 document.querySelectorAll(
 '.nav-links a'
 );
@@ -202,22 +201,16 @@ section=>{
 const top=
 section.offsetTop-150;
 
-if(
-pageYOffset>=top
-){
+if(pageYOffset>=top){
 
 current=
-section.getAttribute(
-'id'
-);
+section.getAttribute('id');
 
 }
 
 });
 
-
-
-navLinks.forEach(
+activeLinks.forEach(
 link=>{
 
 link.classList.remove(
@@ -226,9 +219,8 @@ link.classList.remove(
 
 if(
 
-link.getAttribute(
-'href'
-)==='#'+current
+link.getAttribute('href')
+==='#'+current
 
 ){
 

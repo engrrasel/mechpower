@@ -7,15 +7,15 @@
 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'css/blog_detail.css' %}">
+
 <section class="blog-detail-page">
 
 <div class="blog-hero">
 
-
 {% if blog.media_type == 'video' and youtube_id %}
 
 <div class="video-wrapper">
-
     <iframe
         class="hero-video"
         src="https://www.youtube.com/embed/{{ youtube_id }}?playsinline=1&rel=0"
@@ -25,7 +25,6 @@
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
     </iframe>
-
 </div>
 
 {% elif blog.image %}
@@ -36,12 +35,7 @@ class="hero-img">
 
 {% endif %}
 
-</div>
-
-
-
 <div class="hero-overlay"></div>
-
 
 <div class="hero-content">
 
@@ -62,43 +56,25 @@ Published:
 
 </div>
 
-
 <div class="hero-right">
 
 <div class="social-links">
 
 {% if blog.youtube_link %}
-<a
-href="{{ blog.youtube_link }}"
-target="_blank"
-class="social-btn">
-
+<a href="{{ blog.youtube_link }}" target="_blank" class="social-btn">
 ▶ YouTube
-
 </a>
 {% endif %}
-
 
 {% if blog.facebook_link %}
-<a
-href="{{ blog.facebook_link }}"
-target="_blank"
-class="social-btn">
-
+<a href="{{ blog.facebook_link }}" target="_blank" class="social-btn">
 Facebook
-
 </a>
 {% endif %}
-
 
 {% if blog.tiktok_link %}
-<a
-href="{{ blog.tiktok_link }}"
-target="_blank"
-class="social-btn">
-
+<a href="{{ blog.tiktok_link }}" target="_blank" class="social-btn">
 TikTok
-
 </a>
 {% endif %}
 
@@ -109,26 +85,17 @@ TikTok
 </div>
 
 </div>
-
-
-
 
 <div class="blog-container">
 
 <div class="blog-card">
 
 <p class="blog-text">
-
 {{ blog.short_description }}
-
 </p>
 
-<a
-href="/"
-class="back-btn">
-
+<a href="/" class="back-btn">
 ← Back Home
-
 </a>
 
 </div>
@@ -137,310 +104,6 @@ class="back-btn">
 
 </section>
 
-
-<style>
-
-.blog-detail-page{
-background:#0b0f17;
-min-height:100vh;
-padding-bottom:100px;
-overflow:hidden;
-}
-
-.blog-hero{
-height:560px;
-position:relative;
-overflow:hidden;
-}
-
-
-/* Video */
-
-.video-wrapper{
-position:absolute;
-inset:0;
-overflow:hidden;
-z-index:1;
-}
-
-.hero-video{
-width:100%;
-height:100%;
-border:none;
-pointer-events:auto;
-opacity:1;
-}
-
-
-/* Image */
-
-.hero-img{
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(.3);
-}
-
-
-/* Overlay */
-
-.hero-overlay{
-position:absolute;
-inset:0;
-
-background:
-linear-gradient(
-to top,
-#0b0f17 10%,
-rgba(11,15,23,.3),
-transparent
-);
-
-pointer-events:none;
-z-index:2;
-}
-
-
-/* Content */
-
-.hero-content{
-
-position:absolute;
-
-left:50%;
-
-bottom:70px;
-
-transform:translateX(-50%);
-
-width:min(1200px,90%);
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:flex-end;
-
-gap:40px;
-
-z-index:20;
-
-}
-
-
-.hero-left{
-flex:1;
-max-width:700px;
-}
-
-
-.hero-right{
-display:flex;
-justify-content:flex-end;
-align-items:center;
-flex-shrink:0;
-}
-
-
-.blog-badge{
-
-display:inline-block;
-
-padding:8px 16px;
-
-background:#e8611a;
-
-border-radius:50px;
-
-font-size:12px;
-
-font-weight:700;
-
-letter-spacing:1px;
-
-color:white;
-
-margin-bottom:20px;
-
-}
-
-
-.blog-title{
-
-font-size:58px;
-
-line-height:1.1;
-
-font-weight:900;
-
-color:white;
-
-margin:0;
-
-}
-
-
-.blog-meta{
-
-margin-top:18px;
-
-font-size:14px;
-
-color:#cfcfcf;
-
-}
-
-
-.social-links{
-display:flex;
-gap:10px;
-flex-wrap:nowrap;
-align-items:center;
-}
-
-
-.social-btn{
-
-padding:12px 18px;
-
-background:#e8611a;
-
-border-radius:50px;
-
-text-decoration:none;
-
-color:white;
-
-font-weight:700;
-
-transition:.3s;
-
-}
-
-
-.social-btn:hover{
-transform:translateY(-3px);
-}
-
-
-.blog-container{
-width:min(950px,92%);
-margin:auto;
-
-margin-top:1px;
-
-position:relative;
-z-index:100;
-}
-
-
-.blog-card{
-
-background:#131b27;
-
-padding:55px;
-
-border-radius:30px;
-
-box-shadow:
-0 20px 70px rgba(0,0,0,.35);
-
-}
-
-
-.blog-text{
-
-color:#ddd;
-
-font-size:18px;
-
-line-height:2;
-
-}
-
-
-.back-btn{
-
-display:inline-block;
-
-margin-top:40px;
-
-padding:14px 24px;
-
-background:white;
-
-color:black;
-
-border-radius:50px;
-
-text-decoration:none;
-
-font-weight:700;
-
-}
-
-
-
-@media(max-width:768px){
-
-.blog-hero{
-height:450px;
-}
-
-.hero-content{
-flex-direction:column;
-align-items:flex-start;
-bottom:30px;
-gap:15px;
-}
-
-.hero-right{
-width:100%;
-justify-content:flex-start;
-}
-
-.social-links{
-
-justify-content:flex-start;
-gap:10px;
-
-max-width:100%;
-overflow-x:auto;
-
--webkit-overflow-scrolling:touch;
-
-scrollbar-width:none;
-}
-
-.social-links::-webkit-scrollbar{
-display:none;
-}
-
-.social-btn{
-
-flex:0 0 auto;
-
-white-space:nowrap;
-
-padding:10px 14px;
-
-font-size:13px;
-}
-
-.blog-title{
-font-size:34px;
-}
-
-.blog-card{
-padding:30px;
-}
-
-.hero-right{
-margin-top:10px;
-}
-
-}
-
-</style>
+<script src="{% static 'js/blog_detail.js' %}"></script>
 
 {% endblock %}

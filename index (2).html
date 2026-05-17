@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechPower Solutions — Company Profile 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --or: #E8611A;
+  --am: #F5A623;
+  --nv: #0B1622;
+  --dk: #0E1C2A;
+  --st: #162336;
+  --pl: #1E3045;
+  --mi: #3A5570;
+  --lt: #7A9BB5;
+  --wh: #D8E8F2;
+  --gg: rgba(232,97,26,0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--nv);
+  color: var(--wh);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.cur {
+  position: fixed; width:12px; height:12px;
+  border-radius:50%; background: var(--or);
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, opacity 0.2s;
+  mix-blend-mode: screen;
+}
+.cur2 {
+  position:fixed; width:36px; height:36px;
+  border-radius:50%; border:1px solid rgba(232,97,26,0.4);
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition: all 0.15s ease;
+}
+
+/* ─── NAV ─── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:1.2rem 3rem;
+  display:flex; align-items:center; justify-content:space-between;
+  background: linear-gradient(to bottom, rgba(11,22,34,0.95), transparent);
+  backdrop-filter: blur(10px);
+}
+
+.nav-logo {
+  font-family:'Bebas Neue'; font-size:1.6rem; letter-spacing:3px;
+  color:var(--wh); text-decoration:none;
+}
+.nav-logo span { color:var(--or); }
+
+.nav-links { display:flex; gap:2.5rem; list-style:none; }
+.nav-links a {
+  color:var(--lt); font-size:0.78rem; letter-spacing:2px;
+  text-transform:uppercase; text-decoration:none;
+  transition:color 0.2s;
+  font-family:'Oxanium'; font-weight:400;
+}
+.nav-links a:hover { color:var(--or); }
+
+.nav-cta {
+  background: var(--or); color:#fff;
+  font-family:'Oxanium'; font-size:0.7rem; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.6rem 1.4rem; border:none; cursor:none;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition:background 0.2s;
+}
+.nav-cta:hover { background:var(--am); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh; position:relative;
+  display:flex; align-items:center;
+  overflow:hidden;
+}
+
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 70% 70% at 60% 40%, rgba(232,97,26,0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 15% 70%, rgba(245,166,35,0.06) 0%, transparent 60%),
+    linear-gradient(170deg, #0B1622 0%, #091420 60%, #0D1A28 100%);
+}
+
+/* animated grid */
+.hero-grid {
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(232,97,26,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,97,26,0.05) 1px, transparent 1px);
+  background-size:80px 80px;
+  animation:gridMove 20s linear infinite;
+  mask-image:radial-gradient(ellipse 80% 90% at 50% 50%, black 30%, transparent 80%);
+}
+@keyframes gridMove { from{transform:translateY(0)} to{transform:translateY(80px)} }
+
+/* diagonal slash */
+.hero-slash {
+  position:absolute; right:-5%; bottom:-10%;
+  width:55%; height:130%;
+  background: linear-gradient(160deg, rgba(232,97,26,0.04) 0%, rgba(232,97,26,0.01) 100%);
+  border-left:1px solid rgba(232,97,26,0.12);
+  transform:skewX(-8deg);
+}
+
+/* rotating gear */
+.hero-gear {
+  position:absolute; right:5%; top:50%;
+  transform:translateY(-50%);
+  width:480px; height:480px; opacity:0.06;
+  animation: gearSpin 80s linear infinite;
+}
+@keyframes gearSpin { to { transform:translateY(-50%) rotate(360deg); } }
+
+.hero-inner {
+  position:relative; z-index:2;
+  padding:0 3rem; max-width:1200px; margin:0 auto; width:100%;
+  padding-top:8rem;
+}
+
+.hero-year {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'Oxanium'; font-size:0.7rem; font-weight:600;
+  letter-spacing:5px; color:var(--or); text-transform:uppercase;
+  margin-bottom:2rem;
+  animation: fadeSlide 1s ease both;
+}
+.hero-year::before {
+  content:''; width:40px; height:1px; background:var(--or);
+}
+
+.hero-h1 {
+  font-family:'Bebas Neue';
+  font-size:clamp(4rem, 10vw, 9rem);
+  line-height:0.9;
+  letter-spacing:2px;
+  animation: fadeSlide 1s 0.1s ease both;
+}
+.hero-h1 .line1 { color:var(--lt); display:block; }
+.hero-h1 .line2 { color:var(--or); display:block; }
+.hero-h1 .line3 {
+  display:block; color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.15);
+  font-size:0.6em; letter-spacing:8px;
+}
+
+.hero-sub {
+  margin-top:2rem; max-width:500px;
+  font-size:1rem; line-height:1.8; color:var(--lt);
+  animation: fadeSlide 1s 0.2s ease both;
+}
+
+.hero-ctas {
+  display:flex; gap:1rem; margin-top:2.5rem; flex-wrap:wrap;
+  animation: fadeSlide 1s 0.3s ease both;
+}
+
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--or); color:#fff;
+  font-family:'Oxanium'; font-size:0.78rem; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.9rem 2rem; text-decoration:none;
+  clip-path: polygon(10px 0%,100% 0%,calc(100%-10px) 100%,0% 100%);
+  transition:all 0.25s;
+}
+.btn-primary:hover { background:var(--am); letter-spacing:3px; }
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:10px;
+  background:transparent; color:var(--wh);
+  font-family:'Oxanium'; font-size:0.78rem; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.9rem 2rem; text-decoration:none;
+  border:1px solid rgba(255,255,255,0.15);
+  transition:all 0.25s;
+}
+.btn-outline:hover { border-color:var(--or); color:var(--or); }
+
+/* scroll indicator */
+.scroll-ind {
+  position:absolute; bottom:2.5rem; left:3rem;
+  display:flex; align-items:center; gap:12px;
+  font-family:'Oxanium'; font-size:0.65rem; letter-spacing:3px;
+  color:var(--mi); text-transform:uppercase;
+  animation: fadeSlide 1.5s 0.5s ease both;
+}
+.scroll-line {
+  width:1px; height:50px;
+  background:linear-gradient(to bottom, var(--or), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+/* hero stats */
+.hero-stats {
+  position:absolute; right:3rem; bottom:3rem; z-index:2;
+  display:flex; flex-direction:column; gap:1rem;
+  animation: fadeSlide 1s 0.4s ease both;
+}
+.hstat {
+  text-align:right;
+}
+.hstat-num {
+  font-family:'Bebas Neue'; font-size:2rem; color:var(--or);
+  line-height:1; letter-spacing:2px;
+}
+.hstat-label {
+  font-family:'Oxanium'; font-size:0.6rem; letter-spacing:2px;
+  color:var(--mi); text-transform:uppercase;
+}
+
+@keyframes fadeSlide { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── TICKER ─── */
+.ticker {
+  position: sticky;
+  top: 78px; /* nav height */
+  z-index: 90;
+
+  background: var(--or);
+  padding: 0.6rem 0;
+  overflow: hidden;
+
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.ticker-inner {
+  display:flex;
+  gap:4rem;
+  white-space:nowrap;
+  animation:tickerMove 30s linear infinite;
+}
+
+.ticker-inner span {
+  font-family:'Oxanium';
+  font-size:0.7rem;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:#fff;
+  flex-shrink:0;
+}
+
+.ticker-dot {
+  color:rgba(255,255,255,0.4);
+}
+
+@keyframes tickerMove {
+  from { transform:translateX(0); }
+  to { transform:translateX(-50%); }
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .ticker{
+    top: 64px;
+  }
+}
+
+
+/* ─── SECTION BASE ─── */
+.sec {
+  max-width:1200px; margin:0 auto;
+  padding:7rem 3rem;
+}
+
+.sec-label {
+  font-family:'Oxanium'; font-size:0.65rem; font-weight:700;
+  letter-spacing:5px; color:var(--or); text-transform:uppercase;
+  margin-bottom:0.75rem;
+  display:flex; align-items:center; gap:14px;
+}
+.sec-label::before { content:''; width:30px; height:1px; background:var(--or); }
+
+.sec-title {
+  font-family:'Bebas Neue';
+  font-size:clamp(2.5rem,5vw,4rem);
+  letter-spacing:2px; line-height:1;
+  margin-bottom:1.5rem;
+}
+
+/* ─── ABOUT SECTION ─── */
+.about-wrap {
+  display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+}
+.about-left .big-text {
+  font-family:'Bebas Neue'; font-size:clamp(3rem,6vw,5rem);
+  line-height:1; letter-spacing:1px; color:var(--wh);
+}
+.about-left .big-text em { color:var(--or); font-style:normal; }
+.about-left .tagline {
+  font-size:0.95rem; line-height:1.9; color:var(--lt);
+  margin-top:1.5rem;
+}
+
+.about-right { display:flex; flex-direction:column; gap:1.5rem; }
+
+.about-block {
+  border-left:2px solid var(--or);
+  padding:1rem 1.5rem;
+  background:rgba(232,97,26,0.03);
+  position:relative; overflow:hidden;
+  transition:all 0.3s;
+}
+.about-block::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to right,rgba(232,97,26,0.05),transparent);
+  transform:translateX(-100%); transition:transform 0.4s;
+}
+.about-block:hover::before { transform:translateX(0); }
+.about-block:hover { border-left-color:var(--am); }
+.ab-title {
+  font-family:'Oxanium'; font-size:0.8rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--am);
+  margin-bottom:0.4rem;
+}
+.ab-text { font-size:0.9rem; line-height:1.7; color:var(--lt); }
+
+/* ─── SERVICES ─── */
+.services-bg { background:var(--dk); position:relative; overflow:hidden; }
+.services-bg::before {
+  content:''; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.04);
+  margin-top:3rem;
+}
+
+.svc-card {
+  background:var(--dk);
+  padding:2.5rem 2rem;
+  position:relative; overflow:hidden;
+  transition:all 0.4s;
+}
+.svc-card:hover { background:var(--st); }
+
+.svc-num {
+  font-family:'Bebas Neue'; font-size:4rem; color:rgba(232,97,26,0.08);
+  line-height:1; position:absolute; top:1rem; right:1.5rem;
+  letter-spacing:2px; transition:color 0.3s;
+}
+.svc-card:hover .svc-num { color:rgba(232,97,26,0.15); }
+
+.svc-icon-wrap {
+  width:52px; height:52px;
+  background:rgba(232,97,26,0.1);
+  display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(6px 0%,100% 0%,calc(100%-6px) 100%,0% 100%);
+  margin-bottom:1.5rem;
+  transition:background 0.3s;
+}
+.svc-card:hover .svc-icon-wrap { background:rgba(232,97,26,0.2); }
+
+.svc-icon { font-size:1.4rem; }
+
+.svc-title {
+  font-family:'Oxanium'; font-size:0.85rem; font-weight:700;
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--wh);
+  margin-bottom:0.75rem;
+}
+.svc-desc { font-size:0.85rem; line-height:1.75; color:var(--lt); }
+
+.svc-bar {
+  position:absolute; bottom:0; left:0;
+  height:2px; width:0; background:linear-gradient(to right,var(--or),var(--am));
+  transition:width 0.4s;
+}
+.svc-card:hover .svc-bar { width:100%; }
+
+/* ─── WHY US ─── */
+.why-wrap {
+  display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start;
+}
+
+.why-list { display:flex; flex-direction:column; gap:0; }
+
+.why-item {
+  display:grid; grid-template-columns:60px 1fr; gap:1rem;
+  padding:1.5rem 0; border-bottom:1px solid rgba(255,255,255,0.04);
+  transition:all 0.3s;
+  cursor:default;
+}
+.why-item:hover { padding-left:0.5rem; }
+
+.why-num {
+  font-family:'Bebas Neue'; font-size:2.5rem; color:rgba(232,97,26,0.2);
+  line-height:1; transition:color 0.3s;
+  padding-top:3px;
+}
+.why-item:hover .why-num { color:var(--or); }
+
+.why-content h4 {
+  font-family:'Oxanium'; font-size:0.85rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:1.5px; color:var(--wh);
+  margin-bottom:0.4rem;
+}
+.why-content p { font-size:0.85rem; line-height:1.7; color:var(--lt); }
+
+/* big visual panel */
+.why-visual {
+  background:var(--st);
+  border:1px solid rgba(255,255,255,0.05);
+  padding:3rem;
+  position:relative; overflow:hidden;
+}
+.why-visual::before {
+  content:''; position:absolute; top:0; left:0; right:0;
+  height:3px; background:linear-gradient(to right,var(--or),var(--am));
+}
+
+.metric-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(255,255,255,0.04); margin-top:2rem; }
+.metric-cell {
+  background:var(--st);
+  padding:1.5rem; text-align:center;
+}
+.m-num {
+  font-family:'Bebas Neue'; font-size:3rem; color:var(--or);
+  line-height:1; letter-spacing:2px;
+}
+.m-unit { font-size:0.6rem; vertical-align:super; color:var(--am); font-family:'Oxanium'; font-weight:700; }
+.m-label { font-family:'Oxanium'; font-size:0.6rem; letter-spacing:2px; color:var(--mi); text-transform:uppercase; margin-top:0.3rem; }
+
+/* ─── SECTORS ─── */
+.sectors-bg { background:var(--st); }
+
+.sectors-grid {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin-top:3rem;
+}
+
+.sector-card {
+  position:relative; overflow:hidden;
+  aspect-ratio:3/4; display:flex; flex-direction:column; justify-content:flex-end;
+  padding:1.5rem;
+  transition:transform 0.4s;
+}
+.sector-card:hover { transform:translateY(-6px); }
+
+.sector-bg {
+  position:absolute; inset:0; z-index:0;
+  transition:transform 0.5s;
+}
+.sector-card:hover .sector-bg { transform:scale(1.05); }
+
+.sector-card:nth-child(1) .sector-bg { background:linear-gradient(160deg,#1a2d1a,#0a1a0a); }
+.sector-card:nth-child(2) .sector-bg { background:linear-gradient(160deg,#2d1a0a,#1a0d05); }
+.sector-card:nth-child(3) .sector-bg { background:linear-gradient(160deg,#0a1a2d,#051525); }
+.sector-card:nth-child(4) .sector-bg { background:linear-gradient(160deg,#2d2a0a,#1a1805); }
+
+.sector-overlay {
+  position:absolute; inset:0; z-index:1;
+  background:linear-gradient(to top, rgba(11,22,34,0.9) 30%, transparent 70%);
+}
+
+.sector-icon-big {
+  position:absolute; top:50%; left:50%; z-index:1;
+  transform:translate(-50%,-60%);
+  font-size:4rem; opacity:0.15; transition:opacity 0.3s;
+}
+.sector-card:hover .sector-icon-big { opacity:0.25; }
+
+.sector-content { position:relative; z-index:2; }
+.sector-tag {
+  font-family:'Oxanium'; font-size:0.6rem; font-weight:700;
+  letter-spacing:3px; color:var(--or); text-transform:uppercase;
+  margin-bottom:0.4rem;
+}
+.sector-name {
+  font-family:'Bebas Neue'; font-size:1.4rem; letter-spacing:2px; color:var(--wh);
+  line-height:1.1;
+}
+
+/* ─── CTA BANNER ─── */
+.cta-banner {
+  position:relative; overflow:hidden;
+  background:var(--or);
+  padding:5rem 3rem;
+  text-align:center;
+}
+.cta-banner::before {
+  content:''; position:absolute; inset:0;
+  background:
+    repeating-linear-gradient(45deg,
+      transparent 0px, transparent 20px,
+      rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px);
+}
+.cta-banner-title {
+  font-family:'Bebas Neue';
+  font-size:clamp(3rem,6vw,5rem);
+  color:#fff; letter-spacing:3px; line-height:1;
+  position:relative; z-index:1; margin-bottom:1rem;
+}
+.cta-banner-sub {
+  font-size:1rem; color:rgba(255,255,255,0.7);
+  position:relative; z-index:1; margin-bottom:2rem;
+  font-family:'DM Sans';
+}
+.btn-white {
+  display:inline-flex; align-items:center; gap:10px;
+  background:#fff; color:var(--or);
+  font-family:'Oxanium'; font-size:0.8rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.9rem 2.5rem; text-decoration:none;
+  clip-path:polygon(10px 0%,100% 0%,calc(100%-10px) 100%,0% 100%);
+  position:relative; z-index:1;
+  transition:all 0.25s;
+}
+.btn-white:hover { background:var(--nv); color:#fff; }
+
+/* ─── CONTACT ─── */
+.contact-wrap {
+  display:grid; grid-template-columns:1fr 1.5fr; gap:5rem;
+}
+
+.contact-info { display:flex; flex-direction:column; gap:2rem; }
+
+.c-item {
+  display:flex; align-items:flex-start; gap:1rem;
+}
+.c-icon-box {
+  width:40px; height:40px; flex-shrink:0;
+  background:rgba(232,97,26,0.1);
+  display:flex; align-items:center; justify-content:center;
+  clip-path:polygon(5px 0%,100% 0%,calc(100%-5px) 100%,0% 100%);
+  font-size:1rem;
+}
+.c-text-label {
+  font-family:'Oxanium'; font-size:0.6rem; font-weight:700;
+  letter-spacing:3px; color:var(--or); text-transform:uppercase;
+  margin-bottom:0.25rem;
+}
+.c-text-val { font-size:0.9rem; color:var(--lt); }
+
+/* contact form */
+.contact-form { display:flex; flex-direction:column; gap:1rem; }
+
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+
+.f-group { display:flex; flex-direction:column; gap:0.4rem; }
+.f-label {
+  font-family:'Oxanium'; font-size:0.6rem; font-weight:700;
+  letter-spacing:3px; color:var(--mi); text-transform:uppercase;
+}
+.f-input, .f-select, .f-textarea {
+  background:var(--st); border:1px solid rgba(255,255,255,0.06);
+  color:var(--wh); font-family:'DM Sans'; font-size:0.9rem;
+  padding:0.8rem 1rem; outline:none; width:100%;
+  transition:border-color 0.2s;
+}
+.f-input:focus, .f-select:focus, .f-textarea:focus {
+  border-color:var(--or);
+}
+.f-textarea { min-height:140px; resize:vertical; }
+.f-select { appearance:none; cursor:pointer; }
+.f-select option { background:var(--st); }
+
+.btn-submit {
+  align-self:flex-start;
+  background:var(--or); color:#fff; border:none; cursor:none;
+  font-family:'Oxanium'; font-size:0.78rem; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  padding:0.9rem 2.5rem;
+  clip-path:polygon(10px 0%,100% 0%,calc(100%-10px) 100%,0% 100%);
+  transition:background 0.2s;
+}
+.btn-submit:hover { background:var(--am); }
+
+/* ─── FOOTER ─── */
+footer {
+  background:var(--dk);
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+
+.footer-top {
+  max-width:1200px; margin:0 auto;
+  padding:4rem 3rem;
+  display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:3rem;
+}
+
+.footer-brand {}
+.fb-logo {
+  font-family:'Bebas Neue'; font-size:2rem; letter-spacing:3px;
+  color:var(--wh); margin-bottom:1rem; display:block;
+}
+.fb-logo span { color:var(--or); }
+.fb-tagline {
+  font-size:0.85rem; color:var(--mi); line-height:1.7; margin-bottom:1.5rem;
+}
+.fb-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(232,97,26,0.1); border:1px solid rgba(232,97,26,0.2);
+  padding:5px 12px; font-family:'Oxanium'; font-size:0.6rem;
+  letter-spacing:2px; color:var(--or); text-transform:uppercase;
+}
+.fb-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--or); animation:pulse2 2s infinite; }
+@keyframes pulse2 { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.footer-col-title {
+  font-family:'Oxanium'; font-size:0.65rem; font-weight:700;
+  letter-spacing:3px; color:var(--or); text-transform:uppercase;
+  margin-bottom:1.25rem;
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+.footer-col ul li a {
+  color:var(--mi); font-size:0.85rem; text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-col ul li a:hover { color:var(--wh); }
+
+.footer-bottom {
+  border-top:1px solid rgba(255,255,255,0.04);
+  padding:1.5rem 3rem;
+  max-width:1200px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-copy { font-size:0.78rem; color:var(--mi); font-family:'Oxanium'; letter-spacing:1px; }
+.footer-copy span { color:var(--or); }
+
+/* ─── SECTION TRANSITIONS ─── */
+.reveal {
+  opacity:0; transform:translateY(40px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ─── MOBILE ─── */
+@media(max-width:900px) {
+  .about-wrap, .why-wrap, .contact-wrap { grid-template-columns:1fr; gap:3rem; }
+  .services-grid { grid-template-columns:1fr 1fr; }
+  .sectors-grid { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  nav { padding:1rem 1.5rem; }
+  .nav-links, .nav-cta { display:none; }
+  .sec { padding:4rem 1.5rem; }
+  .hero-inner { padding:0 1.5rem; }
+  .hero-stats { display:none; }
+}
+
+@media(max-width:600px) {
+  .services-grid, .sectors-grid { grid-template-columns:1fr; }
+  .form-row { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr; }
+}
+
+/* ─── NAV SKILL LINK HIGHLIGHT ─── */
+.nav-skill-link {
+  background: rgba(232,97,26,0.12);
+  border: 1px solid rgba(232,97,26,0.35);
+  padding: 4px 10px !important;
+  border-radius: 2px;
+  color: var(--or) !important;
+  letter-spacing: 1.5px;
+  transition: background 0.2s, border-color 0.2s !important;
+}
+.nav-skill-link:hover { background: rgba(232,97,26,0.22) !important; border-color: var(--or) !important; }
+
+/* ═══════════════════════════════════════════
+   BLOG SECTION
+═══════════════════════════════════════════ */
+#blog { background: var(--dk); position: relative; overflow: hidden; }
+#blog::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.blog-card {
+  background: var(--st);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+.blog-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(232,97,26,0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,97,26,0.1);
+}
+.blog-card-thumb {
+  height: 170px;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.blog-card-thumb-icon {
+  font-size: 4.5rem;
+  opacity: 0.45;
+  transition: transform 0.5s ease, opacity 0.3s;
+  filter: drop-shadow(0 0 30px rgba(232,97,26,0.3));
+}
+.blog-card:hover .blog-card-thumb-icon { transform: scale(1.12); opacity: 0.6; }
+.blog-card-accent-line {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--or), var(--am));
+}
+.blog-card-body { padding: 1.6rem 1.6rem 1.4rem; }
+.blog-card-cat {
+  font-family: 'Oxanium'; font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 3px; color: var(--or); text-transform: uppercase;
+  margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px;
+}
+.blog-card-cat::before { content:''; width: 16px; height: 1px; background: var(--or); }
+.blog-card-title {
+  font-family: 'Oxanium'; font-size: 0.95rem; font-weight: 700;
+  color: var(--wh); line-height: 1.45; margin-bottom: 0.8rem;
+  transition: color 0.2s;
+}
+.blog-card:hover .blog-card-title { color: var(--am); }
+.blog-card-excerpt {
+  font-size: 0.82rem; line-height: 1.75; color: var(--lt);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.blog-card-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1.2rem; padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.blog-card-date {
+  font-family: 'Oxanium'; font-size: 0.58rem; letter-spacing: 2px;
+  color: var(--mi); text-transform: uppercase;
+}
+.blog-read-btn {
+  font-family: 'Oxanium'; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 2px; color: var(--or); text-transform: uppercase;
+  display: flex; align-items: center; gap: 6px; transition: gap 0.2s, color 0.2s;
+}
+.blog-card:hover .blog-read-btn { gap: 10px; color: var(--am); }
+
+/* Blog Modal Overlay */
+.blog-modal-overlay {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(6,12,20,0.93);
+  backdrop-filter: blur(8px);
+  display: none; align-items: flex-start; justify-content: center;
+  padding: 2rem 1rem; overflow-y: auto;
+}
+.blog-modal-overlay.is-open { display: flex; }
+.blog-modal {
+  background: var(--st);
+  border: 1px solid rgba(232,97,26,0.2);
+  max-width: 820px; width: 100%;
+  margin: auto;
+  position: relative;
+  animation: modalIn 0.35s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+.blog-modal-top-bar { height: 4px; background: linear-gradient(90deg, var(--or), var(--am)); }
+.blog-modal-hero {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 6rem; position: relative;
+}
+.blog-modal-close {
+  position: absolute; top: 1.2rem; right: 1.2rem; z-index: 10;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--wh); font-size: 1rem; cursor: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.blog-modal-close:hover { border-color: var(--or); background: rgba(232,97,26,0.1); }
+.blog-modal-content { padding: 2.5rem; }
+.blog-modal-cat {
+  font-family: 'Oxanium'; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 3px; color: var(--or); text-transform: uppercase;
+  margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px;
+}
+.blog-modal-cat::before { content:''; width: 24px; height: 1px; background: var(--or); }
+.blog-modal-title {
+  font-family: 'Bebas Neue'; font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 2px; line-height: 1.05; color: var(--wh); margin-bottom: 2rem;
+}
+.blog-modal-body h3 {
+  font-family: 'Oxanium'; font-size: 0.88rem; font-weight: 700;
+  color: var(--am); text-transform: uppercase; letter-spacing: 1.5px;
+  margin: 1.8rem 0 0.7rem; display: flex; align-items: center; gap: 10px;
+}
+.blog-modal-body h3::after { content:''; flex: 1; height: 1px; background: rgba(245,166,35,0.2); }
+.blog-modal-body p {
+  font-size: 0.88rem; line-height: 1.9; color: var(--lt); margin-bottom: 1rem;
+}
+.blog-modal-body ul { list-style: none; margin-bottom: 1.2rem; }
+.blog-modal-body ul li {
+  font-size: 0.85rem; color: var(--lt); padding: 0.35rem 0 0.35rem 1.4rem;
+  position: relative; line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.blog-modal-body ul li::before { content: '▸'; position: absolute; left: 0; color: var(--or); }
+.blog-modal-body ul li:last-child { border-bottom: none; }
+.blog-video-section {
+  margin-top: 2rem; padding: 1.5rem;
+  background: rgba(232,97,26,0.04);
+  border: 1px solid rgba(232,97,26,0.15);
+  border-left: 3px solid var(--or);
+}
+.blog-video-section-title {
+  font-family: 'Oxanium'; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 3px; color: var(--or); text-transform: uppercase; margin-bottom: 1rem;
+}
+.blog-video-links { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.blog-video-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,97,26,0.08); border: 1px solid rgba(232,97,26,0.25);
+  color: var(--or); font-family: 'Oxanium'; font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 0.55rem 1rem; text-decoration: none;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  transition: all 0.2s;
+}
+.blog-video-link:hover { background: rgba(232,97,26,0.18); color: var(--am); letter-spacing: 2px; }
+.blog-video-link .play-icon {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--or); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.55rem; flex-shrink: 0;
+}
+
+@media(max-width:900px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:600px) { .blog-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════════════
+   FREE SKILL TEST SECTION
+═══════════════════════════════════════════ */
+#skilltest {
+  background: var(--nv);
+  position: relative; overflow: hidden;
+}
+#skilltest::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+#skilltest::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--or), var(--am), #00d4ff, var(--or));
+  background-size: 200% 100%;
+  animation: shimmerBar 4s linear infinite;
+}
+@keyframes shimmerBar { 0%{background-position:0% 0%} 100%{background-position:200% 0%} }
+
+.skilltest-inner { position: relative; z-index: 1; }
+
+/* Topic Cards */
+.quiz-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.quiz-topic-card {
+  background: var(--surface, #111827);
+  border: 1px solid var(--border, #1e3a5f);
+  border-radius: 12px;
+  padding: 28px;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative; overflow: hidden;
+}
+.quiz-topic-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.qtc-1::before { background: #3b82f6; }
+.qtc-2::before { background: #8b5cf6; }
+.qtc-3::before { background: #10b981; }
+.quiz-topic-card:hover {
+  transform: translateY(-5px);
+  border-color: #00d4ff;
+  box-shadow: 0 14px 44px rgba(0,212,255,0.1);
+}
+.qtc-module-tag {
+  font-family: 'Rajdhani', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 10px;
+}
+.qtc-1 .qtc-module-tag { color: #3b82f6; }
+.qtc-2 .qtc-module-tag { color: #8b5cf6; }
+.qtc-3 .qtc-module-tag { color: #10b981; }
+.qtc-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 22px;
+  font-weight: 700; color: #fff; margin-bottom: 6px;
+}
+.qtc-subtitle { color: #64748b; font-size: 13px; margin-bottom: 20px; line-height: 1.5; }
+.qtc-meta { display: flex; gap: 16px; }
+.qtc-meta-item { font-size: 12px; color: #64748b; }
+.qtc-meta-item strong { color: #e2e8f0; display: block; font-size: 18px; font-family: 'Rajdhani', sans-serif; }
+.qtc-best-score {
+  margin-top: 16px; padding-top: 16px;
+  border-top: 1px solid #1e3a5f;
+  font-size: 13px; color: #64748b;
+}
+.qtc-best-score .score-val { color: #10b981; font-weight: 700; font-size: 16px; }
+.btn-start-quiz {
+  margin-top: 20px; width: 100%;
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  border: none; color: #0a0e1a;
+  font-family: 'Rajdhani', sans-serif; font-size: 14px;
+  font-weight: 700; letter-spacing: 2px; padding: 12px;
+  border-radius: 6px; cursor: none;
+  text-transform: uppercase; transition: opacity 0.2s, transform 0.2s;
+}
+.btn-start-quiz:hover { opacity: 0.9; transform: scale(1.01); }
+
+/* Quiz Active Screen */
+#quiz-active-screen { display: none; margin-top: 2rem; }
+.quiz-back-bar {
+  margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;
+}
+.btn-quiz-back {
+  background: var(--st, #162336);
+  border: 1px solid #1e3a5f; color: #e2e8f0;
+  padding: 9px 20px; border-radius: 6px; cursor: none;
+  font-family: 'Rajdhani', sans-serif; font-size: 13px;
+  font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: border-color 0.2s;
+}
+.btn-quiz-back:hover { border-color: #00d4ff; }
+.quiz-active-title {
+  font-family: 'Rajdhani', sans-serif; font-size: 18px;
+  font-weight: 700; color: #fff;
+}
+.quiz-progress-wrap {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-radius: 12px; padding: 20px 24px; margin-bottom: 20px;
+}
+.quiz-progress-info {
+  display: flex; justify-content: space-between;
+  margin-bottom: 10px; font-size: 13px; color: #64748b;
+}
+.quiz-progress-track {
+  background: #1a2235; height: 6px; border-radius: 3px; overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #0099cc);
+  border-radius: 3px; transition: width 0.4s ease;
+}
+.q-card {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-radius: 12px; padding: 30px; margin-bottom: 16px;
+  animation: qFadeIn 0.3s ease;
+}
+@keyframes qFadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.q-number-label {
+  font-family: 'Rajdhani', sans-serif; font-size: 11px;
+  letter-spacing: 3px; color: #00d4ff; text-transform: uppercase; margin-bottom: 12px;
+}
+.q-text { font-size: 17px; color: #fff; line-height: 1.55; margin-bottom: 24px; font-weight: 500; }
+.q-options-wrap { display: grid; gap: 10px; }
+.q-opt {
+  background: #1a2235; border: 1px solid #1e3a5f;
+  color: #e2e8f0; padding: 14px 18px; border-radius: 8px;
+  text-align: left; cursor: none;
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+  display: flex; align-items: center; gap: 12px;
+}
+.q-opt:hover:not(:disabled) { border-color: #00d4ff; background: rgba(0,212,255,0.05); }
+.q-opt.q-correct { border-color: #10b981 !important; background: rgba(16,185,129,0.15) !important; color: #10b981 !important; }
+.q-opt.q-wrong   { border-color: #ef4444 !important; background: rgba(239,68,68,0.1) !important;  color: #ef4444 !important; }
+.q-opt:disabled  { cursor: default; }
+.opt-letter-badge {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #111827; border: 1px solid #1e3a5f;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.q-correct .opt-letter-badge { background: #10b981; border-color: #10b981; color: #0a0e1a; }
+.q-wrong   .opt-letter-badge { background: #ef4444; border-color: #ef4444; color: #fff; }
+.q-explanation-box {
+  margin-top: 16px; padding: 14px 18px;
+  background: rgba(0,212,255,0.04); border: 1px solid rgba(0,212,255,0.18);
+  border-radius: 8px; font-size: 13px; color: #94a3b8; line-height: 1.65;
+  display: none;
+}
+.q-explanation-box.show { display: block; }
+.q-explanation-box strong { color: #00d4ff; }
+.quiz-nav-row {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-top: 20px; gap: 16px;
+}
+.btn-qnav {
+  background: #111827; border: 1px solid #1e3a5f; color: #e2e8f0;
+  padding: 12px 28px; border-radius: 6px; cursor: none;
+  font-family: 'Rajdhani', sans-serif; font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; transition: border-color 0.2s;
+}
+.btn-qnav:hover { border-color: #00d4ff; }
+.btn-qnav.qnav-primary {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+  border-color: transparent; color: #0a0e1a;
+}
+.btn-qnav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Result Screen */
+#quiz-result-screen { display: none; margin-top: 2rem; }
+.result-card {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-radius: 16px; padding: 40px; text-align: center;
+  margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.result-card::before {
+  content: ''; position: absolute; top: -80px; left: 50%;
+  transform: translateX(-50%); width: 350px; height: 350px;
+  border-radius: 50%; opacity: 0.06;
+}
+.result-card.r-pass::before { background: #10b981; }
+.result-card.r-fail::before { background: #ef4444; }
+.result-emoji { font-size: 64px; margin-bottom: 16px; display: block; }
+.result-score-pct {
+  font-family: 'Rajdhani', sans-serif; font-size: 80px; font-weight: 700; line-height: 1;
+}
+.r-pass .result-score-pct { color: #10b981; }
+.r-fail .result-score-pct { color: #ef4444; }
+.result-label-small {
+  font-family: 'Rajdhani', sans-serif; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase; color: #64748b; margin-bottom: 6px;
+}
+.result-verdict {
+  font-size: 22px; font-weight: 600; color: #fff; margin-top: 6px;
+}
+.result-stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px; margin-bottom: 24px;
+}
+.rstat {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-radius: 10px; padding: 20px; text-align: center;
+}
+.rstat .rv {
+  font-family: 'Rajdhani', sans-serif; font-size: 36px;
+  font-weight: 700; color: #00d4ff;
+}
+.rstat .rl { font-size: 12px; color: #64748b; letter-spacing: 1px; margin-top: 2px; }
+
+/* Email Capture */
+.email-capture-box {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-top: 3px solid var(--or);
+  border-radius: 12px; padding: 30px; margin-bottom: 28px;
+}
+.email-capture-box h3 {
+  font-family: 'Bebas Neue'; font-size: 1.8rem; letter-spacing: 2px;
+  color: #fff; margin-bottom: 4px;
+}
+.email-capture-box h3 span { color: var(--or); }
+.email-capture-box p { color: #64748b; font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.4rem; }
+.email-capture-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.cert-input {
+  background: #1a2235; border: 1px solid #1e3a5f; color: #e2e8f0;
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  padding: 0.8rem 1rem; border-radius: 6px; outline: none; width: 100%;
+  transition: border-color 0.2s;
+}
+.cert-input:focus { border-color: var(--or); }
+.btn-send-cert {
+  width: 100%;
+  background: linear-gradient(135deg, var(--or), var(--am));
+  border: none; color: #fff;
+  font-family: 'Oxanium'; font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 14px; border-radius: 6px; cursor: none;
+  transition: opacity 0.2s, transform 0.2s;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+}
+.btn-send-cert:hover { opacity: 0.9; transform: scale(1.01); }
+.btn-send-cert:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.cert-sent-msg {
+  display: none; margin-top: 12px; text-align: center;
+  padding: 1rem; background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.3); border-radius: 6px;
+  color: #10b981; font-size: 14px; line-height: 1.6;
+}
+
+/* Review Section */
+.review-wrap h3 {
+  font-family: 'Rajdhani', sans-serif; font-size: 16px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #64748b; margin-bottom: 16px; margin-top: 8px;
+}
+.review-item {
+  background: #111827; border: 1px solid #1e3a5f;
+  border-radius: 10px; padding: 18px; margin-bottom: 12px;
+}
+.review-item.ri-correct { border-left: 3px solid #10b981; }
+.review-item.ri-wrong   { border-left: 3px solid #ef4444; }
+.ri-q-text { font-size: 14px; color: #fff; margin-bottom: 10px; line-height: 1.5; }
+.ri-answer { font-size: 13px; padding: 6px 10px; border-radius: 4px; margin-bottom: 4px; }
+.ri-answer.your-right { background: rgba(16,185,129,0.15); color: #10b981; }
+.ri-answer.your-wrong  { background: rgba(239,68,68,0.1);   color: #ef4444; }
+.ri-answer.correct-show { color: #10b981; }
+.ri-exp { font-size: 12px; color: #64748b; margin-top: 8px; line-height: 1.6; }
+.result-actions-row {
+  display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap;
+}
+.result-actions-row button { flex: 1; min-width: 150px; }
+
+@media(max-width:900px) {
+  .quiz-topics-grid { grid-template-columns: 1fr 1fr; }
+  .email-capture-row { grid-template-columns: 1fr; }
+}
+@media(max-width:600px) {
+  .quiz-topics-grid { grid-template-columns: 1fr; }
+  .result-stats-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <a href="#" class="nav-logo">Mech<span>Power</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#skilltest" class="nav-skill-link">⚡ Free Skill Test</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-slash"></div>
+
+  <!-- Gear SVG -->
+  <svg class="hero-gear" viewBox="0 0 200 200" fill="white">
+    <path d="M100 60 a40 40 0 1 1 -0.1 0 Z
+      M88 22 l4-16 16 0 4 16 Z M112 178 l-4 16 -16 0 -4-16 Z
+      M22 88 l-16-4 0-16 16-4 Z M178 112 l16 4 0 16 -16 4 Z
+      M38 38 l-11-11 11-11 11 11 Z M162 162 l11 11 -11 11 -11-11 Z
+      M162 38 l11-11 11 11 -11 11 Z M38 162 l-11 11 -11-11 11-11 Z"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-year">Company Profile · Est. 2026</div>
+    <h1 class="hero-h1">
+      <span class="line1">Mech</span>
+      <span class="line2">Power</span>
+      <span class="line3">Solutions</span>
+    </h1>
+    <p class="hero-sub">
+      Engineering Reliability with Precision —
+      Bangladesh's trusted partner for Industrial Supply,
+      Solar EPC, and Energy Infrastructure.
+    </p>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 7L7 13M1 7H13" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Explore Services
+      </a>
+      <a href="#contact" class="btn-outline">Request Consultation</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">360°</div>
+      <div class="hstat-label">Industrial Solutions</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">EPC</div>
+      <div class="hstat-label">Turnkey Delivery</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-num">B2B</div>
+      <div class="hstat-label">Enterprise Focus</div>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    Scroll to Explore
+  </div>
+</section>
+
+<!-- ═══════ TICKER ═══════ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Industrial Spare Parts</span><span class="ticker-dot">✦</span>
+    <span>Solar EPC Contracting</span><span class="ticker-dot">✦</span>
+    <span>Energy Infrastructure</span><span class="ticker-dot">✦</span>
+    <span>Industrial Solar Systems</span><span class="ticker-dot">✦</span>
+    <span>Rapid Parts Delivery</span><span class="ticker-dot">✦</span>
+    <span>Power Solutions</span><span class="ticker-dot">✦</span>
+    <span>Engineering Reliability</span><span class="ticker-dot">✦</span>
+    <span>Industrial Spare Parts</span><span class="ticker-dot">✦</span>
+    <span>Solar EPC Contracting</span><span class="ticker-dot">✦</span>
+    <span>Energy Infrastructure</span><span class="ticker-dot">✦</span>
+    <span>Industrial Solar Systems</span><span class="ticker-dot">✦</span>
+    <span>Rapid Parts Delivery</span><span class="ticker-dot">✦</span>
+    <span>Power Solutions</span><span class="ticker-dot">✦</span>
+    <span>Engineering Reliability</span><span class="ticker-dot">✦</span>
+  </div>
+</div>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section id="about">
+  <div class="sec">
+    <div class="about-wrap reveal">
+      <div class="about-left">
+        <p class="sec-label">Who We Are</p>
+        <div class="big-text">
+          Built for<br>
+          Industries<br>
+          that can't<br>
+          <em>stop.</em>
+        </div>
+        <p class="tagline">
+          MechPower Solutions is a full-spectrum engineering and energy company serving Bangladesh's industrial sector. We combine technical depth with operational speed to deliver solutions that keep your business running — without compromise.
+        </p>
+      </div>
+      <div class="about-right">
+        <div class="about-block">
+          <div class="ab-title">Our Mission</div>
+          <p class="ab-text">To be the most reliable engineering and energy partner for industrial businesses — delivering precision-engineered solutions, on time, every time.</p>
+        </div>
+        <div class="about-block">
+          <div class="ab-title">Our Vision</div>
+          <p class="ab-text">To power Bangladesh's industrial growth through sustainable energy solutions and world-class supply chain capabilities — shaping a more efficient industrial future.</p>
+        </div>
+        <div class="about-block">
+          <div class="ab-title">Our Approach</div>
+          <p class="ab-text">Every engagement starts with understanding your operational reality. We then engineer bespoke solutions — from rapid spare part sourcing to full EPC project delivery — with unwavering focus on reliability.</p>
+        </div>
+        <div class="about-block">
+          <div class="ab-title">Core Values</div>
+          <p class="ab-text">Precision · Reliability · Integrity · Speed · Partnership. These aren't just words — they are the operating principles behind every project we undertake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SERVICES ═══════ -->
+<section id="services" class="services-bg">
+  <div class="sec">
+    <p class="sec-label reveal">What We Deliver</p>
+    <h2 class="sec-title reveal">Core Service <span style="color:var(--or)">Verticals</span></h2>
+    <p class="reveal" style="color:var(--lt);max-width:560px;font-size:0.95rem;line-height:1.8;">
+      From a single spare part to a complete solar power plant — we engineer, supply, and deliver across four high-impact service lines.
+    </p>
+
+    <div class="services-grid reveal">
+
+      <div class="svc-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">⚙️</span></div>
+        <div class="svc-title">Industrial Supply & Spare Parts</div>
+        <p class="svc-desc">Rapid sourcing and delivery of critical industrial components, mechanical parts, and electrical equipment. Our extensive supplier network ensures minimal downtime — wherever you are in Bangladesh.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">☀️</span></div>
+        <div class="svc-title">Industrial Solar Power Systems</div>
+        <p class="svc-desc">Design, supply, and full installation of large-scale industrial solar PV systems. We deliver optimized solutions for factories, warehouses, and industrial facilities — maximizing yield and ROI.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">🏗️</span></div>
+        <div class="svc-title">EPC Contracting</div>
+        <p class="svc-desc">Full Engineering, Procurement & Construction turnkey contracts. We own the entire project lifecycle — design, sourcing, construction, and commissioning — under a single, accountable agreement.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">⚡</span></div>
+        <div class="svc-title">Energy & Power Infrastructure</div>
+        <p class="svc-desc">Comprehensive power solutions including energy audits, load optimization, backup power systems, and grid integration. We build resilient energy infrastructure for demanding industrial environments.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">05</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">🔆</span></div>
+        <div class="svc-title">Rooftop Solar Systems</div>
+        <p class="svc-desc">Grid-tied and off-grid rooftop solar for commercial and industrial clients. From site survey to net metering application — complete end-to-end service with quality-certified components.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-num">06</div>
+        <div class="svc-icon-wrap"><span class="svc-icon">📦</span></div>
+        <div class="svc-title">Emergency Parts Logistics</div>
+        <p class="svc-desc">Mission-critical emergency parts delivery for production-critical situations. We operate a rapid-response sourcing and logistics network to get you back online — fast.</p>
+        <div class="svc-bar"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHY US ═══════ -->
+<section id="why">
+  <div class="sec">
+    <div class="why-wrap">
+      <div>
+        <p class="sec-label reveal">Why MechPower</p>
+        <h2 class="sec-title reveal">The <span style="color:var(--or)">Competitive</span><br>Advantage</h2>
+
+        <div class="why-list reveal">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div class="why-content">
+              <h4>Single-Source Accountability</h4>
+              <p>One company, one point of contact for all your industrial and energy needs. No vendor juggling — we own the outcome.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div class="why-content">
+              <h4>Rapid Response Capability</h4>
+              <p>Emergencies can't wait. Our supply chain is built for speed — local stock, international sourcing, and fast delivery logistics.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div class="why-content">
+              <h4>EPC Expertise</h4>
+              <p>We bring true engineering discipline to every project — not just supply. Our EPC model delivers complete systems, not just components.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <div class="why-content">
+              <h4>Sustainable Energy Focus</h4>
+              <p>Solar and energy solutions designed for long-term ROI. We help industries reduce costs while building a cleaner footprint.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">05</div>
+            <div class="why-content">
+              <h4>Local Knowledge, Global Standards</h4>
+              <p>Deep understanding of Bangladesh's industrial landscape — combined with internationally sourced equipment and engineering best practices.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-visual reveal">
+        <p class="sec-label" style="margin-bottom:1rem;">Company at a Glance</p>
+        <h3 style="font-family:'Bebas Neue';font-size:2rem;letter-spacing:2px;color:var(--wh)">MechPower By<br><span style="color:var(--or)">The Numbers</span></h3>
+
+        <div class="metric-grid">
+          <div class="metric-cell">
+            <div class="m-num">4<span class="m-unit">+</span></div>
+            <div class="m-label">Service Verticals</div>
+          </div>
+          <div class="metric-cell">
+            <div class="m-num">360<span class="m-unit">°</span></div>
+            <div class="m-label">Coverage</div>
+          </div>
+          <div class="metric-cell">
+            <div class="m-num">EPC</div>
+            <div class="m-label">Turnkey Ready</div>
+          </div>
+          <div class="metric-cell">
+            <div class="m-num">B2B</div>
+            <div class="m-label">Enterprise Focus</div>
+          </div>
+          <div class="metric-cell">
+            <div class="m-num">25<span class="m-unit">yr</span></div>
+            <div class="m-label">Panel Warranty</div>
+          </div>
+          <div class="metric-cell">
+            <div class="m-num">24/7</div>
+            <div class="m-label">Support Ready</div>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)">
+          <p style="font-size:0.8rem;color:var(--lt);line-height:1.7;">
+            Headquartered in Bangladesh · Serving industries nationwide · Open for regional partnerships and B2B collaborations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SECTORS ═══════ -->
+<section id="sectors" class="sectors-bg">
+  <div class="sec">
+    <p class="sec-label reveal">Industries We Serve</p>
+    <h2 class="sec-title reveal">Target <span style="color:var(--or)">Sectors</span></h2>
+
+    <div class="sectors-grid reveal">
+      <div class="sector-card">
+        <div class="sector-bg"></div>
+        <div class="sector-overlay"></div>
+        <div class="sector-icon-big">🏭</div>
+        <div class="sector-content">
+          <div class="sector-tag">Sector 01</div>
+          <div class="sector-name">Manufacturing & Processing</div>
+        </div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-bg"></div>
+        <div class="sector-overlay"></div>
+        <div class="sector-icon-big">👗</div>
+        <div class="sector-content">
+          <div class="sector-tag">Sector 02</div>
+          <div class="sector-name">Textile & Garment Industry</div>
+        </div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-bg"></div>
+        <div class="sector-overlay"></div>
+        <div class="sector-icon-big">🏗️</div>
+        <div class="sector-content">
+          <div class="sector-tag">Sector 03</div>
+          <div class="sector-name">Construction & Real Estate</div>
+        </div>
+      </div>
+      <div class="sector-card">
+        <div class="sector-bg"></div>
+        <div class="sector-overlay"></div>
+        <div class="sector-icon-big">⚡</div>
+        <div class="sector-content">
+          <div class="sector-tag">Sector 04</div>
+          <div class="sector-name">Power & Energy Utilities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CTA BANNER ═══════ -->
+<div class="cta-banner">
+  <div class="cta-banner-title">Ready to Power Your<br>Next Project?</div>
+  <p class="cta-banner-sub">Let's discuss how MechPower Solutions can become your long-term industrial partner.</p>
+  <a href="#contact" class="btn-white">
+    Start a Conversation →
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BLOG SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="blog">
+  <div class="sec">
+    <p class="sec-label reveal">Knowledge Hub</p>
+    <h2 class="sec-title reveal">Technical <span style="color:var(--or)">Blog</span></h2>
+    <p class="reveal" style="color:var(--lt);font-size:0.95rem;max-width:620px;line-height:1.8;margin-bottom:0.5rem;">
+      Deep-dive engineering articles, industry technical guides, and video references — written by MechPower's certified engineers for industrial and energy professionals.
+    </p>
+    <div class="blog-grid reveal" id="blog-grid"></div>
+  </div>
+</section>
+
+<!-- Blog Modal -->
+<div class="blog-modal-overlay" id="blog-modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="blog-modal" id="blog-modal">
+    <div class="blog-modal-top-bar"></div>
+    <div class="blog-modal-hero" id="modal-hero-area">
+      <span id="modal-hero-icon" style="filter:drop-shadow(0 0 40px rgba(232,97,26,0.5))">⚡</span>
+    </div>
+    <button class="blog-modal-close" onclick="closeBlogModal()">✕</button>
+    <div class="blog-modal-content">
+      <div class="blog-modal-cat" id="modal-cat-label"></div>
+      <div class="blog-modal-title" id="modal-title-text"></div>
+      <div class="blog-modal-body" id="modal-body-content"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     FREE SKILL TEST SECTION
+═══════════════════════════════════════════════════════════ -->
+<section id="skilltest">
+  <div class="sec skilltest-inner">
+    <p class="sec-label reveal">Knowledge Assessment</p>
+    <h2 class="sec-title reveal">Free <span style="color:#00d4ff">Skill Test</span></h2>
+    <p class="reveal" style="color:#64748b;font-size:0.95rem;max-width:640px;line-height:1.8;margin-bottom:0.25rem;">
+      Test your electrical and industrial engineering knowledge across 3 professional modules. Instant answer feedback. Email your scored certificate on completion — free, no login required.
+    </p>
+
+    <!-- Topic Selection Home -->
+    <div id="quiz-home-screen">
+      <div class="quiz-topics-grid reveal" id="quiz-topics-grid">
+        <!-- rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Active Quiz Screen -->
+    <div id="quiz-active-screen">
+      <div class="quiz-back-bar">
+        <button class="btn-quiz-back" onclick="backToQuizHome()">← All Topics</button>
+        <div class="quiz-active-title" id="quiz-active-title"></div>
+      </div>
+      <div class="quiz-progress-wrap">
+        <div class="quiz-progress-info">
+          <span id="q-counter-disp">Question 1 of 15</span>
+          <span id="q-live-score">Score: 0/0</span>
+        </div>
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-fill" id="quiz-pbar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="q-card" id="q-card-el">
+        <div class="q-number-label" id="q-num-disp">QUESTION 1</div>
+        <div class="q-text" id="q-text-disp"></div>
+        <div class="q-options-wrap" id="q-options-wrap"></div>
+        <div class="q-explanation-box" id="q-exp-box"></div>
+      </div>
+      <div class="quiz-nav-row">
+        <button class="btn-qnav" id="btn-prev-q" onclick="prevQ()">← Prev</button>
+        <button class="btn-qnav qnav-primary" id="btn-next-q" onclick="nextQ()">Next →</button>
+      </div>
+    </div>
+
+    <!-- Result Screen -->
+    <div id="quiz-result-screen">
+      <div class="result-card" id="result-card-el">
+        <div class="result-label-small">YOUR SCORE</div>
+        <span class="result-emoji" id="result-emoji-el"></span>
+        <div class="result-score-pct" id="result-pct-el"></div>
+        <div class="result-verdict" id="result-verdict-el"></div>
+      </div>
+      <div class="result-stats-row">
+        <div class="rstat"><div class="rv" id="rs-correct">0</div><div class="rl">Correct</div></div>
+        <div class="rstat"><div class="rv" id="rs-wrong">0</div><div class="rl">Wrong</div></div>
+        <div class="rstat"><div class="rv" id="rs-pct">0%</div><div class="rl">Score</div></div>
+      </div>
+
+      <!-- Email Certificate Capture -->
+      <div class="email-capture-box">
+        <h3>📩 Get Your <span>Score Certificate</span></h3>
+        <p>Enter your details below to receive a personalised score certificate and full performance breakdown direct to your inbox. Your results will be mailed automatically.</p>
+        <div class="email-capture-row">
+          <input class="cert-input" id="cert-email-input" type="email" placeholder="Your Email Address *">
+          <input class="cert-input" id="cert-phone-input" type="tel" placeholder="Phone / WhatsApp Number *">
+        </div>
+        <button class="btn-send-cert" id="btn-send-cert" onclick="sendCertificate()">
+          📨 &nbsp;Email My Score Certificate Now
+        </button>
+        <div class="cert-sent-msg" id="cert-sent-msg">
+          ✅ <strong>Certificate sent!</strong> Check your inbox shortly. Thank you for participating in the MechPower Skill Assessment. Your score and full review have been emailed.
+        </div>
+      </div>
+
+      <div class="review-wrap">
+        <h3>📋 Full Answer Review</h3>
+        <div id="review-items-wrap"></div>
+      </div>
+      <div class="result-actions-row">
+        <button class="btn-quiz-back" onclick="backToQuizHome()">← All Topics</button>
+        <button class="btn-qnav qnav-primary" id="btn-retry">🔁 Retry This Test</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section id="contact">
+  <div class="sec">
+    <p class="sec-label reveal">Get In Touch</p>
+    <h2 class="sec-title reveal">Request a <span style="color:var(--or)">Consultation</span></h2>
+
+    <div class="contact-wrap reveal">
+      <div class="contact-info">
+        <div style="margin-bottom:1rem;">
+          <p style="color:var(--lt);font-size:0.9rem;line-height:1.8;">
+            Whether you need an industrial component urgently, want to explore a solar project, or need a full EPC partner — we're ready to engage.
+          </p>
+        </div>
+
+        <div class="c-item">
+          <div class="c-icon-box">📍</div>
+          <div>
+            <div class="c-text-label">Head Office</div>
+            <div class="c-text-val">Dhaka, Bangladesh</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">📞</div>
+          <div>
+            <div class="c-text-label">Phone / WhatsApp</div>
+            <div class="c-text-val">+880 — [Your Number]</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">📧</div>
+          <div>
+            <div class="c-text-label">Email</div>
+            <div class="c-text-val">info@mechpowersolutions.com</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon-box">🕐</div>
+          <div>
+            <div class="c-text-label">Business Hours</div>
+            <div class="c-text-val">Sun – Thu: 9:00 AM – 6:00 PM</div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;padding:1.5rem;background:var(--st);border-left:2px solid var(--or);">
+          <div style="font-family:'Oxanium';font-size:0.65rem;font-weight:700;letter-spacing:2px;color:var(--or);margin-bottom:0.5rem;">EMERGENCY INQUIRIES</div>
+          <p style="font-size:0.85rem;color:var(--lt);line-height:1.7;">For urgent industrial parts or critical project needs, we offer priority response. Mark your inquiry as urgent and we'll respond within hours.</p>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="f-group">
+            <label class="f-label">Full Name</label>
+            <input class="f-input" type="text" placeholder="Your full name">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Company</label>
+            <input class="f-input" type="text" placeholder="Company name">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="f-group">
+            <label class="f-label">Email</label>
+            <input class="f-input" type="email" placeholder="your@email.com">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Phone</label>
+            <input class="f-input" type="tel" placeholder="+880 ...">
+          </div>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Service Interest</label>
+          <select class="f-select f-input">
+            <option value="">— Select a service —</option>
+            <option>Industrial Spare Parts Supply</option>
+            <option>Industrial Solar System</option>
+            <option>EPC Contract</option>
+            <option>Energy & Power Solutions</option>
+            <option>Rooftop Solar</option>
+            <option>Emergency Parts Delivery</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="f-group">
+          <label class="f-label">Project Details / Message</label>
+          <textarea class="f-textarea" placeholder="Describe your project, requirement, or inquiry..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="alert('Thank you! We will contact you within 24 hours.')">
+          Send Inquiry →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="fb-logo">Mech<span>Power</span> Solutions</span>
+      <p class="fb-tagline">Engineering Reliability with Precision. Bangladesh's trusted industrial and energy solutions partner — delivering excellence across every project.</p>
+      <div class="fb-badge"><div class="fb-badge-dot"></div> Active · 2026</div>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-col-title">Services</div>
+      <ul>
+        <li><a href="#services">Industrial Supply</a></li>
+        <li><a href="#services">Solar Systems</a></li>
+        <li><a href="#services">EPC Contracts</a></li>
+        <li><a href="#services">Energy Solutions</a></li>
+        <li><a href="#services">Parts Delivery</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-col-title">Company</div>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#why">Why MechPower</a></li>
+        <li><a href="#sectors">Sectors</a></li>
+        <li><a href="#blog">Technical Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <div class="footer-col-title">Free Resources</div>
+      <ul>
+        <li><a href="#skilltest">⚡ Free Skill Test</a></li>
+        <li><a href="#skilltest">Safety &amp; Foundations</a></li>
+        <li><a href="#skilltest">Transformer &amp; Protection</a></li>
+        <li><a href="#skilltest">Testing &amp; Commissioning</a></li>
+        <li><a href="#blog">Engineering Articles</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 <span>MechPower Solutions</span>. All rights reserved.</p>
+    <p class="footer-copy">Engineering Reliability with <span>Precision</span></p>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cur = document.getElementById('cur');
+const cur2 = document.getElementById('cur2');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  setTimeout(()=>{ cur2.style.left = e.clientX+'px'; cur2.style.top = e.clientY+'px'; }, 80);
+});
+document.querySelectorAll('a,button,.svc-card,.why-item,.sector-card,.headline-item,.blog-card,.quiz-topic-card').forEach(el => {
+  el.addEventListener('mouseenter', ()=>{ cur.style.width='20px';cur.style.height='20px'; });
+  el.addEventListener('mouseleave', ()=>{ cur.style.width='12px';cur.style.height='12px'; });
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold:0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(11,22,34,0.97)'
+    : 'linear-gradient(to bottom, rgba(11,22,34,0.95), transparent)';
+});
+
+/* ══════════════════════════════════════════════════
+   BLOG DATA & LOGIC
+══════════════════════════════════════════════════ */
+const BLOG_DATA = [
+  {
+    icon: '⚡',
+    bg: 'linear-gradient(145deg,#081e14,#0a2d1a)',
+    category: 'Electrical Safety',
+    title: 'Electrical Substation Safety: LOTO Procedures & Arc Flash Protection',
+    excerpt: 'A deep dive into Lock-Out/Tag-Out procedures, arc flash hazard analysis, PPE selection, and safe working practices for high-voltage substation operations.',
+    date: 'April 2026',
+    body: `
+      <h3>Understanding LOTO in High-Voltage Environments</h3>
+      <p>Lock-Out/Tag-Out (LOTO) is the single most critical safety procedure before any electrical maintenance work. In substation environments operating at 11kV and above, failure to follow LOTO can result in fatal arc flash incidents, explosions, or electrocution. Every technician must treat LOTO as non-negotiable.</p>
+      <h3>The 6-Step LOTO Procedure</h3>
+      <ul>
+        <li>Step 1 — Identify all energy sources: electrical, mechanical, hydraulic, pneumatic</li>
+        <li>Step 2 — Notify all affected personnel before any isolation</li>
+        <li>Step 3 — Isolate the equipment using the designated isolator/disconnector</li>
+        <li>Step 4 — Apply padlock and personal tag to every isolation point</li>
+        <li>Step 5 — Release or restrain stored energy: discharge capacitors, block pneumatic actuators</li>
+        <li>Step 6 — VERIFY DEAD — Test, Test, Test using an approved voltage detector on all phases. Always test the tester first on a known live source</li>
+      </ul>
+      <h3>Arc Flash Hazard Analysis</h3>
+      <p>Arc flash incidents release enormous energy — a bolted fault at 11kV can produce incident energy exceeding 40 cal/cm². PPE must be selected to match the calculated incident energy level at the working distance per NFPA 70E or IEC 61482. Full arc flash suits, face shields rated HRC 2–4, and Class 2 insulating gloves are mandatory for live-near work at HV substations.</p>
+      <h3>Key PPE Standards for Substation Work</h3>
+      <ul>
+        <li>Arc Flash Suits: NFPA 70E / IEC 61482 — rated in cal/cm²</li>
+        <li>Insulating Gloves: IEC 60903 Class 2 (rated 17kV) — retested every 6 months</li>
+        <li>Safety Helmets: IS 2925 / EN 397 dielectric rated</li>
+        <li>Footwear: IEC 61111 dielectric boots — Class 0 minimum</li>
+        <li>Eye Protection: EN 166 or ANSI Z87.1 rated for arc flash</li>
+      </ul>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=LOTO+electrical+substation+safety+procedure" target="_blank" rel="noopener"><span class="play-icon">▶</span>LOTO Substation Procedure</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=arc+flash+hazard+PPE+protection+NFPA70E" target="_blank" rel="noopener"><span class="play-icon">▶</span>Arc Flash Protection Guide</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=electrical+safety+HV+substation+training" target="_blank" rel="noopener"><span class="play-icon">▶</span>HV Substation Safety Training</a>
+        </div>
+      </div>
+    `
+  },
+  {
+    icon: '🔄',
+    bg: 'linear-gradient(145deg,#1a0d05,#2d1a0a)',
+    category: 'Power Transformers',
+    title: 'Power Transformer: Construction, Core Losses, Testing & Commissioning',
+    excerpt: 'Complete engineering guide covering transformer design principles, CT/PT configurations, OC/SC tests, Megger IR, BDV, DGA oil analysis, and full commissioning protocols.',
+    date: 'March 2026',
+    body: `
+      <h3>Why Transformers Work on AC Only</h3>
+      <p>Transformers operate exclusively on alternating current because the continuously changing AC produces a changing magnetic flux in the laminated core — inducing a voltage in the secondary winding by Faraday's Law. Direct current produces a steady, unchanging flux — so no induction occurs and the transformer simply acts as a resistor, often saturating and overheating the core.</p>
+      <h3>Core Losses vs Copper Losses</h3>
+      <ul>
+        <li>Core Losses (Iron Losses): Hysteresis loss + Eddy current loss — present whenever the transformer is energised, constant regardless of load. Measured by the Open Circuit (OC) test.</li>
+        <li>Copper Losses (I²R Losses): Proportional to the square of load current — variable. Measured by the Short Circuit (SC) test.</li>
+        <li>Maximum efficiency occurs at the load where Core Loss = Copper Loss.</li>
+        <li>Modern distribution transformers achieve 98–99.5% efficiency.</li>
+      </ul>
+      <h3>Critical Commissioning Tests</h3>
+      <ul>
+        <li>Turns Ratio Test (TTR): Measured ratio must be within ±0.5% of nameplate on all tap positions (IEC 60076). Deviation >0.5% indicates shorted turns or wrong tap.</li>
+        <li>Winding Resistance (DC Injection): DC only — AC inductance prevents stable reading. Phase imbalance >2% requires investigation.</li>
+        <li>Insulation Resistance (Megger): IR >1 MΩ required. Polarisation Index (PI = R10min ÷ R1min) >2 indicates good insulation.</li>
+        <li>BDV Test on Oil: Breakdown voltage minimum 30kV for 11kV systems (new oil: 70kV+). Low BDV = moisture or contamination.</li>
+        <li>DGA (Dissolved Gas Analysis): Detects incipient faults — H₂ = corona, CH₄ = overheating, C₂H₂ = arcing.</li>
+      </ul>
+      <h3>First Energisation Protocol</h3>
+      <p>Energise on NO-LOAD first. Observe for minimum 30 minutes for abnormal sounds (buzzing, crackling), burning smell, oil leaks, Buchholz relay alarm, or protection relay trips. Only connect load progressively after confirming all parameters are normal and stable.</p>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=power+transformer+working+principle+construction" target="_blank" rel="noopener"><span class="play-icon">▶</span>Transformer Working Principle</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=transformer+commissioning+OC+SC+TTR+megger+test" target="_blank" rel="noopener"><span class="play-icon">▶</span>Transformer Commissioning Tests</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=dissolved+gas+analysis+DGA+transformer+oil" target="_blank" rel="noopener"><span class="play-icon">▶</span>DGA Oil Analysis</a>
+        </div>
+      </div>
+    `
+  },
+  {
+    icon: '☀️',
+    bg: 'linear-gradient(145deg,#1a1005,#2d1e08)',
+    category: 'Solar Energy Systems',
+    title: 'Industrial Solar PV: System Design, Sizing, Grid Integration & ROI for Factories',
+    excerpt: 'Technical guide on solar PV sizing methodology, inverter selection, grid-tie protection, net metering in Bangladesh, and financial ROI analysis for industrial facilities.',
+    date: 'March 2026',
+    body: `
+      <h3>Solar PV System Key Components</h3>
+      <ul>
+        <li>Solar Panels: Monocrystalline PERC (22%+ efficiency) preferred for industrial use. Backed by 25-year linear power warranty.</li>
+        <li>Inverters: String inverters for up to 500kW; central inverters for MW-scale. Hybrid inverters for battery integration.</li>
+        <li>DC Combiner Boxes: String fusing, DC SPD (surge protection device), and monitoring per string.</li>
+        <li>AC Protection: MCCB, anti-islanding relay (must comply with IEEE 1547 / IEC 62116), and surge arresters.</li>
+        <li>Monitoring: Remote SCADA/cloud monitoring for real-time generation, fault alerts, and PR (Performance Ratio) tracking.</li>
+      </ul>
+      <h3>System Sizing Methodology</h3>
+      <p>System Size (kWp) = Daily Energy Consumption (kWh) ÷ Peak Sun Hours (PSH) ÷ System Efficiency Factor. For Bangladesh: PSH ≈ 4.5–5.0 hours/day depending on location and month. A factory consuming 2,000 kWh/day requires approximately 450–470 kWp of solar panels with a well-designed system.</p>
+      <h3>Grid Integration — Bangladesh Requirements</h3>
+      <ul>
+        <li>Net Metering approval required from BREB, DPDC, or DESCO depending on location and voltage level</li>
+        <li>Anti-islanding protection is mandatory — inverter must disconnect within 2 seconds of grid failure</li>
+        <li>Power factor at PCC must remain ≥0.85 lagging during export</li>
+        <li>Metering: Bi-directional energy meter at point of common coupling (PCC)</li>
+      </ul>
+      <h3>ROI & Financial Analysis</h3>
+      <ul>
+        <li>Average simple payback period: 3–5 years for industrial rooftop solar in Bangladesh</li>
+        <li>System lifespan: 25–30 years with 0.5% annual panel degradation</li>
+        <li>Typical savings: 35–65% reduction in monthly electricity bill</li>
+        <li>Carbon offset: 1 kWp ≈ 1.2–1.4 tonnes CO₂/year avoided</li>
+        <li>IRR typically 20–30% for industrial solar projects in Bangladesh</li>
+      </ul>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=industrial+solar+PV+system+design+sizing" target="_blank" rel="noopener"><span class="play-icon">▶</span>Industrial Solar Design</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=solar+PV+grid+tie+net+metering+Bangladesh" target="_blank" rel="noopener"><span class="play-icon">▶</span>Net Metering Bangladesh</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=solar+inverter+commissioning+anti+islanding" target="_blank" rel="noopener"><span class="play-icon">▶</span>Solar Commissioning</a>
+        </div>
+      </div>
+    `
+  },
+  {
+    icon: '🛡️',
+    bg: 'linear-gradient(145deg,#051525,#0a1a2d)',
+    category: 'Protection Systems',
+    title: 'Relay Protection Coordination: OC, Earth Fault & Differential Protection for 11kV',
+    excerpt: 'Engineering principles of overcurrent, earth fault, and differential protection — IDMT grading, time discrimination, CT specification, and Buchholz relay operation.',
+    date: 'February 2026',
+    body: `
+      <h3>The Four Pillars of Protection</h3>
+      <p>A protection system must be: <strong>Reliable</strong> (operates when required), <strong>Selective</strong> (isolates only the faulted section), <strong>Fast</strong> (minimises damage and instability), and <strong>Sensitive</strong> (detects even high-impedance faults). These four properties guide all protection design decisions.</p>
+      <h3>Overcurrent (OC) Protection — IDMT Characteristic</h3>
+      <p>IDMT (Inverse Definite Minimum Time) relays operate faster for higher fault currents — providing better discrimination and faster clearance for severe faults. The IEC 60255-151 standard defines Normal Inverse, Very Inverse, and Extremely Inverse characteristics. Time grading margins between upstream and downstream relays are typically 0.3–0.4 seconds to allow for relay operation time, circuit breaker clearance time, and overshoot.</p>
+      <h3>Earth Fault (EF) Protection</h3>
+      <p>Earth fault relays detect residual current (Ir = Ia + Ib + Ic) in the CT neutral connection or a dedicated core-balance CT. In a balanced system Ir = 0A. EF protection is set 3–5× more sensitively than OC — typically 10–20% of CT rated current — to detect high-impedance faults that OC relays would miss.</p>
+      <h3>Differential Protection — Transformers & Generators</h3>
+      <p>Percentage differential protection compares currents into and out of the protected zone. Any difference (spill current) above the bias-adjusted threshold indicates an internal fault and triggers instantaneous trip. The percentage bias characteristic prevents false trips due to CT mismatch and magnetising inrush current (which is detected and blocked using 2nd harmonic restraint).</p>
+      <h3>CT Safety — Critical Rule</h3>
+      <ul>
+        <li>NEVER open-circuit a CT secondary while the primary is energised</li>
+        <li>An open CT secondary develops extremely high dangerous voltage (thousands of volts)</li>
+        <li>ALWAYS short-circuit the CT secondary terminals before disconnecting from relay or meter panels</li>
+        <li>Protection CTs are specified as Class P with an Accuracy Limit Factor (ALF) — e.g. 5P20 means ≤5% composite error at 20× rated current</li>
+      </ul>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=overcurrent+relay+IDMT+coordination+protection" target="_blank" rel="noopener"><span class="play-icon">▶</span>OC Relay IDMT Coordination</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=transformer+differential+protection+relay+operation" target="_blank" rel="noopener"><span class="play-icon">▶</span>Differential Protection</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=earth+fault+protection+relay+substation" target="_blank" rel="noopener"><span class="play-icon">▶</span>Earth Fault Protection</a>
+        </div>
+      </div>
+    `
+  },
+  {
+    icon: '🏭',
+    bg: 'linear-gradient(145deg,#100528,#1a0a3d)',
+    category: 'Predictive Maintenance',
+    title: 'Industrial Machinery Predictive Maintenance: Vibration, Thermography & Oil Analysis',
+    excerpt: 'Condition monitoring techniques — vibration analysis (ISO 10816), thermal imaging, oil analysis, and ultrasonic testing — to prevent catastrophic failures in industrial plants.',
+    date: 'January 2026',
+    body: `
+      <h3>Why Predictive Maintenance Transforms Operations</h3>
+      <p>Unplanned machinery breakdowns cost industrial facilities 5–10× more than planned maintenance interventions. Predictive Maintenance (PdM) uses real-time condition data to identify developing faults weeks or months before failure — reducing unplanned downtime by up to 50%, extending equipment life, and reducing maintenance costs by 25–35%.</p>
+      <h3>Vibration Analysis — ISO 10816</h3>
+      <p>Vibration analysis is the most powerful tool for rotating machinery health monitoring. ISO 10816 defines severity zones A (new machine), B (acceptable for long-term operation), C (tolerable short-term), D (dangerous — shut down). Key parameters: Velocity in mm/s RMS for general health; Acceleration in g for high-frequency bearing faults; Displacement in μm for low-speed shaft problems.</p>
+      <h3>Fault Frequency Signatures</h3>
+      <ul>
+        <li>Imbalance: Dominant 1× RPM in radial direction</li>
+        <li>Misalignment: Dominant 2× RPM with significant axial component</li>
+        <li>Rolling Element Bearing Defects: BPFI, BPFO, BSF, FTF characteristic frequencies</li>
+        <li>Gear Mesh Faults: GMF = RPM × number of gear teeth, with sidebands</li>
+        <li>Electrical Faults (motors): 2× line frequency (100Hz at 50Hz supply)</li>
+      </ul>
+      <h3>Infrared Thermography</h3>
+      <p>Infrared cameras detect hot spots in electrical connections, motor windings, bearings, and switchgear. Temperature rise >10°C above established baseline warrants investigation; >30°C requires immediate corrective action. Thermographic surveys of HV substations and MCC panels are mandatory annually and prior to peak production seasons.</p>
+      <h3>Lubrication & Oil Analysis</h3>
+      <p>Spectrometric oil analysis tracks wear metals (Fe, Cu, Al, Cr, Sn), contamination (water ppm, soot, glycol), and oil degradation (viscosity, TAN, TBN). Trending wear metal concentrations reveals bearing and gear degradation weeks before catastrophic failure — enabling planned bearing change instead of emergency breakdown.</p>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=vibration+analysis+predictive+maintenance+ISO10816" target="_blank" rel="noopener"><span class="play-icon">▶</span>Vibration Analysis Guide</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=thermography+infrared+electrical+maintenance+inspection" target="_blank" rel="noopener"><span class="play-icon">▶</span>Thermographic Inspection</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=oil+analysis+lubrication+predictive+maintenance" target="_blank" rel="noopener"><span class="play-icon">▶</span>Oil Analysis Basics</a>
+        </div>
+      </div>
+    `
+  },
+  {
+    icon: '🌐',
+    bg: 'linear-gradient(145deg,#052525,#0a3d3d)',
+    category: 'EPC Project Management',
+    title: 'EPC Project Execution: Engineering, Procurement & Construction from Concept to Handover',
+    excerpt: 'Comprehensive guide to EPC methodology, project control systems (CPM/EVA), procurement strategy for long-lead items, commissioning protocols, and risk management.',
+    date: 'December 2025',
+    body: `
+      <h3>What EPC Means — Single-Point Accountability</h3>
+      <p>In an EPC (Engineering, Procurement, Construction) contract, a single contractor takes full responsibility from initial design through to project handover — assuming all technical, commercial, and schedule risk. The client receives a complete, operational facility under one accountable agreement, which eliminates the interface risks that arise when engineering, procurement, and construction are separate contracts.</p>
+      <h3>EPC Project Phase Breakdown</h3>
+      <ul>
+        <li>FEED (Front End Engineering Design): Feasibility, scope definition, equipment lists, CAPEX estimate ±15%</li>
+        <li>Detailed Engineering: P&IDs, Single Line Diagrams, equipment datasheets, civil/structural drawings, cable schedules</li>
+        <li>Procurement: Long-lead items ordered first — power transformers (16–26 weeks), switchgear (12–20 weeks), large motors. Expediting and third-party inspection at manufacturer.</li>
+        <li>Construction: Civil foundations, structural steel, equipment installation, cable installation, instrument loop installation — in parallel where possible to compress schedule</li>
+        <li>Pre-commissioning: Loop checks, insulation resistance tests, instrument calibration, valve stroke tests, relay setting and testing</li>
+        <li>Commissioning: First energisation, functional testing, performance testing, punch list clearance</li>
+        <li>Handover: As-built drawings, operation and maintenance manuals, spare parts list, operator training, defects liability period (typically 12 months)</li>
+      </ul>
+      <h3>Schedule Control — Critical Path Method</h3>
+      <p>The Critical Path (CP) is the longest unbroken chain of dependent activities — any delay on the CP directly delays project completion. EPC project managers use Primavera P6 or MS Project to track Schedule Performance Index (SPI) and Cost Performance Index (CPI) weekly. Float on non-critical activities is actively managed and never wasted.</p>
+      <h3>EPC Risk Categories</h3>
+      <ul>
+        <li>Technical: Equipment specification errors, design-construction interface failures, system integration issues</li>
+        <li>Procurement: Long-lead delays, import restrictions, quality non-conformances at FAT (Factory Acceptance Test)</li>
+        <li>Construction: Ground conditions, weather, skilled labour availability, site safety incidents</li>
+        <li>Commissioning: First energisation failure, control system integration, performance shortfall</li>
+      </ul>
+      <div class="blog-video-section">
+        <div class="blog-video-section-title">📹 Recommended Video References</div>
+        <div class="blog-video-links">
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=EPC+engineering+procurement+construction+project+management" target="_blank" rel="noopener"><span class="play-icon">▶</span>EPC Project Management</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=critical+path+method+CPM+project+scheduling+Primavera" target="_blank" rel="noopener"><span class="play-icon">▶</span>Critical Path Method</a>
+          <a class="blog-video-link" href="https://www.youtube.com/results?search_query=industrial+plant+commissioning+procedures+handover" target="_blank" rel="noopener"><span class="play-icon">▶</span>Plant Commissioning</a>
+        </div>
+      </div>
+    `
+  }
+];
+
+function renderBlogGrid() {
+  const grid = document.getElementById('blog-grid');
+  grid.innerHTML = BLOG_DATA.map((post, idx) => `
+    <div class="blog-card" onclick="openBlogModal(${idx})">
+      <div class="blog-card-thumb" style="background:${post.bg}">
+        <div class="blog-card-accent-line"></div>
+        <span class="blog-card-thumb-icon">${post.icon}</span>
+      </div>
+      <div class="blog-card-body">
+        <div class="blog-card-cat">${post.category}</div>
+        <div class="blog-card-title">${post.title}</div>
+        <div class="blog-card-excerpt">${post.excerpt}</div>
+        <div class="blog-card-footer">
+          <span class="blog-card-date">${post.date}</span>
+          <span class="blog-read-btn">Read Article <span style="font-size:0.8em">→</span></span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+renderBlogGrid();
+
+function openBlogModal(idx) {
+  const p = BLOG_DATA[idx];
+  const heroArea = document.getElementById('modal-hero-area');
+  heroArea.style.background = p.bg;
+  document.getElementById('modal-hero-icon').textContent = p.icon;
+  document.getElementById('modal-cat-label').textContent = p.category;
+  document.getElementById('modal-title-text').textContent = p.title;
+  document.getElementById('modal-body-content').innerHTML = p.body;
+  const overlay = document.getElementById('blog-modal-overlay');
+  overlay.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+  // re-attach cursor listeners to new content
+  overlay.querySelectorAll('a,button').forEach(el => {
+    el.addEventListener('mouseenter', ()=>{ cur.style.width='20px';cur.style.height='20px'; });
+    el.addEventListener('mouseleave', ()=>{ cur.style.width='12px';cur.style.height='12px'; });
+  });
+}
+function handleModalOverlayClick(e) {
+  if (e.target === document.getElementById('blog-modal-overlay')) closeBlogModal();
+}
+function closeBlogModal() {
+  document.getElementById('blog-modal-overlay').classList.remove('is-open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBlogModal(); });
+
+/* ══════════════════════════════════════════════════
+   SKILL TEST — QUIZ DATA
+══════════════════════════════════════════════════ */
+const SKILL_QUIZZES = [
+  {
+    tag: 'Module 01', cls: 'qtc-1',
+    title: 'Safety & Foundations',
+    subtitle: 'Electrical Safety, PPE, AC Theory, Transformers, Measurement & Fault Detection',
+    questions: [
+      { q:"What is the minimum current through the heart that can cause ventricular fibrillation?", opts:["10 mA","50 mA","100 mA","200 mA"], ans:1, exp:"As little as 50mA through the heart can cause ventricular fibrillation, which is fatal. High voltage systems carry thousands of amps — making electrical safety absolutely critical." },
+      { q:"What does LOTO stand for in electrical safety?", opts:["Live Only Test Operations","Lock-Out / Tag-Out","Load Over-current Trip Operation","Level Output Test Override"], ans:1, exp:"LOTO = Lock-Out / Tag-Out. It is the most critical safety procedure performed before any electrical maintenance work to ensure equipment cannot be accidentally energised." },
+      { q:"In the 6-step LOTO procedure, what is Step 6?", opts:["Apply Lock & Tag","Isolate the Equipment","Notify Affected Personnel","VERIFY DEAD — Test, Test, Test"], ans:3, exp:"Step 6 is 'VERIFY DEAD — Test, Test, Test'. Use an approved voltage detector on all phases to confirm de-energisation. Always test the tester first on a known live source." },
+      { q:"IEC 60903 Class 2 insulating gloves must be retested every:", opts:["1 year","2 years","6 months","3 months"], ans:2, exp:"IEC 60903 Class 2 insulating gloves (rated 17kV) must be retested every 6 months. They must also be worn with leather outer gloves for mechanical protection." },
+      { q:"What is the primary difference between an Isolator and a Circuit Breaker?", opts:["Isolators are used for HV, CBs for LV only","Isolators interrupt fault current, CBs do not","Isolators are no-load devices only; CBs interrupt fault current automatically","Isolators are electronic devices, CBs are mechanical"], ans:2, exp:"An Isolator must NEVER be operated under load — it is for isolation for safe maintenance only. A Circuit Breaker automatically interrupts fault current and is the primary protection device." },
+      { q:"In a Star (Wye) 3-phase system, if phase voltage is 230V, what is the line voltage?", opts:["230V","330V","400V (≈415V)","460V"], ans:2, exp:"VLine = √3 × VPhase = 1.732 × 230 ≈ 400V (nominally 415V). This fundamental relationship applies to all star-connected 3-phase systems." },
+      { q:"A load draws 30 kW at a power factor of 0.80. What is the apparent power in kVA?", opts:["24 kVA","30 kVA","37.5 kVA","40 kVA"], ans:2, exp:"S = P / PF = 30 / 0.80 = 37.5 kVA. Apparent power is always greater than active power when PF < 1." },
+      { q:"A transformer has 3,000 primary turns and 150 secondary turns. Primary voltage is 11kV. Secondary voltage is:", opts:["220V","415V","550V","1,100V"], ans:2, exp:"V₂ = V₁ × N₂/N₁ = 11,000 × (150/3,000) = 550V. This is the fundamental transformer turns ratio equation." },
+      { q:"What does RMS stand for in AC electrical measurements?", opts:["Rated Maximum Supply","Root Mean Square","Relative Measured Signal","Resistance Measurement Standard"], ans:1, exp:"RMS = Root Mean Square. It represents the equivalent DC value producing the same heating effect as the AC waveform. All standard AC voltage and current ratings use RMS values." },
+      { q:"In a perfectly balanced 3-phase load, the neutral current is approximately:", opts:["Equal to phase current","Double the phase current","Zero amps (0A)","Half the phase current"], ans:2, exp:"In a balanced 3-phase system the three phase currents cancel — neutral current ≈ 0A. Neutral current >20% of phase current indicates load imbalance or harmonics." },
+      { q:"Which PPE standard covers arc flash suits for substation work?", opts:["EN 361","IS 2925 / EN 397","NFPA 70E / IEC 61482","IEC 61243-3"], ans:2, exp:"Arc Flash Suits are rated to NFPA 70E / IEC 61482. The arc rating in cal/cm² must exceed the calculated incident energy at the working distance." },
+      { q:"A Current Transformer (CT) is connected in what configuration with the main conductor?", opts:["In parallel — across the line","In series — full line current passes through or around the primary","Through a bridge rectifier","Across the neutral busbar only"], ans:1, exp:"A CT is connected IN SERIES with the high-current conductor. Full line current passes through or around its primary (often just 1 turn — the busbar itself). The secondary produces 1A or 5A for safe metering." },
+      { q:"What is the typical efficiency range of modern power transformers?", opts:["80–90%","90–95%","95–97%","98–99.5%"], ans:3, exp:"Modern power transformers achieve 98–99.5% efficiency — making them the most efficient electrical machines and the preferred method of voltage transformation at scale." },
+      { q:"An open circuit fault is best identified by:", opts:["Measuring very high current on clamp meter","IR test showing <1MΩ","Voltage present at source terminal, 0V at load terminal — then continuity test","Checking transformer oil colour"], ans:2, exp:"Open circuit fault: voltage is present at the source terminal but 0V at the load terminal. Use a continuity tester to locate the break systematically from source toward load." },
+      { q:"A Phase Sequence Indicator showing a 'clockwise rotation' lamp confirms:", opts:["Phase sequence is RBY (reversed)","Phase sequence is RYB (positive/standard)","Neutral current is balanced","Transformer is step-up type"], ans:1, exp:"Clockwise rotation = RYB positive sequence (standard). Wrong phase sequence (RBY) causes motors to rotate in reverse — dangerous for connected machinery. Swap any two supply phases to correct." }
+    ]
+  },
+  {
+    tag: 'Module 02', cls: 'qtc-2',
+    title: 'Transformer & Protection',
+    subtitle: 'CT/PT, 11kV Systems, LBS, Earthing, Protection Relays & Coordination',
+    questions: [
+      { q:"Why do transformers ONLY work on AC and not DC supply?", opts:["DC voltage is too high for winding insulation","DC produces no changing magnetic field — so no electromagnetic induction occurs","AC frequency matches the transformer's resonant frequency","DC current is too low to magnetise the core"], ans:1, exp:"Transformers work ONLY on AC because the continuously changing current creates a changing magnetic flux in the core — inducing secondary voltage. DC produces steady flux — no induction occurs." },
+      { q:"Critical safety rule for CT secondary terminals when primary is energised:", opts:["Always keep the secondary terminals open-circuited","NEVER open the CT secondary — short-circuit terminals first before disconnecting","Connect secondary directly to earth at all times","The CT secondary can be freely disconnected at any time"], ans:1, exp:"NEVER open-circuit a CT secondary while the primary is energised. The open secondary develops dangerously high voltage that causes fatal shock, arc flash, and CT destruction. ALWAYS short-circuit first." },
+      { q:"A CT with ratio 200/5A is installed. When 160A flows in the line, CT secondary current is:", opts:["5A","4A","8A","160A"], ans:1, exp:"CT ratio 200/5A = 40:1. Secondary = 160 ÷ 40 = 4A. The CT scales primary current proportionally to give a safe, measurable secondary current for meters and protection relays." },
+      { q:"How is a Potential Transformer (PT) connected in the 11kV system?", opts:["In series with the line — full current flows through it","In parallel (across) the line — senses voltage, draws negligible current","Between neutral and earth only","Through an HRC fuse in series with the busbar"], ans:1, exp:"A PT is connected IN PARALLEL with the line. It senses the voltage, draws negligible current, and produces 110V or 63.5V output for panel meters and relay voltage inputs." },
+      { q:"What is the role of a Load Break Switch (LBS) in an 11kV distribution substation?", opts:["Interrupts high fault currents automatically","Steps down 11kV to 415V for consumers","Switches normal load current ON/OFF — cannot break fault current","Measures current for the protection relay"], ans:2, exp:"An LBS switches normal load current ON/OFF and can break 3–4× rated current, but CANNOT interrupt short-circuit fault current. For fault interruption, circuit breakers or high-speed fuses are used." },
+      { q:"Standard secondary voltage output of a PT on an 11kV system:", opts:["240V","415V","110V","5A current output"], ans:2, exp:"PT ratio is typically 11000/110V. Standard output is 110V (or 63.5V phase-neutral) — universally used for panel voltmeters and protection relay voltage inputs." },
+      { q:"RED indicator lamp on a substation control panel indicates the CB/LBS is:", opts:["Closed and energised","Open position — could be planned switching or a fault trip","Tripped due to overcurrent only","Maintenance lockout applied"], ans:1, exp:"RED lamp = Circuit OPEN (CB or LBS in open position). Could indicate planned switching or a fault trip. Always check the alarm annunciator to determine the reason. GREEN = CLOSED/energised." },
+      { q:"What is the key safety limitation of an Auto Transformer vs a two-winding transformer?", opts:["Auto transformers are less efficient","Auto transformers only work at 50Hz","No galvanic isolation — full HV can appear on LV terminal if the winding opens","Auto transformers cannot step up voltage"], ans:2, exp:"An Auto Transformer uses a SINGLE winding — no galvanic isolation. If the common winding opens between the tap and neutral, full HV appears on the LV terminal — a serious safety hazard." },
+      { q:"The two main types of transformer losses are:", opts:["Eddy current and hysteresis loss only","Core losses (constant) and Copper losses (I²R, variable with load)","Radiation loss and conduction loss","Short circuit loss and open circuit loss"], ans:1, exp:"(1) Core Losses (hysteresis + eddy current) — constant, present whenever energised; (2) Copper Losses (I²R) — variable, proportional to I². Maximum efficiency where Core Loss = Copper Loss." },
+      { q:"What is the purpose of TIME GRADING in protection relay coordination?", opts:["To speed up all relays equally","Ensures the relay closest to the fault trips first, isolating only the faulted section","To test relays automatically during normal operation","To set the CT ratio for each feeder"], ans:1, exp:"Time grading (discrimination) ensures SELECTIVITY — the relay closest to the fault operates first, isolating only the faulted zone. Upstream relays provide backup and trip only if the primary relay fails." },
+      { q:"IDMT stands for:", opts:["Instantaneous Definite Maximum Time","Inverse Definite Minimum Time","Integrated Digital Monitoring Terminal","Inductive Drive Motor Test"], ans:1, exp:"IDMT = Inverse Definite Minimum Time. The relay operates FASTER for HIGHER fault currents — providing better discrimination and faster energy limitation for severe faults closer to the source." },
+      { q:"What does the Buchholz Relay protect against in an oil-filled transformer?", opts:["Overtemperature at the windings","Internal faults — detects gas accumulation (alarm) and oil surge from arcing (trip)","Overcurrent on the secondary side","Earth faults on the HV bushings"], ans:1, exp:"The Buchholz relay detects gases produced by incipient internal faults. Minor faults cause slow gas accumulation → alarm. Major internal arc faults cause sudden oil surge → immediate trip of main breakers." },
+      { q:"Maximum acceptable earth resistance for HV substation earthing per IEC standards:", opts:["Less than 100Ω","Less than 10Ω","Less than 1Ω","Less than 0.01Ω"], ans:1, exp:"IEC standards require HV substation earth resistance to be less than 10Ω. Critical installations should target less than 1Ω. Lower resistance provides a safer and lower-impedance fault current return path." },
+      { q:"Which fault type produces the highest fault current in a 3-phase system?", opts:["Single phase to earth (L-E)","Phase to phase (L-L)","Three phase symmetrical fault (L-L-L)","Double phase to earth (L-L-E)"], ans:2, exp:"A three-phase symmetrical (L-L-L) fault produces the highest fault current = V/Zeq. All protection systems and equipment fault ratings are based on the 3-phase fault level at each busbar." },
+      { q:"On an isolated neutral (IT) system, the first earth fault produces:", opts:["Very high fault current immediately","Very low fault current — no direct return path exists","No indication at the protection relay","Immediate trip of the main circuit breaker"], ans:1, exp:"On an IT (isolated neutral) system, the first earth fault produces very low current as there is no direct return path. A second earth fault on a different phase then creates a phase-to-phase fault — hence earth fault monitoring is critical." }
+    ]
+  },
+  {
+    tag: 'Module 03', cls: 'qtc-3',
+    title: 'Testing & Commissioning',
+    subtitle: 'OC/SC Tests, Megger IR, Earthing Resistance, Commissioning Procedures & Maintenance',
+    questions: [
+      { q:"Acceptable tolerance for a Turns Ratio Test (TTR) per IEC 60076:", opts:["Within 5%","Within 2%","Within 0.5%","Exact match only"], ans:2, exp:"Per IEC 60076, measured turns ratio must be within ±0.5% of the calculated nameplate ratio on ALL tap positions. Deviation >0.5% requires investigation — indicates shorted turns, wrong tap, or winding error." },
+      { q:"Why is DC current used for Winding Resistance measurement instead of AC?", opts:["DC gives higher precision numerical readings","AC causes arcing at test terminals","AC cannot give a stable reading — transformer inductance continuously changes impedance","DC is always safer for personnel"], ans:2, exp:"NEVER use AC for winding resistance — transformer inductance (L) causes continuously changing impedance with AC, preventing a stable accurate reading. DC injection (1–10A DC) is used, with time allowed for current to stabilise." },
+      { q:"The Fall-of-Potential method is used for:", opts:["Measuring transformer winding resistance","Measuring earth/ground resistance of the substation earthing system","Testing cable insulation breakdown voltage","Verifying CT ratio accuracy"], ans:1, exp:"The Fall-of-Potential (three-electrode) method measures earth resistance. Current is injected between the earth electrode under test and an auxiliary current electrode; voltage is measured at an intermediate potential electrode. R = V/I." },
+      { q:"A Megger test showing insulation resistance less than 1 MΩ on a cable indicates:", opts:["Normal and acceptable insulation condition","Very good insulation — no action needed","Poor or failed insulation — fault, moisture ingress, or degradation. Do NOT energise.","Cable is too short for measurement"], ans:2, exp:"IR < 1 MΩ at 500V Megger indicates poor or failed insulation — short circuit fault, moisture ingress, or insulation degradation. The cable or equipment must NOT be energised until the cause is identified and rectified." },
+      { q:"Polarisation Index (PI) and what value indicates GOOD insulation:", opts:["PI = 1-min IR ÷ 10-min IR; Good if PI > 4","PI = 10-min IR ÷ 1-min IR; Good if PI > 2","PI = IR at 500V ÷ IR at 1000V; Good if PI > 1","PI = Core loss ÷ Copper loss; Good if PI > 0.5"], ans:1, exp:"PI = (10-minute IR reading) ÷ (1-minute IR reading). PI > 2 = good dry insulation. PI 1–2 = questionable. PI < 1 = wet or deteriorated insulation requiring immediate attention before any energisation." },
+      { q:"During Pre-Energisation commissioning, which item must be verified FIRST above all others?", opts:["Oil level and cooling fans operational","Protection relays set and tested per coordination study","ALL personnel clear, barriers in place, LOTO removed only by the authorised person","Tap changer confirmed at principal tap position"], ans:2, exp:"Safety ALWAYS comes first: all personnel must be clear, physical barriers in place, and LOTO removed ONLY by the authorised responsible person before any energisation attempt. No technical check ever overrides personnel safety." },
+      { q:"DGA (Dissolved Gas Analysis) of transformer oil detects:", opts:["Oil viscosity and dielectric strength only","Concentration of fault gases dissolved in oil — indicates type and severity of internal faults","Water content and pH only","External contamination from dust and moisture only"], ans:1, exp:"DGA is the most powerful transformer diagnostic tool. Different fault types produce characteristic gases: H₂ = corona partial discharge; CH₄, C₂H₆ = thermal overheating; C₂H₂ = high-energy electrical arcing." },
+      { q:"Breakdown Voltage (BDV) test on transformer oil — minimum acceptable for 11kV systems:", opts:["Current through oil under load conditions","Voltage at which oil insulation fails — minimum 30kV for 11kV systems","Oil viscosity at operating temperature","Water absorption capacity of the oil"], ans:1, exp:"BDV measures the voltage at which transformer oil breaks down as an insulator. For 11kV transformers, minimum BDV = 30kV (new oil is 70kV+). Low BDV = moisture or contamination — oil must be filtered or replaced." },
+      { q:"Phase-to-phase winding resistance imbalance greater than 2% between phases indicates:", opts:["Normal manufacturing tolerance — no action required","Loose bushing clamp, tap changer contact resistance, or internal winding fault — investigate immediately","Transformer needs oil filtration","CT ratio requires recalibration"], ans:1, exp:"Winding resistance imbalance >2% between phases is NOT normal. It indicates: loose bushing clamp, high contact resistance at tap changer, poor termination, or internal winding fault. All phases should be within 2% on a healthy transformer." },
+      { q:"Primary purpose of the Hipot (High-Potential dielectric) test on HV cables:", opts:["Measure the conductor's DC resistance","Verify current carrying capacity under load","Stress-test insulation above rated voltage to detect weaknesses before commissioning","Check phase sequence of the cable installation"], ans:2, exp:"Hipot test applies voltage above the cable's rated level (IEC-specified per voltage class) to stress the insulation. Detects pre-existing weaknesses, pinholes, or damage that would fail in service — before they cause an outage." },
+      { q:"During FIRST ENERGISATION of a new distribution transformer, correct procedure is:", opts:["Apply full rated load immediately to confirm performance","Energise at full voltage with all feeders connected simultaneously","Energise ON NO-LOAD first, observe 30 minutes minimum for abnormal sounds/smells/oil leaks/relay alarms","Apply 50% voltage for 24 hours before applying full voltage"], ans:2, exp:"First energisation: NO-LOAD first. Observe minimum 30 minutes for abnormal sounds, burning smell, oil leaks, Buchholz alarm, or protection relay trips. Only then progressively connect load after confirming all parameters are normal." },
+      { q:"Vsc% = 5% on a 1000 kVA transformer nameplate means the maximum LV-side fault current is:", opts:["Limited to 5% of rated current","Up to 20× (= 1÷0.05) rated full-load current","Unlimited — impedance provides no limiting","5 amps maximum fault current"], ans:1, exp:"Vsc% = 5% means Zeq = 5% of base impedance. Max fault current = Rated current ÷ 0.05 = 20× rated current. This is why Vsc% is critical for LV protection design — CB must safely interrupt this fault current." },
+      { q:"Correct procedure for the Open Circuit (OC) test on a transformer:", opts:["Apply rated voltage to HV side, measure no-load current on HV","Apply rated voltage to LV side, measure no-load current and watts, HV open-circuited","Apply half rated voltage to both windings simultaneously","Apply DC voltage to measure winding resistance"], ans:1, exp:"OC test: Apply RATED VOLTAGE to the LV winding (safer — lower voltage), leave HV open-circuited. Measure no-load current (I₀) and input watts (= core losses). Determines magnetising parameters and core loss." },
+      { q:"In the Short Circuit (SC) test, how much voltage is typically applied?", opts:["Full rated voltage on LV side","Full rated voltage on HV side","5–10% of rated voltage on HV side until rated current flows in the winding","50% rated voltage on LV side"], ans:2, exp:"SC test: Apply ~5–10% of rated voltage on HV side (LV short-circuited) until rated current flows. This low voltage is sufficient because of the transformer's low internal impedance. Measures copper (I²R) losses." },
+      { q:"Annual maintenance test that best detects gradual insulation deterioration in transformer windings:", opts:["Visual inspection only is required annually","BDV oil test only","Insulation Resistance (Megger) with Polarisation Index — tracked as a trend over time","Thermography only"], ans:2, exp:"Annual IR (Megger) testing with Polarisation Index (R10min÷R1min) trend tracking is the primary tool for detecting gradual insulation deterioration. Combined with DGA and BDV oil tests gives a comprehensive transformer health picture." }
+    ]
+  }
+];
+
+/* ══════════════════════════════════════════════════
+   SKILL TEST — STATE & LOGIC
+══════════════════════════════════════════════════ */
+let activeQuizIdx = 0, activeQIdx = 0;
+let activeAnswers = [], activeAnswered = [];
+
+function getStoredScores() {
+  try { return JSON.parse(localStorage.getItem('mp_skill_scores') || '[]'); } catch(e) { return []; }
+}
+function storeScore(entry) {
+  const scores = getStoredScores();
+  scores.push(entry);
+  try { localStorage.setItem('mp_skill_scores', JSON.stringify(scores)); } catch(e) {}
+}
+
+function renderQuizTopics() {
+  const grid = document.getElementById('quiz-topics-grid');
+  const scores = getStoredScores();
+  grid.innerHTML = SKILL_QUIZZES.map((q, idx) => {
+    const attempts = scores.filter(s => s.idx === idx);
+    const bestScore = attempts.length ? Math.max(...attempts.map(a => a.pct)) : null;
+    const scoreHtml = bestScore !== null
+      ? `Best Score: <span class="score-val">${bestScore}%</span> &nbsp;(${attempts.length} attempt${attempts.length > 1 ? 's' : ''})`
+      : 'Best Score: <span class="score-val">—</span>';
+    return `
+      <div class="quiz-topic-card ${q.cls}" onclick="startQuiz(${idx})">
+        <div class="qtc-module-tag">${q.tag}</div>
+        <div class="qtc-title">${q.title}</div>
+        <div class="qtc-subtitle">${q.subtitle}</div>
+        <div class="qtc-meta">
+          <div class="qtc-meta-item"><strong>15</strong>Questions</div>
+          <div class="qtc-meta-item"><strong>20</strong>Minutes</div>
+          <div class="qtc-meta-item"><strong>70%</strong>Pass Mark</div>
+        </div>
+        <div class="qtc-best-score">${scoreHtml}</div>
+        <button class="btn-start-quiz">▶ &nbsp;Start Free Test</button>
+      </div>
+    `;
+  }).join('');
+}
+renderQuizTopics();
+
+function startQuiz(idx) {
+  activeQuizIdx = idx;
+  activeQIdx = 0;
+  const quiz = SKILL_QUIZZES[idx];
+  activeAnswers = new Array(quiz.questions.length).fill(null);
+  activeAnswered = new Array(quiz.questions.length).fill(false);
+  document.getElementById('quiz-home-screen').style.display = 'none';
+  document.getElementById('quiz-result-screen').style.display = 'none';
+  document.getElementById('quiz-active-screen').style.display = 'block';
+  document.getElementById('quiz-active-title').textContent = quiz.title;
+  document.getElementById('cert-sent-msg').style.display = 'none';
+  renderActiveQuestion();
+  document.getElementById('skilltest').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function backToQuizHome() {
+  document.getElementById('quiz-home-screen').style.display = 'block';
+  document.getElementById('quiz-active-screen').style.display = 'none';
+  document.getElementById('quiz-result-screen').style.display = 'none';
+  renderQuizTopics();
+}
+
+function renderActiveQuestion() {
+  const quiz = SKILL_QUIZZES[activeQuizIdx];
+  const q = quiz.questions[activeQIdx];
+  const total = quiz.questions.length;
+  const answeredCount = activeAnswered.filter(Boolean).length;
+  const correctCount = activeAnswers.filter((a, i) => a !== null && a === quiz.questions[i].ans).length;
+
+  document.getElementById('q-counter-disp').textContent = `Question ${activeQIdx + 1} of ${total}`;
+  document.getElementById('q-live-score').textContent = `Score: ${correctCount}/${answeredCount}`;
+  document.getElementById('quiz-pbar').style.width = ((activeQIdx + 1) / total * 100) + '%';
+  document.getElementById('q-num-disp').textContent = `QUESTION ${activeQIdx + 1}`;
+  document.getElementById('q-text-disp').textContent = q.q;
+
+  const optsWrap = document.getElementById('q-options-wrap');
+  optsWrap.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'q-opt';
+    btn.innerHTML = `<span class="opt-letter-badge">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i);
+    if (activeAnswered[activeQIdx]) {
+      btn.disabled = true;
+      if (i === q.ans) btn.classList.add('q-correct');
+      else if (i === activeAnswers[activeQIdx]) btn.classList.add('q-wrong');
+    }
+    optsWrap.appendChild(btn);
+  });
+
+  const expBox = document.getElementById('q-exp-box');
+  if (activeAnswered[activeQIdx]) {
+    expBox.innerHTML = `<strong>Explanation:</strong> ${q.exp}`;
+    expBox.classList.add('show');
+  } else {
+    expBox.classList.remove('show');
+  }
+
+  document.getElementById('btn-prev-q').disabled = activeQIdx === 0;
+  const isLast = activeQIdx === total - 1;
+  const nextBtn = document.getElementById('btn-next-q');
+  if (isLast && activeAnswered.every(Boolean)) {
+    nextBtn.textContent = '✓ Submit Test';
+    nextBtn.onclick = submitQuiz;
+  } else if (isLast) {
+    nextBtn.textContent = 'Submit →';
+    nextBtn.onclick = nextQ;
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.onclick = nextQ;
+  }
+
+  // Re-attach cursor
+  optsWrap.querySelectorAll('button').forEach(el => {
+    el.addEventListener('mouseenter', ()=>{ cur.style.width='20px'; cur.style.height='20px'; });
+    el.addEventListener('mouseleave', ()=>{ cur.style.width='12px'; cur.style.height='12px'; });
+  });
+}
+
+function selectAnswer(optIdx) {
+  if (activeAnswered[activeQIdx]) return;
+  activeAnswers[activeQIdx] = optIdx;
+  activeAnswered[activeQIdx] = true;
+  renderActiveQuestion();
+}
+
+function nextQ() {
+  const total = SKILL_QUIZZES[activeQuizIdx].questions.length;
+  if (activeQIdx < total - 1) {
+    activeQIdx++;
+    renderActiveQuestion();
+    document.getElementById('q-card-el').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    submitQuiz();
+  }
+}
+function prevQ() {
+  if (activeQIdx > 0) { activeQIdx--; renderActiveQuestion(); }
+}
+
+function submitQuiz() {
+  const quiz = SKILL_QUIZZES[activeQuizIdx];
+  const total = quiz.questions.length;
+  let correct = 0;
+  activeAnswers.forEach((a, i) => { if (a === quiz.questions[i].ans) correct++; });
+  const pct = Math.round(correct / total * 100);
+  const passed = pct >= 70;
+
+  storeScore({ idx: activeQuizIdx, title: quiz.title, correct, total, pct, passed, date: new Date().toLocaleDateString('en-GB') });
+
+  const resultCard = document.getElementById('result-card-el');
+  resultCard.className = 'result-card ' + (passed ? 'r-pass' : 'r-fail');
+  document.getElementById('result-emoji-el').textContent = passed ? '🏆' : '📖';
+  document.getElementById('result-pct-el').textContent = pct + '%';
+  document.getElementById('result-verdict-el').textContent = passed ? '✅ PASSED — Excellent Work!' : '❌ Below Pass Mark — Review & Retry';
+  document.getElementById('rs-correct').textContent = correct;
+  document.getElementById('rs-wrong').textContent = total - correct;
+  document.getElementById('rs-pct').textContent = pct + '%';
+
+  // Build review
+  const reviewWrap = document.getElementById('review-items-wrap');
+  reviewWrap.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+  quiz.questions.forEach((q, i) => {
+    const ua = activeAnswers[i];
+    const isC = ua === q.ans;
+    const div = document.createElement('div');
+    div.className = 'review-item ' + (isC ? 'ri-correct' : 'ri-wrong');
+    div.innerHTML = `
+      <div class="ri-q-text"><strong>${isC ? '✅' : '❌'} Q${i+1}.</strong> ${q.q}</div>
+      <div class="ri-answer ${isC ? 'your-right' : 'your-wrong'}">Your answer: ${ua !== null ? letters[ua] + '. ' + q.opts[ua] : 'Not answered'}</div>
+      ${!isC ? `<div class="ri-answer correct-show">✓ Correct answer: ${letters[q.ans]}. ${q.opts[q.ans]}</div>` : ''}
+      <div class="ri-exp"><strong>Explanation:</strong> ${q.exp}</div>
+    `;
+    reviewWrap.appendChild(div);
+  });
+
+  document.getElementById('btn-retry').onclick = () => startQuiz(activeQuizIdx);
+  document.getElementById('cert-email-input').value = '';
+  document.getElementById('cert-phone-input').value = '';
+  const sendBtn = document.getElementById('btn-send-cert');
+  sendBtn.disabled = false;
+  sendBtn.textContent = '📨  Email My Score Certificate Now';
+  document.getElementById('cert-sent-msg').style.display = 'none';
+
+  document.getElementById('quiz-active-screen').style.display = 'none';
+  document.getElementById('quiz-result-screen').style.display = 'block';
+  document.getElementById('skilltest').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function sendCertificate() {
+  const email = document.getElementById('cert-email-input').value.trim();
+  const phone = document.getElementById('cert-phone-input').value.trim();
+  if (!email || !phone) {
+    alert('Please enter both your Email Address and Phone / WhatsApp Number to receive your certificate.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid email address (e.g. yourname@gmail.com).');
+    return;
+  }
+  if (phone.replace(/[\s\-\+\(\)]/g,'').length < 7) {
+    alert('Please enter a valid phone number.');
+    return;
+  }
+  // Log the submission (in production, connect to backend/email API)
+  const quiz = SKILL_QUIZZES[activeQuizIdx];
+  const scores = getStoredScores();
+  const lastScore = scores.filter(s => s.idx === activeQuizIdx).slice(-1)[0];
+  console.log('MechPower Skill Certificate Request:', { email, phone, quiz: quiz.title, score: lastScore });
+  // Simulate sending
+  const btn = document.getElementById('btn-send-cert');
+  btn.disabled = true;
+  btn.textContent = '⏳  Sending Certificate...';
+  setTimeout(() => {
+    btn.textContent = '✅  Certificate Sent!';
+    document.getElementById('cert-sent-msg').style.display = 'block';
+    document.getElementById('cert-sent-msg').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 1800);
+}
+</script>
+
+</body>
+</html>

@@ -20,6 +20,10 @@ mobileNav.classList.toggle("show");
    CUSTOM CURSOR
 ========================== */
 
+/* ==========================
+   CUSTOM CURSOR
+========================== */
+
 const cur =
 document.getElementById('cur');
 
@@ -27,7 +31,11 @@ const cur2 =
 document.getElementById('cur2');
 
 
-if(cur && cur2){
+if(
+window.innerWidth > 768 &&
+cur &&
+cur2
+){
 
 document.addEventListener(
 'mousemove',
@@ -100,8 +108,19 @@ cur.style.height='12px';
 }
 );
 
+}else{
+
+/* মোবাইলে সম্পূর্ণ hide */
+
+if(cur){
+cur.style.display='none';
 }
 
+if(cur2){
+cur2.style.display='none';
+}
+
+}
 
 /* ==========================
    REVEAL FIX

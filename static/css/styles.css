@@ -1339,3 +1339,33 @@ display:flex;
 }
 
 }
+
+/* ===== Disable Custom Cursor on Mobile Only ===== */
+
+@media (max-width:768px){
+
+  /* ডিফল্ট কার্সর ফিরিয়ে আনা */
+  body{
+    cursor:auto !important;
+  }
+
+  /* কাস্টম কার্সর hide */
+  .cur,
+  .cur2{
+    display:none !important;
+    opacity:0 !important;
+    visibility:hidden !important;
+    pointer-events:none !important;
+  }
+
+  /* যেসব বাটনে cursor:none দেওয়া ছিল */
+  .nav-cta,
+  .btn-submit,
+  .btn-start-quiz,
+  .btn-qnav,
+  .btn-send-cert,
+  .blog-modal-close{
+    cursor:pointer !important;
+  }
+
+}

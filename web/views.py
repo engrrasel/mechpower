@@ -15,8 +15,22 @@ from .models import (
     QuizSubmission
 )
 
+from certificate.models import (
+    Certificate
+)
+
+from certificate.services import (
+    generate_certificate
+)
+
+from urllib.parse import (
+    urlparse,
+    parse_qs
+)
+
 import json
 import re
+
 
 
 # YouTube ID extractor
@@ -25,30 +39,20 @@ def get_youtube_id(url):
     if not url:
         return None
 
-    patterns = [
+    parsed = urlparse(url)
 
-        r"(?:youtube\.com/watch\?v=)([^&]+)",
+    if "youtube.com" in parsed.netloc:
 
-        r"(?:youtu\.be/)([^?&]+)",
+        return parse_qs(
+            parsed.query
+        ).get(
+            "v",
+            [None]
+        )[0]
 
-        r"(?:youtube\.com/embed/)([^?&]+)",
+    elif "youtu.be" in parsed.netloc:
 
-        r"(?:youtube\.com/shorts/)([^?&]+)",
-
-    ]
-
-    for pattern in patterns:
-
-        match = re.search(
-            pattern,
-            url
-        )
-
-        if match:
-
-            video_id = match.group(1)
-
-            return video_id[:11]
+        return parsed.path.lstrip("/")
 
     return None
 
@@ -109,33 +113,6 @@ def home(request):
 
 
 # Blog Detail
-from django.shortcuts import render, get_object_or_404
-from urllib.parse import urlparse, parse_qs
-
-
-def get_youtube_id(url):
-
-    parsed = urlparse(url)
-
-    # youtube.com/watch?v=xxxx
-    if "youtube.com" in parsed.netloc:
-
-        return parse_qs(
-            parsed.query
-        ).get(
-            "v",
-            [None]
-        )[0]
-
-    # youtu.be/xxxx
-    elif "youtu.be" in parsed.netloc:
-
-        return parsed.path.lstrip("/")
-
-    return None
-
-
-
 def blog_detail(request, slug):
 
     blog = get_object_or_404(
@@ -153,16 +130,6 @@ def blog_detail(request, slug):
 
         youtube_id = get_youtube_id(
             blog.youtube_link
-        )
-
-        print(
-            "VIDEO:",
-            blog.youtube_link
-        )
-
-        print(
-            "VIDEO ID:",
-            youtube_id
         )
 
     return render(
@@ -203,6 +170,7 @@ def save_quiz(request):
             request.body
         )
 
+
         QuizSubmission.objects.create(
 
             name=data["name"],
@@ -216,10 +184,62 @@ def save_quiz(request):
 
         )
 
+
+        percentage = int(
+            data["percentage"]
+        )
+
+
+        if percentage >= 80:
+
+            grade = "A"
+
+        elif percentage >= 60:
+
+            grade = "B"
+
+        else:
+
+            grade = "C"
+
+
+        certificate = (
+            Certificate.objects.create(
+
+                participant_name=
+                data["name"],
+
+                quiz_name=
+                data["quiz"],
+
+                score=
+                percentage,
+
+                grade=
+                grade
+            )
+        )
+
+
+        generate_certificate(
+            certificate
+        )
+
+
         return JsonResponse({
-            "success": True
+
+            "success": True,
+
+            "certificate_id":
+            certificate.certificate_id,
+
+            "download_url":
+            f"/certificate/download/{certificate.certificate_id}/"
+
         })
 
     return JsonResponse({
+
         "success": False
+
     })

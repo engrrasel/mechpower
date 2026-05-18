@@ -524,27 +524,43 @@ quizContainer.innerHTML=`
 <div class="lead-box">
 
 <h1>
-
 🎉 Result
-
 </h1>
 
 <h2>
-
 ${score}/${questions.length}
-
 </h2>
 
 <p>
-
 Score:
 ${percentage}%
-
 </p>
+
+<a
+href="${data.download_url}"
+class="result-btn"
+style="
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+"
+>
+
+⬇ Download Certificate
+
+</a>
 
 </div>
 
 `;
+
+
+setTimeout(()=>{
+
+window.location.href=
+data.download_url;
+
+},1500);
 
 }
 

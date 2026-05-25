@@ -65,13 +65,6 @@ def generate_certificate(
     )
 
 
-    # Grade
-    c.drawString(
-        415,
-        205,
-        certificate.grade
-    )
-
 
     # Certificate Date
     c.setFont(

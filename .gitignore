@@ -1,11 +1,30 @@
+# Virtual Environment
 venv/
+env/
+
+# Python Cache
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Database
 db.sqlite3
+
+# Environment Variables
 .env
+
+# Media Files
 media/
-staticfiles/media/
-__pycache__/
-*.pyc
-db.sqlite3
-venv/
+
+# Collected Static Files
+staticfiles/
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

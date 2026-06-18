@@ -141,11 +141,29 @@ class QuizSubmission(models.Model):
 
 class Quiz(models.Model):
     title = models.CharField(max_length=200)
-    short_title = models.CharField(max_length=50)
+
+    short_title = models.CharField(
+        max_length=50
+    )
+
+    time_per_question = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        help_text="Time per question in seconds"
+    )
+
+    def total_time(self):
+
+        if not self.time_per_question:
+            return None
+
+        return (
+            self.questions.count()
+            * self.time_per_question
+        )
 
     def __str__(self):
         return self.title
-
 
 class Question(models.Model):
 

@@ -28,9 +28,27 @@ class QuestionInline(
 
 # Quiz Admin
 @admin.register(Quiz)
-class QuizAdmin(
-    admin.ModelAdmin
-):
+class QuizAdmin(admin.ModelAdmin):
+
+    list_display = [
+        "title",
+        "time_per_question",
+        "get_total_time"
+    ]
+
+    def get_total_time(self,obj):
+
+        total = obj.total_time()
+
+        if total:
+            return f"{total} sec"
+
+        return "No Limit"
+
+    get_total_time.short_description = (
+        "Total Time"
+    )
+
     inlines = [
         QuestionInline
     ]

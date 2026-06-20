@@ -62,6 +62,8 @@ class QuizSubmissionAdmin(
 
     list_display = (
         'name',
+        'email',
+        "phone",
         'quiz_name',
         'score',
         'percentage',

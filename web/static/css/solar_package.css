@@ -1,0 +1,110 @@
+/* Tailwind custom configuration injected via CSS variable style behavior */
+@layer base {
+  :root {
+    --color-leaf-50: #F2FBF5;
+    --color-leaf-100: #E3F7EA;
+    --color-leaf-200: #BFEBCE;
+    --color-leaf-300: #8FDAAA;
+    --color-leaf-400: #5FC585;
+    --color-leaf-500: #3CAE66;
+    --color-leaf-600: #2C8F52;
+    --color-leaf-700: #236F40;
+    --color-leaf-800: #1B4332;
+    --color-leaf-900: #123326;
+    
+    --color-sun-50: #FFF6ED;
+    --color-sun-100: #FFE8D3;
+    --color-sun-200: #FFCB9C;
+    --color-sun-300: #FFA75C;
+    --color-sun-400: #FB923C;
+    --color-sun-500: #F2730E;
+    --color-sun-600: #D85F08;
+    --color-sun-700: #B14B08;
+    
+    --color-gold-300: #FBE08D;
+    --color-gold-400: #F2C94C;
+    --color-gold-500: #E0AE1F;
+    
+    --color-ink-700: #33403A;
+    --color-ink-800: #22302A;
+    --color-ink-900: #15201B;
+  }
+}
+
+/* Tailwind configuration bridge */
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          leaf:   { 50:'#F2FBF5', 100:'#E3F7EA', 200:'#BFEBCE', 300:'#8FDAAA', 400:'#5FC585', 500:'#3CAE66', 600:'#2C8F52', 700:'#236F40', 800:'#1B4332', 900:'#123326' },
+          sun:    { 50:'#FFF6ED', 100:'#FFE8D3', 200:'#FFCB9C', 300:'#FFA75C', 400:'#FB923C', 500:'#F2730E', 600:'#D85F08', 700:'#B14B08' },
+          gold:   { 300:'#FBE08D', 400:'#F2C94C', 500:'#E0AE1F' },
+          ink:    { 700:'#33403A', 800:'#22302A', 900:'#15201B' }
+        },
+        fontFamily: {
+          display: ['"Baloo Da 2"','sans-serif'],
+          body: ['"Hind Siliguri"','sans-serif']
+        },
+        boxShadow: {
+          soft: '0 10px 30px -10px rgba(27,67,50,0.18)',
+          card: '0 2px 10px rgba(27,67,50,0.08)'
+        }
+      }
+    }
+  }
+</script>
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Hind Siliguri', sans-serif; background:#fff; color:#22302A; }
+.font-display { font-family: 'Baloo Da 2', sans-serif; }
+::selection { background: #BFEBCE; }
+
+/* ---- Solar dial signature element ---- */
+.dial-track { stroke: #E3F7EA; }
+.dial-arc {
+  stroke: url(#dialGradient);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.7s cubic-bezier(.4,0,.2,1);
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.ray { animation: spin-slow 22s linear infinite; transform-origin: center; }
+
+/* ---- chip / pill controls ---- */
+.pill-radio input:checked + .pill-label {
+  background:#1B4332; color:#fff; box-shadow: 0 6px 14px -6px rgba(27,67,50,.55);
+}
+.pill-radio input:checked + .pill-label .pill-sub { color:#BFEBCE; }
+.pill-label { transition: all .2s ease; }
+
+.equip-card { transition: all .18s ease; }
+.equip-check:checked ~ .equip-card {
+  border-color:#3CAE66; background:#F2FBF5; box-shadow: 0 6px 18px -10px rgba(60,174,102,.6);
+}
+.equip-check:checked ~ .equip-card .equip-dot { background:#3CAE66; }
+.qty-box { transition: opacity .15s ease, max-height .25s ease; }
+
+/* package cards */
+.pkg-card { transition: transform .25s ease, box-shadow .25s ease; }
+.pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -20px rgba(27,67,50,.35); }
+.pkg-highlight { animation: glow 1.8s ease-in-out 2; }
+@keyframes glow {
+  0%,100% { box-shadow: 0 0 0 0 rgba(242,115,14,0); }
+  50% { box-shadow: 0 0 0 8px rgba(242,115,14,.18); }
+}
+
+/* modal */
+.modal-overlay { backdrop-filter: blur(4px); }
+.modal-card { animation: pop .25s ease; }
+@keyframes pop { from { opacity:0; transform: translateY(10px) scale(.98);} to {opacity:1; transform:none;} }
+
+/* toast */
+#toast { transition: opacity .3s ease, transform .3s ease; }
+
+/* scrollbar-ish nav underline */
+.nav-link { position:relative; }
+.nav-link::after {
+  content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0%;
+  background:#F2730E; transition: width .2s ease;
+}
+.nav-link:hover::after { width:100%; }

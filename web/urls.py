@@ -5,6 +5,7 @@ from .views import (
     blog_detail,
     quiz_page,
     save_quiz,
+    solar_package,  # এখানে সোলার প্যাকেজ ভিউটি ইমপোর্ট করা হলো
 )
 
 urlpatterns = [
@@ -13,6 +14,13 @@ urlpatterns = [
         '',
         home,
         name='home'
+    ),
+
+    # সোলার প্যাকেজের পাথটি সঠিকভাবে ঠিক করে দেওয়া হলো
+    path(
+        'solar-package/', 
+        solar_package, 
+        name='solar_package'
     ),
 
     path(

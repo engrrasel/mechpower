@@ -1,4 +1,4 @@
-﻿*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
   --or:#E8611A;--am:#F5A623;
   --nv:#0B1622;--dk:#0E1C2A;--st:#162336;--pl:#1E3045;--mi:#3A5570;--lt:#7A9BB5;--wh:#D8E8F2;
@@ -9,10 +9,14 @@
   --nav-h:72px;
 }
 html{scroll-behavior:smooth}
-body{background:var(--nv);color:var(--wh);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none}
-.cur{position:fixed;width:10px;height:10px;border-radius:50%;background:var(--or);pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen}
-.cur2{position:fixed;width:32px;height:32px;border-radius:50%;border:1px solid rgba(232,97,26,.5);pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .12s ease}
 
+/* এখানে cursor: none বাদ দিয়ে স্বাভাবিক করা হয়েছে */
+body{background:var(--nv);color:var(--wh);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+
+/* সব বাটন, লিংক ও ক্লিকেবল কার্ডে স্ট্যান্ডার্ড কারসর পয়েন্টার (হাতের চিহ্ন) নিশ্চিত করা হয়েছে */
+a, button, select, input[type="submit"], .sol-card, .sector-card, .why-item, .faq-q, .t-tab {
+  cursor: pointer;
+}
 /* ─── NAV ─── */
 header{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);background:transparent;transition:background .4s,backdrop-filter .4s,box-shadow .4s;border-bottom:1px solid transparent}
 header.scrolled{background:rgba(11,22,34,.97);backdrop-filter:blur(20px);border-bottom-color:rgba(255,255,255,.05);box-shadow:0 4px 30px rgba(0,0,0,.4)}

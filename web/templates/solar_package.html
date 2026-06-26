@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সৌর প্যাকেজ সিলেক্টর | Wellwish Solar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght=500;600;700;800&family=Hind+Siliguri:wght=400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="{% static 'css/solar_package.css' %}">
+</head>
+<body class="antialiased">
+
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-leaf-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sun-400 to-leaf-500 flex items-center justify-center text-white font-display text-sm">☀</div>
+        <span class="font-display text-lg text-leaf-800">Wellwish <span class="text-sun-500">Solar</span></span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-ink-700 font-medium">
+        <a href="{% url 'home' %}#home" class="nav-link">হোম</a>
+        <a href="{% url 'solar_package' %}#calculator" class="nav-link">ক্যালকুলেটর</a>
+        <a href="{% url 'solar_package' %}#packages" class="nav-link">Power Packages</a>
+        <a href="{% url 'home' %}#contact" class="nav-link">যোগাযোগ</a>
+      </nav>
+      <a href="{% url 'solar_package' %}#calculator" class="bg-leaf-700 hover:bg-leaf-800 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-card">প্যাকেজ খুঁজুন</a>
+    </div>
+  </header>
+
+  <section id="home" class="relative overflow-hidden bg-gradient-to-b from-leaf-50 to-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block text-sun-600 bg-sun-100 text-xs font-semibold tracking-wide px-3 py-1 rounded-full mb-4">আপনার বাসার জন্য সঠিক সোলার প্যাকেজ</span>
+        <h1 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-leaf-900">
+          এক মিনিটে খুঁজে নিন<br><span class="text-sun-500">পারফেক্ট সৌর প্যাকেজ</span>
+        </h1>
+        <p class="mt-5 text-ink-700 text-base sm:text-lg max-w-md">
+          আপনার বাসার ফ্যান, লাইট, ফ্রিজ, এসি আর ব্যাকআপের চাহিদা বলুন — আমাদের ক্যালকুলেটর হিসেব করে দেখাবে ঠিক কোন প্যাকেজে আপনার সংসার সবচেয়ে নিরাপদ ও সাশ্রয়ী থাকবে।
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#calculator" class="bg-sun-500 hover:bg-sun-600 text-white font-semibold px-6 py-3 rounded-full shadow-soft">নিজের প্যাকেজ বের করুন</a>
+          <a href="#packages" class="bg-white border border-leaf-200 hover:bg-leaf-50 text-leaf-800 font-semibold px-6 py-3 rounded-full">সব প্যাকেজ দেখুন</a>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80">
+          <svg viewBox="0 0 200 200" class="w-full h-full ray">
+            <g opacity="0.5">
+              <line x1="100" y1="6" x2="100" y2="22" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="100" y1="178" x2="100" y2="194" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="6" y1="100" x2="22" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="178" y1="100" x2="194" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="35" y1="35" x2="47" y2="47" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="153" y1="153" x2="165" y2="165" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="35" y1="165" x2="47" y2="153" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="153" y1="47" x2="165" y2="35" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full -rotate-90">
+            <defs>
+              <linearGradient id="dialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3CAE66"/>
+                <stop offset="100%" stop-color="#F2730E"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="82" fill="none" stroke-width="14" class="dial-track"/>
+            <circle id="heroDialArc" cx="100" cy="100" r="82" fill="none" stroke-width="14" stroke-dasharray="515" stroke-dashoffset="515" class="dial-arc"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="text-xs text-ink-700/70">আনুমানিক চাহিদা</span>
+            <span id="heroDialValue" class="font-display text-3xl sm:text-4xl text-leaf-800">০.০</span>
+            <span class="text-xs text-ink-700/70">ইউনিট (kWh)/দিন</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="bg-leaf-50 py-16 md:py-20">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-10">
+        <span class="text-sun-600 font-semibold text-sm">সেলফ-অ্যাসেসমেন্ট</span>
+        <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">আপনার বাসার চাহিদা জানান</h2>
+        <p class="text-ink-700 mt-2 max-w-xl mx-auto">যা চলবে, তা সিলেক্ট করুন — সংখ্যা ঠিক করুন — আর আমরা হিসেব করে আপনার জন্য সবচেয়ে উপযুক্ত প্যাকেজ বের করব।</p>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-soft p-6 sm:p-10">
+        <h3 class="font-display text-lg text-leaf-800 mb-4">১. কী কী চলবে?</h3>
+        <div id="equipmentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+        <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">২. ব্যাকআপের সময়কাল</h3>
+        <div id="backupGroup" class="flex flex-wrap gap-3"></div>
+
+        <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">৩. বাসার ধরন</h3>
+        <div id="houseGroup" class="flex flex-wrap gap-3"></div>
+
+        <div class="mt-10 rounded-2xl bg-leaf-50 border border-leaf-100 p-5 flex items-center gap-5">
+          <svg viewBox="0 0 100 100" class="w-16 h-16 -rotate-90 shrink-0">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#E3F7EA" stroke-width="9"/>
+            <circle id="liveDialArc" cx="50" cy="50" r="40" fill="none" stroke="url(#dialGradient)" stroke-width="9" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" style="transition:stroke-dashoffset .4s ease;"/>
+          </svg>
+          <div>
+            <p class="text-sm text-ink-700">আনুমানিক দৈনিক চাহিদা</p>
+            <p class="font-display text-2xl text-leaf-800"><span id="livekWh">০.০</span> ইউনিট (kWh)/দিন</p>
+          </div>
+        </div>
+
+        <button id="findPackageBtn" class="mt-8 w-full sm:w-auto bg-sun-500 hover:bg-sun-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-soft">প্যাকেজ দেখুন</button>
+        <p id="formError" class="text-sun-700 text-sm mt-3 hidden">অনুগ্রহ করে অন্তত একটি ইকুইপমেন্ট সিলেক্ট করুন।</p>
+      </div>
+
+      <div id="resultBox" class="hidden mt-10 bg-white rounded-3xl shadow-soft border-2 border-gold-400 p-6 sm:p-8">
+        <span class="inline-block bg-gold-400 text-leaf-900 text-xs font-bold px-3 py-1 rounded-full">আপনার জন্য সুপারিশ করা প্যাকেজ</span>
+        <div id="resultContent" class="mt-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sun-600 font-semibold text-sm">আমাদের সমাধান</span>
+        <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">সব সৌর প্যাকেজ</h2>
+        <p class="text-ink-700 mt-2 max-w-xl mx-auto">ছোট পরিবার থেকে শিল্প প্রতিষ্ঠান — প্রতিটি প্রয়োজনের জন্য আলাদা প্যাকেজ।</p>
+      </div>
+      <div id="tierContainer" class="space-y-12"></div>
+    </div>
+  </section>
+
+  <footer id="contact" class="bg-leaf-900 text-leaf-100 py-14">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 grid sm:grid-cols-3 gap-8">
+      <div>
+        <p class="font-display text-xl text-white">Wellwish <span class="text-sun-400">Solar</span></p>
+        <p class="text-leaf-300 mt-2 text-sm">উত্তরা, ঢাকা, বাংলাদেশ</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">যোগাযোগ</p>
+        <p class="text-leaf-300 text-sm">ফোন: ০১৭০০-০০০০০০</p>
+        <p class="text-leaf-300 text-sm">ইমেইল: info@wellwishsolar.com</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">নোট</p>
+        <p class="text-leaf-300 text-sm">এই ক্যালকুলেটরের ফলাফল আনুমানিক। সঠিক মাপজোক ও মূল্যের জন্য আমাদের একজন বিশেষজ্ঞ আপনার বাসা/প্রতিষ্ঠান সরাসরি ভিজিট করবেন।</p>
+      </div>
+    </div>
+    <p class="text-center text-leaf-400 text-xs mt-10">© ২০২৬ Wellwish Solar Energy Ltd. সর্বস্বত্ব সংরক্ষিত।</p>
+  </footer>
+
+  <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-overlay bg-black/40 p-4">
+    <div class="modal-card bg-white w-full max-w-md rounded-3xl shadow-soft p-6 sm:p-8 relative">
+      <button id="closeModal" class="absolute top-4 right-4 text-ink-700/60 hover:text-ink-700 text-xl leading-none">✕</button>
+      <h3 class="font-display text-xl text-leaf-900" id="modalTitle">তথ্য দিন</h3>
+      <p class="text-ink-700 text-sm mt-1" id="modalSub">আমাদের একজন প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করবে।</p>
+
+      <form id="contactForm" class="mt-6 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-ink-700">নাম <span class="text-sun-500">*</span></label>
+          <input required id="inputName" type="text" placeholder="আপনার নাম লিখুন" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+        </div>
+        <div>
+          <label class="text-sm font-medium text-ink-700">ফোন নাম্বার <span class="text-sun-500">*</span></label>
+          <input required id="inputPhone" type="tel" placeholder="01XXXXXXXXX" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+          <p id="phoneError" class="text-sun-600 text-xs mt-1 hidden">সঠিক বাংলাদেশী ফোন নাম্বার দিন (যেমন 01XXXXXXXXX)।</p>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-ink-700">ঠিকানা <span class="text-ink-700/50 font-normal">(ঐচ্ছিক)</span></label>
+          <input id="inputAddress" type="text" placeholder="এলাকা / শহর" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+        </div>
+        <button type="submit" class="w-full bg-leaf-700 hover:bg-leaf-800 text-white font-semibold py-3 rounded-full mt-2">জমা দিন</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-leaf-800 text-white px-6 py-3 rounded-full shadow-soft opacity-0 translate-y-4 pointer-events-none z-50 text-sm"></div>
+
+  <script src="{% static 'js/solar_package.js' %}"></script>
+</body>
+</html>{% load static %}
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>সৌর প্যাকেজ সিলেক্টর | Wellwish Solar</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght=500;600;700;800&family=Hind+Siliguri:wght=400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <link rel="stylesheet" href="{% static 'css/solar_package.css' %}">
+</head>
+<body class="antialiased">
+
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-leaf-100">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sun-400 to-leaf-500 flex items-center justify-center text-white font-display text-sm">☀</div>
+        <span class="font-display text-lg text-leaf-800">Wellwish <span class="text-sun-500">Solar</span></span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-ink-700 font-medium">
+        <a href="{% url 'home' %}#home" class="nav-link">হোম</a>
+        <a href="{% url 'solar_package' %}#calculator" class="nav-link">ک্যালকুলেটর</a>
+        <a href="{% url 'solar_package' %}#packages" class="nav-link">Power Packages</a>
+        <a href="{% url 'home' %}#contact" class="nav-link">যোগাযোগ</a>
+      </nav>
+      <a href="{% url 'solar_package' %}#calculator" class="bg-leaf-700 hover:bg-leaf-800 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-card">প্যাকেজ খুঁজুন</a>
+    </div>
+  </header>
+
+  <section id="home" class="relative overflow-hidden bg-gradient-to-b from-leaf-50 to-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block text-sun-600 bg-sun-100 text-xs font-semibold tracking-wide px-3 py-1 rounded-full mb-4">আপনার বাসার জন্য সঠিক সোলার প্যাকেজ</span>
+        <h1 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-leaf-900">
+          এক মিনিটে খুঁজে নিন<br><span class="text-sun-500">পারফেক্ট সৌর প্যাকেজ</span>
+        </h1>
+        <p class="mt-5 text-ink-700 text-base sm:text-lg max-w-md">
+          আপনার বাসার ফ্যান, লাইট, ফ্রিজ, এসি আর ব্যাকআপের চাহিদা বলুন — আমাদের ক্যালকুলেটর হিসেব করে দেখাবে ঠিক কোন প্যাকেজে আপনার সংসার সবচেয়ে নিরাপদ ও সাশ্রয়ী থাকবে।
+        </p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#calculator" class="bg-sun-500 hover:bg-sun-600 text-white font-semibold px-6 py-3 rounded-full shadow-soft">নিজের প্যাকেজ বের করুন</a>
+          <a href="#packages" class="bg-white border border-leaf-200 hover:bg-leaf-50 text-leaf-800 font-semibold px-6 py-3 rounded-full">সব প্যাকেজ দেখুন</a>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="relative w-64 h-64 sm:w-80 sm:h-80">
+          <svg viewBox="0 0 200 200" class="w-full h-full ray">
+            <g opacity="0.5">
+              <line x1="100" y1="6" x2="100" y2="22" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="100" y1="178" x2="100" y2="194" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="6" y1="100" x2="22" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="178" y1="100" x2="194" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="35" y1="35" x2="47" y2="47" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="153" y1="153" x2="165" y2="165" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="35" y1="165" x2="47" y2="153" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+              <line x1="153" y1="47" x2="165" y2="35" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full -rotate-90">
+            <defs>
+              <linearGradient id="dialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#3CAE66"/>
+                <stop offset="100%" stop-color="#F2730E"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="82" fill="none" stroke-width="14" class="dial-track"/>
+            <circle id="heroDialArc" cx="100" cy="100" r="82" fill="none" stroke-width="14" stroke-dasharray="515" stroke-dashoffset="515" class="dial-arc"/>
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="text-xs text-ink-700/70">আনুমানিক চাহিদা</span>
+            <span id="heroDialValue" class="font-display text-3xl sm:text-4xl text-leaf-800">০.০</span>
+            <span class="text-xs text-ink-700/70">ইউনিট (kWh)/দিন</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="bg-leaf-50 py-16 md:py-20">
+    <div class="max-w-5xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-10">
+        <span class="text-sun-600 font-semibold text-sm">সেলফ-অ্যাসেসমেন্ট</span>
+        <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">আপনার বাসার চাহিদা জানান</h2>
+        <p class="text-ink-700 mt-2 max-w-xl mx-auto">যা চলবে, তা সিলেক্ট করুন — সংখ্যা ঠিক করুন — আর আমরা হিসেব করে আপনার জন্য সবচেয়ে উপযুক্ত প্যাকেজ বের করব।</p>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-soft p-6 sm:p-10">
+        <h3 class="font-display text-lg text-leaf-800 mb-4">১. কী কী চলবে?</h3>
+        <div id="equipmentGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+        <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">২. ব্যাকআপের সময়কাল</h3>
+        <div id="backupGroup" class="flex flex-wrap gap-3"></div>
+
+        <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">৩. বাসার ধরন</h3>
+        <div id="houseGroup" class="flex flex-wrap gap-3"></div>
+
+        <div class="mt-10 rounded-2xl bg-leaf-50 border border-leaf-100 p-5 flex items-center gap-5">
+          <svg viewBox="0 0 100 100" class="w-16 h-16 -rotate-90 shrink-0">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#E3F7EA" stroke-width="9"/>
+            <circle id="liveDialArc" cx="50" cy="50" r="40" fill="none" stroke="url(#dialGradient)" stroke-width="9" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" style="transition:stroke-dashoffset .4s ease;"/>
+          </svg>
+          <div>
+            <p class="text-sm text-ink-700">আনুমানিক দৈনিক চাহিদা</p>
+            <p class="font-display text-2xl text-leaf-800"><span id="livekWh">০.০</span> ইউনিট (kWh)/দিন</p>
+          </div>
+        </div>
+
+        <button id="findPackageBtn" class="mt-8 w-full sm:w-auto bg-sun-500 hover:bg-sun-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-soft">প্যাকেজ দেখুন</button>
+        <p id="formError" class="text-sun-700 text-sm mt-3 hidden">অনুগ্রহ করে অন্তত একটি ইকুইপমেন্ট সিলেক্ট করুন।</p>
+      </div>
+
+      <div id="resultBox" class="hidden mt-10 bg-white rounded-3xl shadow-soft border-2 border-gold-400 p-6 sm:p-8">
+        <span class="inline-block bg-gold-400 text-leaf-900 text-xs font-bold px-3 py-1 rounded-full">আপনার জন্য সুপারিশ করা প্যাকেজ</span>
+        <div id="resultContent" class="mt-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-12">
+        <span class="text-sun-600 font-semibold text-sm">আমাদের সমাধান</span>
+        <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">সব সৌর প্যাকেজ</h2>
+        <p class="text-ink-700 mt-2 max-w-xl mx-auto">ছোট পরিবার থেকে শিল্প প্রতিষ্ঠান — প্রতিটি প্রয়োজনের জন্য আলাদা প্যাকেজ।</p>
+      </div>
+      <div id="tierContainer" class="space-y-12"></div>
+    </div>
+  </section>
+
+  <footer id="contact" class="bg-leaf-900 text-leaf-100 py-14">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 grid sm:grid-cols-3 gap-8">
+      <div>
+        <p class="font-display text-xl text-white">Wellwish <span class="text-sun-400">Solar</span></p>
+        <p class="text-leaf-300 mt-2 text-sm">উত্তরা, ঢাকা, বাংলাদেশ</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">যোগাযোগ</p>
+        <p class="text-leaf-300 text-sm">ফোন: ০১৭০০-০০০০০০</p>
+        <p class="text-leaf-300 text-sm">ইমেইল: info@wellwishsolar.com</p>
+      </div>
+      <div>
+        <p class="font-semibold text-white mb-2">নোট</p>
+        <p class="text-leaf-300 text-sm">এই ক্যালকুলেটরের ফলাফল আনুমানিক। সঠিক মাপজোক ও মূল্যের জন্য আমাদের একজন বিশেষজ্ঞ আপনার বাসা/প্রতিষ্ঠান সরাসরি ভিজিট করবেন।</p>
+      </div>
+    </div>
+    <p class="text-center text-leaf-400 text-xs mt-10">© ২০২৬ Wellwish Solar Energy Ltd. সর্বস্বত্ব সংরক্ষিত।</p>
+  </footer>
+
+  <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-overlay bg-black/40 p-4">
+    <div class="modal-card bg-white w-full max-w-md rounded-3xl shadow-soft p-6 sm:p-8 relative">
+      <button id="closeModal" class="absolute top-4 right-4 text-ink-700/60 hover:text-ink-700 text-xl leading-none">✕</button>
+      <h3 class="font-display text-xl text-leaf-900" id="modalTitle">তথ্য দিন</h3>
+      <p class="text-ink-700 text-sm mt-1" id="modalSub">আমাদের একজন প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করবে।</p>
+
+      <form id="contactForm" class="mt-6 space-y-4">
+        <div>
+          <label class="text-sm font-medium text-ink-700">নাম <span class="text-sun-500">*</span></label>
+          <input required id="inputName" type="text" placeholder="আপনার নাম লিখুন" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+        </div>
+        <div>
+          <label class="text-sm font-medium text-ink-700">ফোন নাম্বার <span class="text-sun-500">*</span></label>
+          <input required id="inputPhone" type="tel" placeholder="01XXXXXXXXX" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+          <p id="phoneError" class="text-sun-600 text-xs mt-1 hidden">সঠিক বাংলাদেশী ফোন নাম্বার দিন (যেমন 01XXXXXXXXX)।</p>
+        </div>
+        <div>
+          <label class="text-sm font-medium text-ink-700">ঠিকানা <span class="text-ink-700/50 font-normal">(ঐচ্ছিক)</span></label>
+          <input id="inputAddress" type="text" placeholder="এলাকা / শহর" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+        </div>
+        <button type="submit" class="w-full bg-leaf-700 hover:bg-leaf-800 text-white font-semibold py-3 rounded-full mt-2">জমা দিন</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-leaf-800 text-white px-6 py-3 rounded-full shadow-soft opacity-0 translate-y-4 pointer-events-none z-50 text-sm"></div>
+
+  <script src="{% static 'js/solar_package.js' %}"></script>
+</body>
+</html>

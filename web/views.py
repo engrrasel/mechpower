@@ -56,7 +56,9 @@ def get_youtube_id(url):
 
     return None
 
-
+# সোলার প্যাকেজ পেজ রেন্ডার করার ভিউ
+def solar_package(request):
+    return render(request, 'solar_package.html')
 
 # Home
 def home(request):

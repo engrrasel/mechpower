@@ -1,541 +1,562 @@
-﻿{% extends 'base.html' %}
-{% load static %}
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechPower Solutions — Engineering Reliability with Precision</title>
+<meta name="description" content="Bangladesh's trusted partner for Industrial Supply, Solar EPC, and Energy Infrastructure.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
 
-{% block title %}
-MechPower Home
-{% endblock %}
 
-{% block content %}
+<!-- NAV -->
+<header id="hdr">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo"><div><div class="nav-logo-text">Mech<span>Power</span></div><span class="nav-logo-sub">Solutions</span></div></a>
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+      <li class="nav-item">
+        <a href="#solutions" class="nav-link">Solutions <i class="fa-solid fa-chevron-down chev"></i></a>
+        <div class="mega-drop">
+          <a href="#solutions" class="mega-link">Industrial Supply</a>
+          <a href="#solutions" class="mega-link">Solar Power Systems</a>
+          <a href="#solutions" class="mega-link">EPC Contracting</a>
+          <a href="#solutions" class="mega-link">Energy Infrastructure</a>
+          <a href="#solutions" class="mega-link">Rooftop Solar</a>
+          <a href="#solutions" class="mega-link">Emergency Logistics</a>
+        </div>
+      </li>
+      <li class="nav-item"><a href="#sectors" class="nav-link">Sectors</a></li>
+      <li class="nav-item"><a href="#technology" class="nav-link">Technology</a></li>
+      <li class="nav-item">
+        <a href="#voltmatrix" class="nav-link">Simulation <i class="fa-solid fa-chevron-down chev"></i></a>
+        <div class="mega-drop">
+          <a href="#voltmatrix" class="mega-link">⚡ Live Power Simulator</a>
+          <a href="#voltmatrix" class="mega-link">Solar Sizing Tool</a>
+          <a href="#voltmatrix" class="mega-link">ROI Calculator</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#blog" class="nav-link">Blog <i class="fa-solid fa-chevron-down chev"></i></a>
+        <div class="mega-drop">
+          <a href="#blog" class="mega-link">Technical Articles</a>
+          <a href="#skilltest" class="mega-link">⚡ Free Skill Test</a>
+        </div>
+      </li>
+      <li class="nav-item">
+    <a href="{% url 'solar_package' %}#packages" class="nav-link">Power Packages</a>
+</li>
+      <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+      
 
-<!-- Cursor -->
-<div class="cur" id="cur"></div>
-<div class="cur2" id="cur2"></div>
+    </ul>
+    <div class="nav-right">
+      <a href="#contact" class="nav-cta">Get Quote</a>
+      <button class="hamburger" id="ham"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-nav" id="mob-nav">
+  <a href="#about" onclick="closeNav()">About</a>
+  <a href="#solutions" onclick="closeNav()">Solutions</a>
+  <a href="#sectors" onclick="closeNav()">Sectors</a>
+  <a href="#technology" onclick="closeNav()">Technology</a>
+  <a href="#voltmatrix" onclick="closeNav()">⚡ Live Simulation</a>
+  <a href="#blog" onclick="closeNav()">Blog</a>
+  <a href="#skilltest" onclick="closeNav()">Free Skill Test</a>
+  <a href="#contact" onclick="closeNav()">Power Packages</a>
+  <a href="#contact" onclick="closeNav()">Contact</a>
+</div>
 
+<!-- HERO -->
 <section class="hero" id="home">
-  <div class="hero-bg"></div>
   <div class="hero-grid"></div>
-  <div class="hero-slash"></div>
-
-  <!-- Gear SVG -->
-  <svg class="hero-gear" viewBox="0 0 200 200" fill="white">
-    <path d="M100 60 a40 40 0 1 1 -0.1 0 Z
-      M88 22 l4-16 16 0 4 16 Z M112 178 l-4 16 -16 0 -4-16 Z
-      M22 88 l-16-4 0-16 16-4 Z M178 112 l16 4 0 16 -16 4 Z
-      M38 38 l-11-11 11-11 11 11 Z M162 162 l11 11 -11 11 -11-11 Z
-      M162 38 l11-11 11 11 -11 11 Z M38 162 l-11 11 -11-11 11-11 Z"/>
-  </svg>
-
-  <div class="hero-inner">
-    <div class="hero-year">Company Profile · Est. 2024
-</div>
-    <h1 class="hero-h1">
-      <span class="line1">Mech</span>
-      <span class="line2">Power</span>
-      <span class="line3">Solutions</span>
-    </h1>
-    <p class="hero-sub">
-  Engineering Reliability with Precision — 
-  Bangladesh's trusted partner for Industrial 
-  Supply, Solar EPC, and Energy Infrastructure.
-    </p>
-    <div class="hero-ctas">
-      <a href="#services" class="btn-primary">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 7L7 13M1 7H13" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Explore Services
-      </a>
-      <a href="#contact" class="btn-outline">Request Consultation</a>
-    </div>
+  <div class="particles" id="pts"></div>
+  <div class="hero-slides">
+    <div class="slide active"><div class="slide-bg sb1"></div><div class="slide-content"><div class="slide-tag">Engineering Reliability · Est. 2026</div><h1 class="slide-h1"><span class="l1">Mech</span><span class="l2">Power</span><span class="l3">Solutions</span></h1><p class="slide-sub">Bangladesh's trusted partner for Industrial Supply, Solar EPC, and Energy Infrastructure — precision, speed, and reliability.</p><div class="slide-ctas"><a href="#solutions" class="btn-dark"><i class="fa-solid fa-arrow-right"></i> Explore Services</a><a href="#contact" class="btn-ghost">Request Consultation</a></div></div></div>
+    <div class="slide"><div class="slide-bg sb2"></div><div class="slide-content"><div class="slide-tag">Industrial Solar EPC</div><h1 class="slide-h1"><span class="l1">Powering</span><span class="l2">Industry</span><span class="l3">with Solar</span></h1><p class="slide-sub">Full turnkey solar EPC solutions — from site survey and system design to installation, commissioning, and net metering support.</p><div class="slide-ctas"><a href="#solutions" class="btn-dark"><i class="fa-solid fa-solar-panel"></i> Solar Solutions</a><a href="#voltmatrix" class="btn-ghost">Run Simulation</a></div></div></div>
+    <div class="slide"><div class="slide-bg sb3"></div><div class="slide-content"><div class="slide-tag">Industrial Spare Parts · B2B</div><h1 class="slide-h1"><span class="l1">Keep Your</span><span class="l2">Industry</span><span class="l3">Running</span></h1><p class="slide-sub">Rapid sourcing and delivery of critical industrial components. Emergency response logistics. One partner — total reliability.</p><div class="slide-ctas"><a href="#solutions" class="btn-dark"><i class="fa-solid fa-gear"></i> Industrial Supply</a><a href="#contact" class="btn-ghost">Emergency Inquiry</a></div></div></div>
   </div>
-
+  <button class="h-arrow prev" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="h-arrow nxt" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+  <div class="hero-indicators"><button class="hdot active" onclick="goSlide(0)"></button><button class="hdot" onclick="goSlide(1)"></button><button class="hdot" onclick="goSlide(2)"></button></div>
+  <div class="hero-scroll"><div class="sc-line"></div>Scroll to Explore</div>
   <div class="hero-stats">
-    <div class="hstat">
-      <div class="hstat-num">360°</div>
-      <div class="hstat-label">Industrial Solutions</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num">EPC</div>
-      <div class="hstat-label">Turnkey Delivery</div>
-    </div>
-    <div class="hstat">
-      <div class="hstat-num">B2B</div>
-      <div class="hstat-label">Enterprise Focus</div>
-    </div>
-  </div>
-
-  <div class="scroll-ind">
-    <div class="scroll-line"></div>
-    Scroll to Explore
+    <div class="hst"><div class="hst-n">360°</div><div class="hst-l">Industrial Solutions</div></div>
+    <div class="hst"><div class="hst-n">EPC</div><div class="hst-l">Turnkey Delivery</div></div>
+    <div class="hst"><div class="hst-n">B2B</div><div class="hst-l">Enterprise Focus</div></div>
   </div>
 </section>
 
-<!-- â•â•â•â•â•â•â• TICKER â•â•â•â•â•â•â• -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>Industrial Spare Parts</span><span class="ticker-dot">✦</span>
-    <span>Solar EPC Contracting</span><span class="ticker-dot">✦</span>
-    <span>Energy Infrastructure</span><span class="ticker-dot">✦</span>
-    <span>Industrial Solar Systems</span><span class="ticker-dot">✦</span>
-    <span>Rapid Parts Delivery</span><span class="ticker-dot">✦</span>
-    <span>Power Solutions</span><span class="ticker-dot">✦</span>
-    <span>Engineering Reliability</span><span class="ticker-dot">✦</span>
-    <span>Industrial Spare Parts</span><span class="ticker-dot">✦</span>
-    <span>Solar EPC Contracting</span><span class="ticker-dot">✦</span>
-    <span>Energy Infrastructure</span><span class="ticker-dot">✦</span>
-    <span>Industrial Solar Systems</span><span class="ticker-dot">✦</span>
-    <span>Rapid Parts Delivery</span><span class="ticker-dot">✦</span>
-    <span>Power Solutions</span><span class="ticker-dot">✦</span>
-    <span>Engineering Reliability</span><span class="ticker-dot">✦</span>
-  </div>
-</div>
+<!-- TICKER -->
+<div class="ticker"><div class="t-track"><span>Industrial Spare Parts</span><span class="t-dot">✦</span><span>Solar EPC Contracting</span><span class="t-dot">✦</span><span>Energy Infrastructure</span><span class="t-dot">✦</span><span>VoltMatrix Simulation</span><span class="t-dot">✦</span><span>Rapid Parts Delivery</span><span class="t-dot">✦</span><span>Power Solutions</span><span class="t-dot">✦</span><span>Engineering Reliability</span><span class="t-dot">✦</span><span>EPC Turnkey Projects</span><span class="t-dot">✦</span><span>Industrial Spare Parts</span><span class="t-dot">✦</span><span>Solar EPC Contracting</span><span class="t-dot">✦</span><span>Energy Infrastructure</span><span class="t-dot">✦</span><span>VoltMatrix Simulation</span><span class="t-dot">✦</span><span>Rapid Parts Delivery</span><span class="t-dot">✦</span><span>Power Solutions</span><span class="t-dot">✦</span><span>Engineering Reliability</span><span class="t-dot">✦</span><span>EPC Turnkey Projects</span><span class="t-dot">✦</span></div></div>
 
-<!-- ═══════ ABOUT ═══════ -->
-<section id="about">
-  <div class="sec">
-    <div class="about-wrap reveal">
-      <div class="about-left">
-        <p class="sec-label">Who We Are</p>
-        <div class="big-text">
-          Built for<br>
-          Industries<br>
-          that can't<br>
-          <em>stop.</em>
-        </div>
-        <p class="tagline">
-          MechPower Solutions is a full-spectrum engineering and energy company serving Bangladesh's industrial sector. We combine technical depth with operational speed to deliver solutions that keep your business running — without compromise.
-        </p>
-      </div>
-      <div class="about-right">
-        <div class="about-block">
-          <div class="ab-title">Our Mission</div>
-          <p class="ab-text">To be the most reliable engineering and energy partner for industrial businesses — delivering precision-engineered solutions, on time, every time.</p>
-        </div>
-        <div class="about-block">
-          <div class="ab-title">Our Vision</div>
-          <p class="ab-text">To power Bangladesh's industrial growth through sustainable energy solutions and world-class supply chain capabilities — shaping a more efficient industrial future.</p>
-        </div>
-        <div class="about-block">
-          <div class="ab-title">Our Approach</div>
-          <p class="ab-text">Every engagement starts with understanding your operational reality. We then engineer bespoke solutions — from rapid spare part sourcing to full EPC project delivery — with unwavering focus on reliability.</p>
-        </div>
-        <div class="about-block">
-          <div class="ab-title">Core Values</div>
-          <p class="ab-text">Precision · Reliability · Integrity · Speed · Partnership. These aren't just words — they are the operating principles behind every project we undertake.</p>
-        </div>
-      </div>
-    </div>
+<!-- STATS -->
+<section class="stats-sec" id="stats">
+  <div class="stats-grid">
+    <div class="stat-c" data-aos="fade-up" data-aos-delay="0"><div class="s-num"><span class="counter" data-target="6">0</span><span class="s-unit">+</span></div><div class="s-lbl">Service Verticals</div><div class="s-desc">End-to-end industrial coverage</div></div>
+    <div class="stat-c" data-aos="fade-up" data-aos-delay="80"><div class="s-num"><span class="counter" data-target="360">0</span><span class="s-unit">°</span></div><div class="s-lbl">Coverage</div><div class="s-desc">Full-spectrum solutions</div></div>
+    <div class="stat-c" data-aos="fade-up" data-aos-delay="160"><div class="s-num"><span class="counter" data-target="25">0</span><span class="s-unit">yr</span></div><div class="s-lbl">Panel Warranty</div><div class="s-desc">Long-term solar performance</div></div>
+    <div class="stat-c" data-aos="fade-up" data-aos-delay="240"><div class="s-num"><span class="counter" data-target="24">0</span><span class="s-unit">/7</span></div><div class="s-lbl">Support Ready</div><div class="s-desc">Emergency response always on</div></div>
+    <div class="stat-c" data-aos="fade-up" data-aos-delay="320"><div class="s-num"><span class="counter" data-target="100">0</span><span class="s-unit">%</span></div><div class="s-lbl">Turnkey Capable</div><div class="s-desc">Design to commissioning</div></div>
   </div>
 </section>
 
-<!-- ═══════ SERVICES ═══════ -->
-<section id="services" class="services-bg">
-  <div class="sec">
-    <p class="sec-label reveal">What We Deliver</p>
-    <h2 class="sec-title reveal">Core Service <span style="color:var(--or)">Verticals</span></h2>
-    <p class="reveal" style="color:var(--lt);max-width:560px;font-size:0.95rem;line-height:1.8;">
-      From a single spare part to a complete solar power plant — we engineer, supply, and deliver across four high-impact service lines.
-    </p>
-
-    <div class="services-grid reveal">
-
-      <div class="svc-card">
-        <div class="svc-num">01</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">⚙️</span></div>
-        <div class="svc-title">Industrial Supply & Spare Parts</div>
-        <p class="svc-desc">Rapid sourcing and delivery of critical industrial components, mechanical parts, and electrical equipment. Our extensive supplier network ensures minimal downtime — wherever you are in Bangladesh.</p>
-        <div class="svc-bar"></div>
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="sw">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-box">
+          <div class="about-big">Built for<br>Industries<br>that can't<br><em>stop.</em></div>
+          <p class="about-p">MechPower Solutions is a full-spectrum engineering and energy company serving Bangladesh's industrial sector — combining technical depth with operational speed.</p>
+          <svg class="about-gear" viewBox="0 0 200 200" fill="white"><path d="M100 60 a40 40 0 1 1 -0.1 0 Z M88 22 l4-16 16 0 4 16 Z M112 178 l-4 16 -16 0 -4-16 Z M22 88 l-16-4 0-16 16-4 Z M178 112 l16 4 0 16 -16 4 Z M38 38 l-11-11 11-11 11 11 Z M162 162 l11 11 -11 11 -11-11 Z M162 38 l11-11 11 11 -11 11 Z M38 162 l-11 11 -11-11 11-11 Z"/></svg>
+        </div>
       </div>
-
-      <div class="svc-card">
-        <div class="svc-num">02</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">☀️</span></div>
-        <div class="svc-title">Industrial Solar Power Systems</div>
-        <p class="svc-desc">Design, supply, and full installation of large-scale industrial solar PV systems. We deliver optimized solutions for factories, warehouses, and industrial facilities — maximizing yield and ROI.</p>
-        <div class="svc-bar"></div>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">03</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">🏗️</span></div>
-        <div class="svc-title">EPC Contracting</div>
-        <p class="svc-desc">Full Engineering, Procurement & Construction turnkey contracts. We own the entire project lifecycle — design, sourcing, construction, and commissioning — under a single, accountable agreement.</p>
-        <div class="svc-bar"></div>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">04</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">⚡</span></div>
-        <div class="svc-title">Energy & Power Infrastructure</div>
-        <p class="svc-desc">Comprehensive power solutions including energy audits, load optimization, backup power systems, and grid integration. We build resilient energy infrastructure for demanding industrial environments.</p>
-        <div class="svc-bar"></div>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">05</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">🔆</span></div>
-        <div class="svc-title">Rooftop Solar Systems</div>
-        <p class="svc-desc">Grid-tied and off-grid rooftop solar for commercial and industrial clients. From site survey to net metering application — complete end-to-end service with quality-certified components.</p>
-        <div class="svc-bar"></div>
-      </div>
-
-      <div class="svc-card">
-        <div class="svc-num">06</div>
-        <div class="svc-icon-wrap"><span class="svc-icon">📦</span></div>
-        <div class="svc-title">Emergency Parts Logistics</div>
-        <p class="svc-desc">Mission-critical emergency parts delivery for production-critical situations. We operate a rapid-response sourcing and logistics network to get you back online — fast.</p>
-        <div class="svc-bar"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══════ WHY US ═══════ -->
-
-
-<section id="why">
-  <div class="sec">
-    <div class="why-wrap">
       <div>
-        <p class="sec-label reveal">Why MechPower</p>
-        <h2 class="sec-title reveal">The <span style="color:var(--or)">Competitive</span><br>Advantage</h2>
+        <p class="sec-lbl dark-lbl reveal">Who We Are</p>
+        <h2 class="sec-title on-dark reveal">Engineering <span style="color:var(--or)">Reliability</span><br>with Precision</h2>
+        <div class="a-blocks reveal">
+          <div class="a-block"><div class="a-title">Our Mission</div><p class="a-text">To be the most reliable engineering and energy partner for industrial businesses — delivering precision-engineered solutions, on time, every time.</p></div>
+          <div class="a-block"><div class="a-title">Our Vision</div><p class="a-text">To power Bangladesh's industrial growth through sustainable energy and world-class supply chain capabilities.</p></div>
+          <div class="a-block"><div class="a-title">Core Values</div><p class="a-text">Precision · Reliability · Integrity · Speed · Partnership — the operating principles behind every project.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- SOLUTIONS -->
+<section class="solutions-sec" id="solutions">
+  <div class="sw">
+    <p class="sec-lbl dark-lbl reveal">What We Deliver</p>
+    <h2 class="sec-title on-dark reveal">Find Your <span style="color:var(--or)">Power</span></h2>
+    <p class="sec-sub on-dark reveal">Multi-application solutions for industrial and energy demands — from a single spare part to a complete power plant.</p>
+    <div class="sol-grid">
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="0"><div class="sol-top"><div class="sol-num">01</div><div class="sol-ico">⚙️</div><div class="sol-title">Industrial Supply & Spare Parts</div><p class="sol-desc">Rapid sourcing of critical industrial components, mechanical parts, and electrical equipment. Minimal downtime — wherever you are in Bangladesh.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Request Parts <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="80"><div class="sol-top"><div class="sol-num">02</div><div class="sol-ico">☀️</div><div class="sol-title">Industrial Solar Power Systems</div><p class="sol-desc">Design, supply, and full installation of large-scale industrial solar PV systems for factories, warehouses, and facilities — maximizing yield and ROI.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Solar Inquiry <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="160"><div class="sol-top"><div class="sol-num">03</div><div class="sol-ico">🏗️</div><div class="sol-title">EPC Contracting</div><p class="sol-desc">Full Engineering, Procurement & Construction turnkey contracts. Design, sourcing, construction, and commissioning — under one accountable agreement.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Explore EPC <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="0"><div class="sol-top"><div class="sol-num">04</div><div class="sol-ico">⚡</div><div class="sol-title">Energy & Power Infrastructure</div><p class="sol-desc">Energy audits, load optimization, backup power, and grid integration. Resilient infrastructure for demanding industrial environments.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Energy Solutions <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="80"><div class="sol-top"><div class="sol-num">05</div><div class="sol-ico">🔆</div><div class="sol-title">Rooftop Solar Systems</div><p class="sol-desc">Grid-tied and off-grid rooftop solar for commercial and industrial clients. Site survey to net metering — complete end-to-end service.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Rooftop Quote <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+      <div class="sol-card" data-aos="fade-up" data-aos-delay="160"><div class="sol-top"><div class="sol-num">06</div><div class="sol-ico">📦</div><div class="sol-title">Emergency Parts Logistics</div><p class="sol-desc">Mission-critical emergency parts delivery for production-critical situations. Rapid-response sourcing and logistics to get you back online fast.</p></div><div class="sol-foot"><a href="#contact" class="sol-link">Emergency Request <i class="fa-solid fa-arrow-right" style="font-size:.58rem"></i></a></div><div class="sol-bar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-sec" id="why">
+  <div class="sw">
+    <div class="why-grid">
+      <div>
+        <p class="sec-lbl dark-lbl reveal">Why MechPower</p>
+        <h2 class="sec-title on-dark reveal">Your Power,<br><span style="color:var(--or)">Fortified</span></h2>
         <div class="why-list reveal">
-          <div class="why-item">
-            <div class="why-num">01</div>
-            <div class="why-content">
-              <h4>Single-Source Accountability</h4>
-              <p>One company, one point of contact for all your industrial and energy needs. No vendor juggling — we own the outcome.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-num">02</div>
-            <div class="why-content">
-              <h4>Rapid Response Capability</h4>
-              <p>Emergencies can't wait. Our supply chain is built for speed — local stock, international sourcing, and fast delivery logistics.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-num">03</div>
-            <div class="why-content">
-              <h4>EPC Expertise</h4>
-              <p>We bring true engineering discipline to every project — not just supply. Our EPC model delivers complete systems, not just components.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-num">04</div>
-            <div class="why-content">
-              <h4>Sustainable Energy Focus</h4>
-              <p>Solar and energy solutions designed for long-term ROI. We help industries reduce costs while building a cleaner footprint.</p>
-            </div>
-          </div>
-          <div class="why-item">
-            <div class="why-num">05</div>
-            <div class="why-content">
-              <h4>Local Knowledge, Global Standards</h4>
-              <p>Deep understanding of Bangladesh's industrial landscape — combined with internationally sourced equipment and engineering best practices.</p>
-            </div>
-          </div>
+          <div class="why-item"><div class="why-n">01</div><div class="why-content"><h4>Single-Source Accountability</h4><p>One company, one contact for all industrial and energy needs. No vendor juggling — we own the outcome.</p></div></div>
+          <div class="why-item"><div class="why-n">02</div><div class="why-content"><h4>Rapid Response Capability</h4><p>Emergencies can't wait. Our supply chain is built for speed — local stock, international sourcing, fast logistics.</p></div></div>
+          <div class="why-item"><div class="why-n">03</div><div class="why-content"><h4>True EPC Expertise</h4><p>Real engineering discipline to every project. Our EPC model delivers complete systems, not just components.</p></div></div>
+          <div class="why-item"><div class="why-n">04</div><div class="why-content"><h4>3-Source Energy Mastery</h4><p>Solar · Grid · Generator — intelligent energy management via VoltMatrix integration for maximum savings.</p></div></div>
+          <div class="why-item"><div class="why-n">05</div><div class="why-content"><h4>Local Knowledge, Global Standards</h4><p>Deep understanding of Bangladesh's industrial landscape — internationally sourced equipment, global best practices.</p></div></div>
         </div>
       </div>
-
-      <div class="why-visual reveal">
-        <p class="sec-label" style="margin-bottom:1rem;">Company at a Glance</p>
-        <h3 style="font-family:'Bebas Neue';font-size:2rem;letter-spacing:2px;color:var(--wh)">MechPower By<br><span style="color:var(--or)">The Numbers</span></h3>
-
-        <div class="metric-grid">
-          <div class="metric-cell">
-            <div class="m-num">4<span class="m-unit">+</span></div>
-            <div class="m-label">Service Verticals</div>
-          </div>
-          <div class="metric-cell">
-            <div class="m-num">360<span class="m-unit">°</span></div>
-            <div class="m-label">Coverage</div>
-          </div>
-          <div class="metric-cell">
-            <div class="m-num">EPC</div>
-            <div class="m-label">Turnkey Ready</div>
-          </div>
-          <div class="metric-cell">
-            <div class="m-num">B2B</div>
-            <div class="m-label">Enterprise Focus</div>
-          </div>
-          <div class="metric-cell">
-            <div class="m-num">25<span class="m-unit">yr</span></div>
-            <div class="m-label">Panel Warranty</div>
-          </div>
-          <div class="metric-cell">
-            <div class="m-num">24/7</div>
-            <div class="m-label">Support Ready</div>
-          </div>
-        </div>
-
-        <div style="margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06)">
-          <p style="font-size:0.8rem;color:var(--lt);line-height:1.7;">
-            Headquartered in Bangladesh · Serving industries nationwide · Open for regional partnerships and B2B collaborations.
-          </p>
+      <div class="why-vis reveal">
+        <p class="sec-lbl dark-lbl" style="margin-bottom:.8rem">Company Snapshot</p>
+        <h3 style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:2px;color:var(--wh)">MechPower By<br><span style="color:var(--or)">The Numbers</span></h3>
+        <div class="met-grid">
+          <div class="met-c"><div class="m-n">6<span class="m-u">+</span></div><div class="m-l">Verticals</div></div>
+          <div class="met-c"><div class="m-n">360<span class="m-u">°</span></div><div class="m-l">Coverage</div></div>
+          <div class="met-c"><div class="m-n">EPC</div><div class="m-l">Turnkey Ready</div></div>
+          <div class="met-c"><div class="m-n">B2B</div><div class="m-l">Enterprise</div></div>
+          <div class="met-c"><div class="m-n">25<span class="m-u">yr</span></div><div class="m-l">Warranty</div></div>
+          <div class="met-c"><div class="m-n">24/7</div><div class="m-l">Support</div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="sectors" class="sectors-bg">
-  <div class="sec">
-    <p class="sec-label reveal">Industries We Serve</p>
-    <h2 class="sec-title reveal">Target <span style="color:var(--or)">Sectors</span></h2>
-
+<!-- SECTORS -->
+<section class="sectors-sec" id="sectors">
+  <div class="sw">
+    <p class="sec-lbl dark-lbl reveal">Industries We Serve</p>
+    <h2 class="sec-title on-dark reveal">Target <span style="color:var(--or)">Sectors</span></h2>
     <div class="sectors-grid reveal">
-      <div class="sector-card">
-        <div class="sector-bg"></div>
-        <div class="sector-overlay"></div>
-        <div class="sector-icon-big">🏭</div>
-        <div class="sector-content">
-          <div class="sector-tag">Sector 01</div>
-          <div class="sector-name">Manufacturing & Processing</div>
+      <div class="sector-card s1"><div class="s-bg"></div><div class="s-ov"></div><div class="s-icon">🏭</div><div class="s-content"><div class="s-tag">Sector 01</div><div class="s-name">Manufacturing & Processing</div><p class="s-desc">Industrial machinery, process equipment, utilities, and solar integration.</p></div></div>
+      <div class="sector-card s2"><div class="s-bg"></div><div class="s-ov"></div><div class="s-icon">👗</div><div class="s-content"><div class="s-tag">Sector 02</div><div class="s-name">Textile & Garment</div><p class="s-desc">Machinery parts, electrical systems, and rooftop solar for the RMG sector.</p></div></div>
+      <div class="sector-card s3"><div class="s-bg"></div><div class="s-ov"></div><div class="s-icon">🏗️</div><div class="s-content"><div class="s-tag">Sector 03</div><div class="s-name">Construction & Real Estate</div><p class="s-desc">Heavy equipment parts, backup power, and commercial solar installations.</p></div></div>
+      <div class="sector-card s4"><div class="s-bg"></div><div class="s-ov"></div><div class="s-icon">⚡</div><div class="s-content"><div class="s-tag">Sector 04</div><div class="s-name">Power & Energy Utilities</div><p class="s-desc">Electrical infrastructure, protection systems, and renewable energy projects.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY TABS -->
+<section class="tech-sec" id="technology">
+  <div class="sw">
+    <p class="sec-lbl dark-lbl reveal">Our Capabilities</p>
+    <h2 class="sec-title on-dark reveal">Built for <span style="color:var(--or)">Extreme</span> Demands</h2>
+    <p class="sec-sub on-dark reveal">Engineered for uncompromising reliability — even in the most challenging industrial and environmental conditions.</p>
+    <div class="tech-tabs reveal">
+      <button class="t-tab active" onclick="showTab(0,this)">Solar Technology</button>
+      <button class="t-tab" onclick="showTab(1,this)">Industrial Supply</button>
+      <button class="t-tab" onclick="showTab(2,this)">EPC Process</button>
+      <button class="t-tab" onclick="showTab(3,this)">Energy Systems</button>
+    </div>
+    <div class="reveal">
+      <div class="t-panel active" id="tp0"><div class="t-panel-grid"><div class="t-vis"><div class="t-vis-icon">☀️</div></div><div><h3 style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:2px;color:var(--wh);margin-bottom:.4rem">High-Efficiency <span style="color:var(--or)">Solar PV</span></h3><p style="font-size:.86rem;color:var(--lt);line-height:1.8">Industrial-grade solar PV using monocrystalline PERC and HJT panels with 22%+ efficiency — designed for Bangladesh's climate and grid requirements.</p><ul class="t-spec"><li>Monocrystalline PERC / HJT panels — 22%+ efficiency, 25-year warranty</li><li>String and central inverters for up to MW-scale installations</li><li>Anti-islanding protection per IEEE 1547 / IEC 62116</li><li>Net metering support — BREB, DPDC, DESCO compliance</li><li>Remote SCADA monitoring — real-time generation, fault alerts, PR tracking</li><li>Bangladesh payback period: 3–5 years with 20–30% IRR</li></ul></div></div></div>
+      <div class="t-panel" id="tp1"><div class="t-panel-grid"><div class="t-vis"><div class="t-vis-icon">⚙️</div></div><div><h3 style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:2px;color:var(--wh);margin-bottom:.4rem">Industrial <span style="color:var(--or)">Parts Network</span></h3><p style="font-size:.86rem;color:var(--lt);line-height:1.8">Multi-brand spare parts sourcing covering mechanical, electrical, hydraulic, and pneumatic components — with emergency rapid-response logistics.</p><ul class="t-spec"><li>Multi-brand availability — local stock plus international sourcing</li><li>Emergency dispatch for critical production situations</li><li>Mechanical: bearings, seals, couplings, gears, belts, chains</li><li>Electrical: motors, drives, switchgear, protection relays, cables</li><li>Hydraulic & pneumatic: pumps, valves, actuators, cylinders</li><li>OEM-certified components available on request</li></ul></div></div></div>
+      <div class="t-panel" id="tp2"><div class="t-panel-grid"><div class="t-vis"><div class="t-vis-icon">🏗️</div></div><div><h3 style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:2px;color:var(--wh);margin-bottom:.4rem">Full <span style="color:var(--or)">EPC Process</span></h3><p style="font-size:.86rem;color:var(--lt);line-height:1.8">Single-point accountability from concept to handover — eliminating interface risk and delivering complete, operational systems under one contract.</p><ul class="t-spec"><li>FEED: Feasibility, scope definition, equipment lists, CAPEX ±15%</li><li>Detailed engineering: SLDs, P&IDs, cable schedules, civil drawings</li><li>Procurement: long-lead item management, factory inspection</li><li>Construction: civil, structural, installation — CPM scheduled</li><li>Commissioning: loop checks, relay testing, first energisation protocol</li><li>Handover: as-builts, O&M manuals, operator training, 12-month DLP</li></ul></div></div></div>
+      <div class="t-panel" id="tp3"><div class="t-panel-grid"><div class="t-vis"><div class="t-vis-icon">⚡</div></div><div><h3 style="font-family:'Bebas Neue';font-size:1.8rem;letter-spacing:2px;color:var(--wh);margin-bottom:.4rem">Smart <span style="color:var(--or)">Energy Systems</span></h3><p style="font-size:.86rem;color:var(--lt);line-height:1.8">Resilient energy infrastructure integrating Solar, Grid, and Generator — managed intelligently via VoltMatrix automation platform.</p><ul class="t-spec"><li>Energy audits and load flow analysis</li><li>Power factor correction — reducing reactive power penalties</li><li>Backup power: UPS, generator, BESS battery storage</li><li>Grid integration and substation works — 11kV/33kV systems</li><li>VoltMatrix 3-source AI priority switching (Solar → Grid → Generator)</li><li>Real-time energy monitoring — dashboards, alerts, reporting</li></ul></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (dark) -->
+<section class="test-sec" id="testimonials">
+  <div class="sw"><p class="sec-lbl dark-lbl reveal">Customer Voice</p><h2 class="sec-title on-dark reveal" style="margin-bottom:2rem">Our Clients <span style="color:var(--or)">Trust Us</span></h2></div>
+  <div class="test-slider"><div class="test-track">
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">MechPower delivered our emergency bearing replacement within 6 hours. Our production line was back online the same day. Absolute lifesavers.</p><div class="t-author"><div class="t-av">🏭</div><div><div class="t-name">Ahmed R.</div><div class="t-role">Plant Manager · Manufacturing Co., Dhaka</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">The rooftop solar system cut our electricity bill by 48%. Professional from survey to commissioning — net metering handled without any hassle.</p><div class="t-author"><div class="t-av">☀️</div><div><div class="t-name">Tanvir H.</div><div class="t-role">Director · Textile Group, Gazipur</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">We entrusted MechPower with our 500kWp industrial solar EPC. Delivered on time, within budget, and system yield exceeds projections every month.</p><div class="t-author"><div class="t-av">⚡</div><div><div class="t-name">Karim A.</div><div class="t-role">CEO · Industrial Holdings, Chittagong</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">Their knowledge of protection relay coordination and 11kV systems is exceptional. Resolved our substation fault that three other vendors couldn't diagnose.</p><div class="t-author"><div class="t-av">🔧</div><div><div class="t-name">Jamal U.</div><div class="t-role">Electrical Engineer · Power Utility, Dhaka</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">MechPower delivered our emergency bearing replacement within 6 hours. Our production line was back online the same day. Absolute lifesavers.</p><div class="t-author"><div class="t-av">🏭</div><div><div class="t-name">Ahmed R.</div><div class="t-role">Plant Manager · Manufacturing Co., Dhaka</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">The rooftop solar system cut our electricity bill by 48%. Professional from survey to commissioning — net metering handled without any hassle.</p><div class="t-author"><div class="t-av">☀️</div><div><div class="t-name">Tanvir H.</div><div class="t-role">Director · Textile Group, Gazipur</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">We entrusted MechPower with our 500kWp industrial solar EPC. Delivered on time, within budget, and system yield exceeds projections every month.</p><div class="t-author"><div class="t-av">⚡</div><div><div class="t-name">Karim A.</div><div class="t-role">CEO · Industrial Holdings, Chittagong</div></div></div></div>
+    <div class="test-card"><div class="t-stars">★★★★★</div><p class="t-text">Their knowledge of protection relay coordination and 11kV systems is exceptional. Resolved our substation fault that three other vendors couldn't diagnose.</p><div class="t-author"><div class="t-av">🔧</div><div><div class="t-name">Jamal U.</div><div class="t-role">Electrical Engineer · Power Utility, Dhaka</div></div></div></div>
+  </div></div>
+</section>
+
+<!-- === THEME BRIDGE: DARK → LIGHT === -->
+<div class="theme-bridge"></div>
+
+<!-- CTA BANNER (orange — bridging dark to light) -->
+<div class="cta-banner">
+  <div class="cta-title">Ready to Power Your<br>Next Project?</div>
+  <p class="cta-sub">Let's discuss how MechPower Solutions can become your long-term industrial partner.</p>
+  <a href="#contact" class="btn-white">Start a Conversation →</a>
+</div>
+
+<!-- ════════════════════════════════════
+     VOLTMATRIX SIMULATION SECTION (LIGHT)
+════════════════════════════════════ -->
+<section class="vm-sec" id="voltmatrix">
+  <div class="sw">
+    <div class="vm-badge"><div class="vm-badge-dot"></div> Live System Active — Powered by VoltMatrix</div>
+    <p class="sec-lbl lt-lbl reveal">3-Source Energy Intelligence</p>
+    <h2 class="sec-title on-light reveal">System <span style="color:var(--or)">Simulation</span></h2>
+    <p class="sec-sub on-light reveal">Configure your facility parameters and instantly simulate Solar · Grid · Generator energy balance using the VoltMatrix AI priority engine. Trusted by industrial facilities worldwide.</p>
+
+    <div class="vm-layout reveal">
+      <!-- LEFT: Configuration Form -->
+      <div class="vm-form-card">
+        <div class="vm-form-head">
+          <h3>⚙ System Configuration</h3>
+          <p>VoltMatrix Pro Simulator</p>
+        </div>
+        <div class="vm-form-body">
+          <div class="vm-section-title">Facility Details</div>
+          <div class="vm-field-group"><label class="vm-label">Facility Type</label><select class="vm-select" id="vm-facility"><option value="factory">Factory / Manufacturing Plant</option><option value="textile">Textile / Garment Factory</option><option value="warehouse">Warehouse / Cold Storage</option><option value="commercial">Commercial Building</option><option value="hospital">Hospital / Critical Facility</option><option value="telecom">Telecom Tower / BTS</option><option value="hotel">Hotel / Hospitality</option></select></div>
+          <div class="vm-row">
+            <div class="vm-field-group"><label class="vm-label">Total Load (kW)</label><input type="number" class="vm-input" id="vm-load" value="150" min="5" max="10000"></div>
+            <div class="vm-field-group"><label class="vm-label">Daily Usage (hrs)</label><input type="number" class="vm-input" id="vm-hours" value="12" min="1" max="24"></div>
+          </div>
+          <div class="vm-field-group"><label class="vm-label">Location (Bangladesh)</label><select class="vm-select" id="vm-location"><option value="dhaka">Dhaka — PSH 4.6 hrs</option><option value="chittagong">Chittagong — PSH 4.8 hrs</option><option value="gazipur">Gazipur — PSH 4.7 hrs</option><option value="narayanganj">Narayanganj — PSH 4.5 hrs</option><option value="sylhet">Sylhet — PSH 4.4 hrs</option><option value="rajshahi">Rajshahi — PSH 5.0 hrs</option><option value="khulna">Khulna — PSH 4.9 hrs</option></select></div>
+          <div class="vm-divider"></div>
+          <div class="vm-section-title">Solar Array</div>
+          <div class="vm-row">
+            <div class="vm-field-group"><label class="vm-label">Solar Capacity (kWp)</label><input type="number" class="vm-input" id="vm-solar" value="100" min="0" max="10000"></div>
+            <div class="vm-field-group"><label class="vm-label">Panel Efficiency (%)</label><select class="vm-select" id="vm-eff"><option value="0.22">22% — HJT Premium</option><option value="0.21" selected>21% — Mono PERC Hi</option><option value="0.20">20% — Mono PERC Std</option><option value="0.19">19% — Poly Standard</option></select></div>
+          </div>
+          <div class="vm-field-group"><label class="vm-label">Panel Orientation</label>
+            <div class="vm-radio-group">
+              <div class="vm-radio-btn"><input type="radio" name="orient" id="or1" value="south" checked><label for="or1">South</label></div>
+              <div class="vm-radio-btn"><input type="radio" name="orient" id="or2" value="se"><label for="or2">South-East</label></div>
+              <div class="vm-radio-btn"><input type="radio" name="orient" id="or3" value="sw"><label for="or3">South-West</label></div>
+              <div class="vm-radio-btn"><input type="radio" name="orient" id="or4" value="east"><label for="or4">East</label></div>
+            </div>
+          </div>
+          <div class="vm-divider"></div>
+          <div class="vm-section-title">Power Sources</div>
+          <div class="vm-row">
+            <div class="vm-field-group"><label class="vm-label">Grid Tariff (BDT/kWh)</label><input type="number" class="vm-input" id="vm-tariff" value="8.5" min="1" max="30" step="0.1"></div>
+            <div class="vm-field-group"><label class="vm-label">Generator Capacity (kVA)</label><input type="number" class="vm-input" id="vm-gen" value="200" min="0" max="5000"></div>
+          </div>
+          <div class="vm-row">
+            <div class="vm-field-group"><label class="vm-label">Diesel Cost (BDT/L)</label><input type="number" class="vm-input" id="vm-diesel" value="110" min="50" max="300"></div>
+            <div class="vm-field-group"><label class="vm-label">Battery Storage (kWh)</label><input type="number" class="vm-input" id="vm-battery" value="0" min="0" max="5000"></div>
+          </div>
+          <div class="vm-divider"></div>
+          <div class="vm-section-title">VoltMatrix Priority</div>
+          <div class="vm-field-group"><label class="vm-label">Source Priority Mode</label>
+            <div class="vm-radio-group">
+              <div class="vm-radio-btn"><input type="radio" name="priority" id="p1" value="solar_first" checked><label for="p1">☀ Solar First</label></div>
+              <div class="vm-radio-btn"><input type="radio" name="priority" id="p2" value="eco"><label for="p2">🌿 Eco Mode</label></div>
+              <div class="vm-radio-btn"><input type="radio" name="priority" id="p3" value="cost"><label for="p3">💰 Cost Save</label></div>
+            </div>
+          </div>
+          <button class="btn-simulate" id="btn-sim" onclick="runSimulation()">
+            <span class="btn-txt">⚡ Run VoltMatrix Simulation</span>
+            <span class="spin">↻</span>
+          </button>
         </div>
       </div>
-      <div class="sector-card">
-        <div class="sector-bg"></div>
-        <div class="sector-overlay"></div>
-        <div class="sector-icon-big">👗</div>
-        <div class="sector-content">
-          <div class="sector-tag">Sector 02</div>
-          <div class="sector-name">Textile & Garment Industry</div>
+
+      <!-- RIGHT: Live Dashboard -->
+      <div class="vm-dashboard" id="vm-dashboard">
+        <!-- Power Flow -->
+        <div class="vm-powerflow">
+          <div class="vm-card-head">
+            <div class="vm-card-title">Live Power Flow</div>
+            <div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div>
+          </div>
+          <div class="pf-diagram">
+            <div class="pf-source active-src" id="pf-solar">
+              <span class="pf-src-icon">☀️</span>
+              <div class="pf-src-name">Solar</div>
+              <div class="pf-src-val solar-val" id="pf-solar-kw">0.0 kW</div>
+              <div class="pf-src-status st-active" id="pf-solar-st">Active</div>
+            </div>
+            <div class="pf-arrow"><div class="pf-arrow-line flowing" id="pf-line1"></div><div class="pf-arrow-kw" id="pf-kw1">→</div></div>
+            <div class="pf-center">
+              <div style="font-size:1.4rem;margin-bottom:4px">⚡</div>
+              <div class="pf-center-label">VoltMatrix</div>
+              <div class="pf-center-status" id="pf-status">AUTO ACTIVE</div>
+            </div>
+            <div class="pf-arrow"><div class="pf-arrow-line flowing" id="pf-line2"></div><div class="pf-arrow-kw" id="pf-kw2">→</div></div>
+            <div class="pf-source active-src" id="pf-load">
+              <span class="pf-src-icon">🏭</span>
+              <div class="pf-src-name">Facility Load</div>
+              <div class="pf-src-val load-val" id="pf-load-kw">0.0 kW</div>
+              <div class="pf-src-status st-active">Primary</div>
+            </div>
+          </div>
+          <!-- Extra sources row -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+            <div class="pf-source" id="pf-grid-card" style="text-align:center;padding:.8rem">
+              <span class="pf-src-icon" style="font-size:1.4rem">⚡</span>
+              <div class="pf-src-name">Grid</div>
+              <div class="pf-src-val grid-val" id="pf-grid-kw">0.0 kW</div>
+              <div class="pf-src-status" id="pf-grid-st">Standby</div>
+            </div>
+            <div class="pf-source" id="pf-gen-card" style="text-align:center;padding:.8rem">
+              <span class="pf-src-icon" style="font-size:1.4rem">⚙️</span>
+              <div class="pf-src-name">Generator</div>
+              <div class="pf-src-val gen-val" id="pf-gen-kw">0.0 kW</div>
+              <div class="pf-src-status" id="pf-gen-st">Standby</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-bg"></div>
-        <div class="sector-overlay"></div>
-        <div class="sector-icon-big">🏗️</div>
-        <div class="sector-content">
-          <div class="sector-tag">Sector 03</div>
-          <div class="sector-name">Construction & Real Estate</div>
+
+        <!-- Priority Cards -->
+        <div class="vm-priority-row">
+          <div class="pri-card pri-solar">
+            <div class="pri-badge pb-solar">Priority 1 — Always First</div>
+            <div class="pri-icon">☀️</div>
+            <div class="pri-title">Solar Power</div>
+            <div class="pri-kw solar-kw" id="pri-solar-kw">0.0 kW</div>
+            <div class="pri-bar-wrap"><div class="pri-bar bar-solar" id="bar-solar" style="width:0%"></div></div>
+            <div class="pri-pct" id="pct-solar">0% of load</div>
+          </div>
+          <div class="pri-card pri-grid">
+            <div class="pri-badge pb-grid">Priority 2 — Supplement</div>
+            <div class="pri-icon">🔌</div>
+            <div class="pri-title">Grid Power</div>
+            <div class="pri-kw grid-kw" id="pri-grid-kw">0.0 kW</div>
+            <div class="pri-bar-wrap"><div class="pri-bar bar-grid" id="bar-grid" style="width:0%"></div></div>
+            <div class="pri-pct" id="pct-grid">0% of load</div>
+          </div>
+          <div class="pri-card pri-gen">
+            <div class="pri-badge pb-gen">Priority 3 — Emergency</div>
+            <div class="pri-icon">⚙️</div>
+            <div class="pri-title">Generator</div>
+            <div class="pri-kw gen-kw" id="pri-gen-kw">Standby</div>
+            <div class="pri-bar-wrap"><div class="pri-bar bar-gen" id="bar-gen" style="width:0%"></div></div>
+            <div class="pri-pct" id="pct-gen">On standby</div>
+          </div>
         </div>
-      </div>
-      <div class="sector-card">
-        <div class="sector-bg"></div>
-        <div class="sector-overlay"></div>
-        <div class="sector-icon-big">⚡</div>
-        <div class="sector-content">
-          <div class="sector-tag">Sector 04</div>
-          <div class="sector-name">Power & Energy Utilities</div>
+
+        <!-- KPI Row -->
+        <div class="vm-kpi-row">
+          <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-val" id="kpi-savings">0<span> BDT</span></div><div class="kpi-label">Monthly Savings</div><div class="kpi-trend trend-up" id="kpi-savings-trend">— run simulation</div></div>
+          <div class="kpi-card"><div class="kpi-icon">📉</div><div class="kpi-val" id="kpi-bill-red">0<span>%</span></div><div class="kpi-label">Bill Reduction</div><div class="kpi-trend trend-up" id="kpi-bill-trend">— run simulation</div></div>
+          <div class="kpi-card"><div class="kpi-icon">📅</div><div class="kpi-val" id="kpi-payback">—<span> yrs</span></div><div class="kpi-label">Payback Period</div><div class="kpi-trend" id="kpi-payback-trend" style="color:var(--tx-faint)">— run simulation</div></div>
+          <div class="kpi-card"><div class="kpi-icon">🌱</div><div class="kpi-val" id="kpi-co2">0<span> T</span></div><div class="kpi-label">CO₂ Saved/yr</div><div class="kpi-trend trend-up" id="kpi-co2-trend">— run simulation</div></div>
+        </div>
+
+        <!-- Monthly Energy Chart -->
+        <div class="vm-chart-card">
+          <div class="vm-card-head">
+            <div class="vm-card-title">Monthly Energy Balance (kWh)</div>
+            <div style="font-family:'Oxanium';font-size:.58rem;letter-spacing:1px;color:var(--tx-faint)">Estimated — 12 months</div>
+          </div>
+          <div class="vm-chart-wrap" id="vm-chart">
+            <div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--tx-faint);font-family:'Oxanium';font-size:.7rem;letter-spacing:2px;text-transform:uppercase">Run simulation to generate chart</div>
+          </div>
+          <div class="chart-legend" id="vm-legend" style="display:none">
+            <div class="cl-dot" style="background:#f59e0b"></div>Solar Generation</div>
+            <div class="cl-item"><div class="cl-dot" style="background:#3b82f6"></div>Grid Consumption</div>
+          </div>
+        </div>
+
+        <!-- Gauges Row -->
+        <div class="vm-gauge-row">
+          <div class="gauge-card">
+            <div class="vm-card-head" style="margin-bottom:.5rem"><div class="vm-card-title">System Efficiency</div></div>
+            <svg class="gauge-svg" viewBox="0 0 140 80" id="gauge-eff-svg">
+              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
+              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="0"/>
+              <path id="gauge-eff-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="url(#geff)" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition:stroke-dashoffset 1.5s ease"/>
+              <defs><linearGradient id="geff" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs>
+              <text x="70" y="68" text-anchor="middle" font-family="Bebas Neue" font-size="22" fill="#0B1622" id="gauge-eff-txt">—</text>
+            </svg>
+            <div class="gauge-sub">Performance Ratio</div>
+          </div>
+          <div class="gauge-card">
+            <div class="vm-card-head" style="margin-bottom:.5rem"><div class="vm-card-title">Solar Fraction</div></div>
+            <svg class="gauge-svg" viewBox="0 0 140 80" id="gauge-sf-svg">
+              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
+              <path id="gauge-sf-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="url(#gsf)" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition:stroke-dashoffset 1.5s ease"/>
+              <defs><linearGradient id="gsf" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
+              <text x="70" y="68" text-anchor="middle" font-family="Bebas Neue" font-size="22" fill="#0B1622" id="gauge-sf-txt">—</text>
+            </svg>
+            <div class="gauge-sub">% Load from Solar</div>
+          </div>
+        </div>
+
+        <!-- Event Log -->
+        <div class="vm-log">
+          <div class="vm-card-head"><div class="vm-card-title">System Event Log</div><div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div></div>
+          <div class="log-list" id="vm-log-list">
+            <div class="log-item info"><span class="log-time">--:--:--</span><span class="log-msg">Configure system parameters and run simulation</span><span class="log-badge lb-info">READY</span></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════ CTA BANNER ═══════ --><div class="cta-banner">
-  <div class="cta-banner-title">Ready to Power Your<br>Next Project?</div>
-  <p class="cta-banner-sub">Let's discuss how MechPower Solutions can become your long-term industrial partner.</p>
-  <a href="#contact" class="btn-white">
-    Start a Conversation →
-  </a>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     BLOG SECTION
-═══════════════════════════════════════════════════════════ -->
-<section id="blog">
-  <div class="sec">
-    <p class="sec-label reveal">Knowledge Hub</p>
-    <h2 class="sec-title reveal">Technical <span style="color:var(--or)">Blog</span></h2>
-    <p class="reveal" style="color:var(--lt);font-size:0.95rem;max-width:620px;line-height:1.8;margin-bottom:0.5rem;">
-      Deep-dive engineering articles, industry technical guides, and video references — written by MechPower's certified engineers for industrial and energy professionals.
-    </p>
-    <div class="blog-grid reveal">
-{% for blog in blogs %}
-
-<a href="{% url 'blog_detail' blog.slug %}" class="blog-card">
-
-    <div class="blog-card-thumb">
-        <img
-            src="{{ blog.image.url }}"
-            style="
-            width:100%;
-            height:170px;
-            object-fit:cover;
-            ">
-    </div>
-
-    <div class="blog-card-body">
-
-        <div class="blog-card-cat">
-            {{ blog.category|default:"BLOG" }}
-        </div>
-
-        <div class="blog-card-title">
-            {{ blog.title }}
-        </div>
-
-        <div class="blog-card-excerpt">
-            {{ blog.short_description|truncatechars:120 }}
-        </div>
-
-        <div class="blog-card-footer">
-
-            <div class="blog-card-date">
-                {{ blog.created_at|date:"M d, Y" }}
-            </div>
-
-            <div class="blog-read-btn">
-                Read →
-            </div>
-
-        </div>
-
-    </div>
-
-</a>
-
-{% endfor %}
-
-
-</div>
+<!-- BLOG (LIGHT) -->
+<section class="blog-sec" id="blog">
+  <div class="sw">
+    <p class="sec-lbl lt-lbl reveal">Knowledge Hub</p>
+    <h2 class="sec-title on-light reveal">Technical <span style="color:var(--or)">Blog</span></h2>
+    <p class="sec-sub on-light reveal">Deep-dive engineering articles, industry guides, and video references — written by MechPower's certified engineers.</p>
+    <div class="blog-grid reveal" id="blog-grid"></div>
   </div>
 </section>
 
 <!-- Blog Modal -->
-<div class="blog-modal-overlay" id="blog-modal-overlay" onclick="handleModalOverlayClick(event)">
-  <div class="blog-modal" id="blog-modal">
-    <div class="blog-modal-top-bar"></div>
-    <div class="blog-modal-hero" id="modal-hero-area">
-      <span id="modal-hero-icon" style="filter:drop-shadow(0 0 40px rgba(232,97,26,0.5))">⚡</span>
-    </div>
-    <button class="blog-modal-close" onclick="closeBlogModal()">✕</button>
-    <div class="blog-modal-content">
-      <div class="blog-modal-cat" id="modal-cat-label"></div>
-      <div class="blog-modal-title" id="modal-title-text"></div>
-      <div class="blog-modal-body" id="modal-body-content"></div>
+<div class="bm-overlay" id="bm-overlay" onclick="bmOverlayClick(event)">
+  <div class="bm-modal" id="bm-modal">
+    <div class="bm-hero" id="bm-hero"></div>
+    <button class="bm-close" onclick="closeBM()">✕</button>
+    <div class="bm-content">
+      <div class="bm-cat" id="bm-cat"></div>
+      <div class="bm-title" id="bm-title"></div>
+      <div class="bm-body" id="bm-body"></div>
     </div>
   </div>
 </div>
 
-<!-- ═══════ CONTACT ═══════ -->
-<section id="contact">
-  <div class="sec">
-    <p class="sec-label reveal">Get In Touch</p>
-    <h2 class="sec-title reveal">Request a <span style="color:var(--or)">Consultation</span></h2>
-
-    <div class="contact-wrap reveal">
-      <div class="contact-info">
-        <div style="margin-bottom:1rem;">
-          <p style="color:var(--lt);font-size:0.9rem;line-height:1.8;">
-            Whether you need an industrial component urgently, want to explore a solar project, or need a full EPC partner — we're ready to engage.
-          </p>
-        </div>
-
-        <div class="c-item">
-          <div class="c-icon-box">📍</div>
-          <div>
-            <div class="c-text-label">Head Office</div>
-            <div class="c-text-val">Uttara, Dhaka, Bangladesh</div>
-          </div>
-        </div>
-        <div class="c-item">
-          <div class="c-icon-box">📞</div>
-          <div>
-            <div class="c-text-label">Phone / WhatsApp</div>
-            <div class="c-text-val">+880 1757 374232</div>
-          </div>
-        </div>
-        <div class="c-item">
-          <div class="c-icon-box">📧</div>
-          <div>
-            <div class="c-text-label">Email</div>
-            <div class="c-text-val">info@mechpower.net</div>
-          </div>
-        </div>
-        <div class="c-item">
-          <div class="c-icon-box">🕐</div>
-          <div>
-            <div class="c-text-label">Business Hours</div>
-            <div class="c-text-val">Sat – Thu: 9:00 AM – 6:00 PM</div>
-          </div>
-        </div>
-
-        <div style="margin-top:1rem;padding:1.5rem;background:var(--st);border-left:2px solid var(--or);">
-          <div style="font-family:'Oxanium';font-size:0.65rem;font-weight:700;letter-spacing:2px;color:var(--or);margin-bottom:0.5rem;">EMERGENCY INQUIRIES</div>
-          <p style="font-size:0.85rem;color:var(--lt);line-height:1.7;">For urgent industrial parts or critical project needs, we offer priority response. Mark your inquiry as urgent and we'll respond within hours.</p>
-        </div>
-      </div>
-
-<div class="contact-form">
-
-<form method="POST">
-{% csrf_token %}
-
-<div class="form-row">
-    <div class="f-group">
-        <label class="f-label">Full Name</label>
-        <input class="f-input"
-               type="text"
-               name="full_name"
-               placeholder="Your full name">
-    </div>
-
-    <div class="f-group">
-        <label class="f-label">Company</label>
-        <input class="f-input"
-               type="text"
-               name="company"
-               placeholder="Company name">
-    </div>
-</div>
-
-<div class="form-row">
-    <div class="f-group">
-        <label class="f-label">Email</label>
-        <input class="f-input"
-               type="email"
-               name="email"
-               placeholder="your@email.com">
-    </div>
-
-    <div class="f-group">
-        <label class="f-label">Phone</label>
-        <input class="f-input"
-               type="tel"
-               name="phone"
-               placeholder="+880 ...">
-    </div>
-</div>
-
-<div class="f-group">
-    <label class="f-label">Service Interest</label>
-
-    <select class="f-select f-input"
-            name="service">
-        <option value="">— Select a service —</option>
-        <option>Industrial Spare Parts Supply</option>
-        <option>Industrial Solar System</option>
-        <option>EPC Contract</option>
-        <option>Energy & Power Solutions</option>
-    </select>
-</div>
-
-<div class="f-group">
-    <label class="f-label">
-        Project Details / Message
-    </label>
-
-    <textarea class="f-textarea"
-              name="message"
-              placeholder="Describe your project">
-    </textarea>
-</div>
-
-<button type="submit" class="btn-submit">
-    Send Inquiry →
-</button>
-
-</form>
-
-</div>
+<!-- FAQ (LIGHT) -->
+<section class="faq-sec" id="faq">
+  <div class="sw">
+    <p class="sec-lbl lt-lbl reveal">Common Questions</p>
+    <h2 class="sec-title on-light reveal">Frequently Asked <span style="color:var(--or)">Questions</span></h2>
+    <div class="faq-grid reveal">
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What industries do you serve in Bangladesh?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">We serve manufacturing, textile & garment, construction, food & beverage, pharmaceutical, power utilities, and commercial real estate. Any industry requiring industrial parts, energy solutions, or EPC services can benefit from MechPower.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How quickly can you deliver emergency spare parts?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">For locally stocked items, dispatch within hours. For internationally sourced parts, we use priority freight to minimise lead time. Mark your inquiry as urgent and our team responds within hours.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you handle the full solar project from start to finish?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Yes — complete turnkey EPC. Site survey, system design, procurement, installation, commissioning, net metering application with BREB/DPDC/DESCO, and O&M support. One contact, full accountability.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the VoltMatrix simulation tool?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">VoltMatrix is an intelligent 3-source energy automation platform — Solar first, Grid second, Generator only as last resort. Our simulation tool lets you enter your facility parameters and instantly calculate energy balance, savings, ROI, and payback period before committing to any investment.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the typical ROI for industrial solar in Bangladesh?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Industrial solar projects in Bangladesh typically achieve simple payback of 3–5 years with IRR of 20–30%. Monthly electricity bills commonly reduce by 35–65%. We provide full financial modelling as part of our proposal.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What equipment brands do you work with?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">We are brand-agnostic and select equipment based on client budget, project requirements, and long-term reliability. We work with internationally certified brands and can supply OEM-certified spare parts for major industrial equipment manufacturers.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- â•â•â•â•â•â•â• FOOTER â•â•â•â•â•â•â• -->
-{% endblock %}
+<!-- SKILL TEST (LIGHT) -->
+<section class="skill-sec" id="skilltest">
+  <div class="sw">
+    <p class="sec-lbl lt-lbl reveal">Knowledge Assessment</p>
+    <h2 class="sec-title on-light reveal">Free <span style="color:var(--or)">Skill Test</span></h2>
+    <p class="sec-sub on-light reveal" style="margin-bottom:.5rem">Test your electrical and industrial engineering knowledge across 3 professional modules. Instant feedback. Email your scored certificate on completion — free, no login required.</p>
+    <div id="quiz-home-screen"><div class="quiz-topics-grid reveal" id="quiz-topics-grid"></div></div>
+    <div id="quiz-active-screen">
+      <div class="quiz-back-bar"><button class="btn-qback" onclick="backToHome()">← All Topics</button><div class="q-active-title" id="q-active-title"></div></div>
+      <div class="q-prog-wrap"><div class="q-prog-info"><span id="q-counter">Question 1 of 15</span><span id="q-score">Score: 0/0</span></div><div class="q-prog-track"><div class="q-prog-fill" id="q-pbar" style="width:0%"></div></div></div>
+      <div class="q-card" id="q-card"><div class="q-num-lbl" id="q-num">QUESTION 1</div><div class="q-text" id="q-text"></div><div class="q-opts" id="q-opts"></div><div class="q-exp-box" id="q-exp"></div></div>
+      <div class="quiz-nav-row"><button class="btn-qnav" id="btn-prev" onclick="prevQ()">← Prev</button><button class="btn-qnav primary" id="btn-next" onclick="nextQ()">Next →</button></div>
+    </div>
+    <div id="quiz-result-screen">
+      <div class="result-card" id="result-card"><div class="res-label-sm">YOUR SCORE</div><span class="res-emoji" id="res-emoji"></span><div class="res-pct" id="res-pct"></div><div class="res-verdict" id="res-verdict"></div></div>
+      <div class="res-stats-row"><div class="rstat"><div class="rv" id="rs-c">0</div><div class="rl">Correct</div></div><div class="rstat"><div class="rv" id="rs-w">0</div><div class="rl">Wrong</div></div><div class="rstat"><div class="rv" id="rs-p">0%</div><div class="rl">Score</div></div></div>
+      <div class="email-box"><h3>📩 Get Your <span>Score Certificate</span></h3><p>Enter your details to receive a personalised score certificate and full performance breakdown direct to your inbox.</p><div class="email-row"><input class="cert-inp" id="cert-email" type="email" placeholder="Your Email Address *"><input class="cert-inp" id="cert-phone" type="tel" placeholder="Phone / WhatsApp *"></div><button class="btn-cert" id="btn-cert" onclick="sendCert()">📨 &nbsp;Email My Score Certificate Now</button><div class="cert-sent" id="cert-sent">✅ <strong>Certificate sent!</strong> Check your inbox. Thank you for the MechPower Skill Assessment.</div></div>
+      <div class="review-wrap"><h3>Full Answer Review</h3><div id="review-wrap"></div></div>
+      <div class="result-actions"><button class="btn-qback" onclick="backToHome()">← All Topics</button><button class="btn-qnav primary" id="btn-retry">🔁 Retry This Test</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT (LIGHT) -->
+<section class="contact-sec" id="contact">
+  <div class="sw">
+    <p class="sec-lbl lt-lbl reveal">Get In Touch</p>
+    <h2 class="sec-title on-light reveal">Request a <span style="color:var(--or)">Consultation</span></h2>
+    <div class="contact-grid reveal">
+      <div class="c-info">
+        <p style="color:var(--tx-muted);font-size:.88rem;line-height:1.8">Whether you need an industrial component urgently, want to explore a solar project, or need a full EPC partner — we're ready to engage.</p>
+        <div class="ci-item"><div class="ci-ico">📍</div><div><div class="ci-label">Head Office</div><div class="ci-val">Dhaka, Bangladesh</div></div></div>
+        <div class="ci-item"><div class="ci-ico">📞</div><div><div class="ci-label">Phone / WhatsApp</div><div class="ci-val">+880 — [To be updated]</div></div></div>
+        <div class="ci-item"><div class="ci-ico">📧</div><div><div class="ci-label">Email</div><div class="ci-val">info@mechpowersolutions.com</div></div></div>
+        <div class="ci-item"><div class="ci-ico">🕐</div><div><div class="ci-label">Business Hours</div><div class="ci-val">Sun – Thu: 9:00 AM – 6:00 PM</div></div></div>
+        <div class="emerg-box"><div class="emerg-title">EMERGENCY INQUIRIES</div><p class="emerg-text">For urgent industrial parts or critical project needs, we offer priority response. Mark your inquiry as urgent and we'll respond within hours.</p></div>
+      </div>
+      <div class="c-form">
+        <div class="cf-row"><div class="cf-grp"><label class="cf-lbl">Full Name</label><input class="cf-inp" type="text" placeholder="Your full name"></div><div class="cf-grp"><label class="cf-lbl">Company</label><input class="cf-inp" type="text" placeholder="Company name"></div></div>
+        <div class="cf-row"><div class="cf-grp"><label class="cf-lbl">Email</label><input class="cf-inp" type="email" placeholder="your@email.com"></div><div class="cf-grp"><label class="cf-lbl">Phone / WhatsApp</label><input class="cf-inp" type="tel" placeholder="+880 ..."></div></div>
+        <div class="cf-grp"><label class="cf-lbl">Service Interest</label><select class="cf-sel cf-inp"><option value="">— Select a service —</option><option>Industrial Spare Parts Supply</option><option>Industrial Solar System</option><option>EPC Contract</option><option>Energy & Power Solutions</option><option>Rooftop Solar</option><option>VoltMatrix Energy Simulation</option><option>Emergency Parts Delivery</option><option>General Inquiry</option></select></div>
+        <div class="cf-grp"><label class="cf-lbl">Project Details / Message</label><textarea class="cf-ta" placeholder="Describe your project, requirement, or inquiry..."></textarea></div>
+        <button class="btn-csub" onclick="alert('Thank you! We will contact you within 24 hours.')">Send Inquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER (dark) -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="fb-name">Mech<span>Power</span> Solutions</span>
+      <p class="fb-tag">Engineering Reliability with Precision. Bangladesh's trusted industrial and energy solutions partner.</p>
+      <div class="fb-badge"><div class="fb-dot"></div> Active · 2026</div>
+      <div class="f-social">
+        <a href="#" class="f-sb"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="f-sb"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" class="f-sb"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" class="f-sb"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div><div class="fc-title">Solutions</div><ul class="fc-list"><li><a href="#solutions">Industrial Supply</a></li><li><a href="#solutions">Solar Systems</a></li><li><a href="#solutions">EPC Contracts</a></li><li><a href="#solutions">Energy Solutions</a></li><li><a href="#solutions">Emergency Logistics</a></li></ul></div>
+    <div><div class="fc-title">Company</div><ul class="fc-list"><li><a href="#about">About Us</a></li><li><a href="#why">Why MechPower</a></li><li><a href="#sectors">Sectors</a></li><li><a href="#technology">Technology</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div><div class="fc-title">Resources</div><ul class="fc-list"><li><a href="#blog">Technical Articles</a></li><li><a href="#voltmatrix">⚡ Live Simulation</a></li><li><a href="#skilltest">Free Skill Test</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+    <div><div class="fc-title">Newsletter</div><p style="font-size:.8rem;color:var(--mi);line-height:1.7;margin-bottom:.6rem">Engineering updates and industry insights.</p><div class="nl-form"><input class="nl-inp" type="email" placeholder="Your email"><button class="nl-btn">Subscribe</button></div></div>
+  </div>
+  <div class="footer-bottom">
+    <p class="f-copy">© 2026 <span>MechPower Solutions</span>. All rights reserved.</p>
+    <div class="f-links"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a><a href="#">Complaint Reporting</a></div>
+  </div>
+</footer>
+
+<!-- Floating Buttons -->
+<div class="float-btns">
+  <a href="https://wa.me/880" class="float-btn f-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+  <button class="float-btn f-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-chevron-up"></i></button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

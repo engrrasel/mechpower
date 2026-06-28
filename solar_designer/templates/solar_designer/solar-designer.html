@@ -1,0 +1,181 @@
+{% extends "solar_designer/base.html" %}
+{% load static %}
+
+{% block title %}MechPower Solar Designer{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'solar_designer/css/home.css' %}">
+<style>
+    .sticky-summary {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+        z-index: 100;
+    }
+    .workspace-scroll {
+        max-height: 75vh;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+    .workspace-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+    .workspace-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+    /* ডাইনামিক সার্চ ড্রপডাউন রেজাল্ট বক্স */
+    .search-results-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        z-index: 1050;
+        max-height: 250px;
+        overflow-y: auto;
+        display: none;
+    }
+    .search-result-item {
+        padding: 10px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #f8f9fa;
+        transition: background 0.2s;
+    }
+    .search-result-item:hover {
+        background: #f1f3f5;
+    }
+    /* সিলেক্টেড রো স্টাইল */
+    .selected-item-row {
+        background: #fff;
+        border-left: 4px solid #0d6efd;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        padding: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        transition: all 0.2s;
+    }
+    .segment-switch {
+        background: #f1f3f5;
+        padding: 4px;
+        border-radius: 10px;
+        display: inline-flex;
+        width: 100%;
+    }
+    .segment-btn {
+        flex: 1;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 8px;
+        background: transparent;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #495057;
+    }
+    .segment-btn.active {
+        background: #fff;
+        color: #0d6efd;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section py-3 bg-white border-bottom">
+    <div class="container">
+        <div class="row align-items-center g-3">
+            <div class="col-md-8">
+                <span class="hero-badge mb-1 d-inline-block">⚡ Admin-Driven Solar Calculator</span>
+                <h1 class="hero-title mb-1" style="font-size: 2rem;">Design Your Perfect <span>Solar System</span></h1>
+                <p class="hero-text mb-0 text-muted small">Search and add any appliance dynamically managed from your Admin Panel.</p>
+            </div>
+            <div class="col-md-4 text-end d-none d-md-block">
+                <img src="{% static 'solar_designer/images/solar-hero.png' %}" class="img-fluid" style="max-height: 100px; object-fit: contain;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="workspace-section py-4">
+    <div class="container">
+        <div class="row g-4">
+            
+            <div class="col-xl-8 col-lg-7">
+                <div class="workspace-scroll">
+                    
+                    <div class="row g-2 mb-4 align-items-center bg-white p-3 shadow-sm rounded-3 mx-0">
+                        <div class="col-md-4">
+                            <div class="segment-switch">
+                                <button type="button" class="segment-btn active" data-category="residential"><i class="fa-solid fa-house me-2"></i>Residential</button>
+                                <button type="button" class="segment-btn" data-category="industrial"><i class="fa-solid fa-industry me-2"></i>Industrial</button>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-8 position-relative">
+                            <div class="search-box">
+                                <i class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                                <input id="searchAppliance" class="form-control bg-light border-0 ps-5 py-2" placeholder="Type appliance name (e.g. AC, Pump, Light)..." autocomplete="off">
+                            </div>
+                            <div id="dropdownResults" class="search-results-dropdown"></div>
+                        </div>
+                    </div>
+
+                    <h6 class="fw-bold mb-3 text-dark d-flex justify-content-between">
+                        <span>নির্বাচিত অ্যাপ্লায়েন্স সমূহ (এডমিন ডাটাভিত্তিক)</span>
+                        <span id="total-items-count" class="badge bg-primary">0 Items</span>
+                    </h6>
+                    
+                    <div id="selected-appliances-list" class="pe-1">
+                        <div id="empty-state-msg" class="text-center py-5 text-muted bg-white rounded-3 border border-dashed">
+                            <i class="fa-solid fa-search fs-2 mb-2 text-secondary"></i>
+                            <p class="mb-0">উপরের সার্চ বারে অ্যাপ্লায়েন্সের নাম লিখে তালিকায় যোগ করুন।</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-5">
+                <div class="sticky-summary">
+                    <div class="summary-card p-3 mb-3 bg-white shadow-sm rounded-3">
+                        <h5 class="fw-bold mb-3"><i class="fa-solid fa-chart-simple me-2 text-primary"></i>Live Summary</h5>
+                        <div class="d-flex justify-content-between mb-2 pb-2 border-bottom"><span class="text-muted small">Connected Load</span><strong id="connected-load" class="text-dark">0 W</strong></div>
+                        <div class="d-flex justify-content-between mb-2 pb-2 border-bottom"><span class="text-muted small">Peak Load</span><strong id="peak-load" class="text-dark">0 W</strong></div>
+                        <div class="d-flex justify-content-between mb-2 pb-2 border-bottom"><span class="text-muted small">Daily Energy</span><strong id="daily-energy" class="text-dark">0 kWh</strong></div>
+                        <div class="d-flex justify-content-between"><span class="text-muted small">Monthly Energy</span><strong id="monthly-energy" class="text-dark">0 kWh</strong></div>
+                    </div>
+
+                    <div class="recommend-card p-3 bg-white shadow-sm rounded-3 mb-4">
+                        <h5 class="fw-bold mb-3 text-warning"><i class="fa-solid fa-sun me-2"></i>System Recommendation</h5>
+                        <div class="row g-2">
+                            <div class="col-6"><div class="p-2 bg-light rounded text-center"><small class="text-muted d-block" style="font-size: 0.75rem;">Solar Panel</small><strong id="solar-size" class="fs-6">0 kW</strong></div></div>
+                            <div class="col-6"><div class="p-2 bg-light rounded text-center"><small class="text-muted d-block" style="font-size: 0.75rem;">Inverter</small><strong id="inverter-size" class="fs-6">0 kW</strong></div></div>
+                            <div class="col-6"><div class="p-2 bg-light rounded text-center"><small class="text-muted d-block" style="font-size: 0.75rem;">Battery</small><strong id="battery-size" class="fs-6">0 Ah</strong></div></div>
+                            <div class="col-6"><div class="p-2 bg-warning-subtle rounded text-center"><small class="text-warning-emphasis d-block" style="font-size: 0.75rem;">Est. Cost</small><strong id="estimated-cost" class="text-warning-emphasis fs-6">৳ 0</strong></div></div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary w-100 py-2 shadow-sm proposal-btn" style="border-radius: 10px; font-weight: 600;">
+                        <i class="fa-solid fa-file-pdf me-2"></i> Generate Proposal
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script>
+    // জ্যাঙ্গো ভিউ থেকে পাঠানো ডাটা জাভাস্ক্রিপ্ট অবজেক্টে রূপান্তর
+    const dbAppliances = {{ appliances_json|safe }};
+    let currentCategory = 'residential'; 
+</script>
+<script src="{% static 'solar_designer/js/home.js' %}"></script>
+{% endblock %}

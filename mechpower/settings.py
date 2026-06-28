@@ -30,6 +30,8 @@ ALLOWED_HOSTS = [
     "site-poszoi.hostnin.com",
     "localhost",
     "127.0.0.1",
+    "192.168.0.59"
+    ,
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -64,6 +66,7 @@ INSTALLED_APPS = [
 
     "web",
     "certificate",
+    "solar_designer",
 ]
 
 # ==================================

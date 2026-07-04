@@ -67,6 +67,10 @@ INSTALLED_APPS = [
     "web",
     "certificate",
     "solar_designer",
+    "voltmatrix_app",
+    "blog",
+    "skill_test",
+    "contact",
 ]
 
 # ==================================

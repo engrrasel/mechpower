@@ -1,0 +1,101 @@
+<!-- VOLTMATRIX SKILL TEST SECTION -->
+<section id="skill-test" class="py-5 text-white" style="background: linear-gradient(135deg, #0b132b, #1c2541); font-family: 'DM Sans', sans-serif;">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <!-- Left Side: Content & Info -->
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="badge bg-warning text-dark mb-3 px-3 py-2 text-uppercase fw-bold" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 1px;">
+                    VoltMatrix Assessment
+                </div>
+                <h2 class="display-5 fw-bold mb-4" style="font-family: 'Rajdhani', sans-serif; color: #edf2f4;">
+                    Test Your Electrical & <br><span class="text-warning">Engineering Skills</span>
+                </h2>
+                <p class="text-light-50 mb-4" style="opacity: 0.85; font-size: 1.05rem; line-height: 1.6;">
+                    Evaluate your core expertise in industrial automation, power infrastructure, and electrical reliability. Take our quick interactive assessment to get instant insights and a comprehensive skill breakdown score.
+                </p>
+                
+                <!-- Quick Features/Steps -->
+                <div class="d-flex flex-column gap-3 mb-4">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 35px; height: 35px;">
+                            <i class="fa-solid fa-check fw-bold"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1 text-white fw-bold" style="font-family: 'Rajdhani', sans-serif;">Instant Certification Score</h5>
+                            <p class="text-muted small mb-0">Get evaluated instantly with precise accuracy metrics.</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 35px; height: 35px;">
+                            <i class="fa-solid fa-check fw-bold"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1 text-white fw-bold" style="font-family: 'Rajdhani', sans-serif;">Industrial Scenarios</h5>
+                            <p class="text-muted small mb-0">Questions designed by top-tier MechPower reliability engineers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{% url 'quiz' %}" class="btn btn-warning btn-lg text-dark fw-bold px-4 rounded-pill" style="font-family: 'Rajdhani', sans-serif;">
+                    Start Live Quiz <i class="fa-solid fa-play ms-2"></i>
+                </a>
+            </div>
+
+            <!-- Right Side: Interactive Widget Placeholder -->
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="card border-0 bg-dark text-white p-4 shadow-lg position-relative overflow-hidden" style="border-radius: 15px; background: rgba(255, 255, 255, 0.03) !important; backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1) !important;">
+                    
+                    <!-- Decorative Background Light effect -->
+                    <div class="position-absolute bg-warning rounded-circle" style="width: 150px; height: 150px; top: -50px; right: -50px; filter: blur(80px); opacity: 0.2;"></div>
+                    
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4 class="fw-bold m-0 text-warning" style="font-family: 'Rajdhani', sans-serif;">
+                                <i class="fa-solid fa-bolt me-2"></i> VoltMatrix Widget
+                            </h4>
+                            <span class="badge bg-danger text-uppercase fw-semibold animate-pulse">Live</span>
+                        </div>
+
+                        <!-- 💡 আপনার জেনারেট করা ডাইনামিক উইজেট বা কম্পোনেন্ট এর অংশ এখানে বসবে -->
+                        <div class="widget-container bg-black rounded p-4 text-center border border-secondary" style="min-height: 250px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(0,0,0,0.3) !important;">
+                            
+                            <!-- Sample dynamic component loader / Placeholder -->
+                            <div class="quiz-preview-ui w-100">
+                                <p class="text-muted small text-start mb-2"><i class="fa-solid fa-terminal me-2"></i> system_test_active...</p>
+                                <h5 class="text-start fw-bold mb-4" style="font-family: 'Rajdhani', sans-serif;">Q1: What is the primary function of a Solar Grid-Tied Inverter?</h5>
+                                
+                                <div class="d-flex flex-column gap-2 text-start">
+                                    <button class="btn btn-outline-light text-start btn-sm py-2 px-3 border-secondary" style="border-radius: 8px; font-size: 0.9rem;">
+                                        A. Converting DC to AC and synchronizing with grid
+                                    </button>
+                                    <button class="btn btn-outline-light text-start btn-sm py-2 px-3 border-secondary" style="border-radius: 8px; font-size: 0.9rem;">
+                                        B. Storing massive DC energy in lithium batteries
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top border-secondary d-flex justify-content-between align-items-center text-muted small">
+                            <span><i class="fa-solid fa-users me-1"></i> Over 5,000+ Engineers Tested</span>
+                            <span>v2.1.4</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS for specific pulse animation in widget -->
+<style>
+    .animate-pulse {
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(220, 53, 69, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+    }
+</style>

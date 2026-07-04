@@ -1,95 +1,18 @@
-{% extends "solar_designer/base.html" %}
+{% extends 'solar_designer/base.html' %}
 {% load static %}
 
-{% block title %}MechPower Solar Designer{% endblock %}
+{% block title %}MechPower Solar Designer - {{ blog.title }}{% endblock %}
 
 {% block css %}
+<!-- যেহেতু বেস ফাইলে অলরেডি বুটস্ট্র্যাপ ও ফন্ট-অসাম আছে, তাই এখানে শুধু আপনার কাস্টম সিএসএস থাকবে -->
 <link rel="stylesheet" href="{% static 'solar_designer/css/home.css' %}">
-<style>
-    .sticky-summary {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 20px;
-        z-index: 100;
-    }
-    .workspace-scroll {
-        max-height: 75vh;
-        overflow-y: auto;
-        padding-right: 10px;
-    }
-    .workspace-scroll::-webkit-scrollbar {
-        width: 6px;
-    }
-    .workspace-scroll::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 10px;
-    }
-    /* ডাইনামিক সার্চ ড্রপডাউন রেজাল্ট বক্স */
-    .search-results-dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-        z-index: 1050;
-        max-height: 250px;
-        overflow-y: auto;
-        display: none;
-    }
-    .search-result-item {
-        padding: 10px 15px;
-        cursor: pointer;
-        border-bottom: 1px solid #f8f9fa;
-        transition: background 0.2s;
-    }
-    .search-result-item:hover {
-        background: #f1f3f5;
-    }
-    /* সিলেক্টেড রো স্টাইল */
-    .selected-item-row {
-        background: #fff;
-        border-left: 4px solid #0d6efd;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        padding: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        transition: all 0.2s;
-    }
-    .segment-switch {
-        background: #f1f3f5;
-        padding: 4px;
-        border-radius: 10px;
-        display: inline-flex;
-        width: 100%;
-    }
-    .segment-btn {
-        flex: 1;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 8px;
-        background: transparent;
-        font-weight: 600;
-        font-size: 0.9rem;
-        color: #495057;
-    }
-    .segment-btn.active {
-        background: #fff;
-        color: #0d6efd;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-</style>
 {% endblock %}
 
 {% block content %}
-
 <section class="hero-section py-3 bg-white border-bottom">
     <div class="container">
         <div class="row align-items-center g-3">
             <div class="col-md-8">
-                <span class="hero-badge mb-1 d-inline-block">⚡ Admin-Driven Solar Calculator</span>
                 <h1 class="hero-title mb-1" style="font-size: 2rem;">Design Your Perfect <span>Solar System</span></h1>
                 <p class="hero-text mb-0 text-muted small">Search and add any appliance dynamically managed from your Admin Panel.</p>
             </div>
@@ -132,7 +55,7 @@
                     <div id="selected-appliances-list" class="pe-1">
                         <div id="empty-state-msg" class="text-center py-5 text-muted bg-white rounded-3 border border-dashed">
                             <i class="fa-solid fa-search fs-2 mb-2 text-secondary"></i>
-                            <p class="mb-0">উপরের সার্চ বারে অ্যাপ্লায়েন্সের নাম লিখে তালিকায় যোগ করুন।</p>
+                            <p class="mb-0">উপরের সার্চ বারে অ্যাপ্লায়েন্সের নাম লিখে তালিকায় যোগ করুন।</p>
                         </div>
                     </div>
 
@@ -168,12 +91,10 @@
         </div>
     </div>
 </section>
-
 {% endblock %}
 
 {% block js %}
 <script>
-    // জ্যাঙ্গো ভিউ থেকে পাঠানো ডাটা জাভাস্ক্রিপ্ট অবজেক্টে রূপান্তর
     const dbAppliances = {{ appliances_json|safe }};
     let currentCategory = 'residential'; 
 </script>

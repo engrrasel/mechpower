@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoltMatrix Pro Simulator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="{% static 'VoltMatrixApp/css/dashboard.css' %}">
+</head>
+<body>
+
+  <section class="vm-sec" id="voltmatrix">
+    <div class="sw">
+      <div class="vm-badge"><div class="vm-badge-dot"></div> Live System Active — Powered by VoltMatrix</div>
+      <h2 class="sec-title on-light">System <span style="color:var(--or)">Simulation</span></h2>
+      <p class="sec-sub on-light">Configure your facility parameters and instantly simulate Solar · Grid · Generator energy balance.</p>
+
+      <div class="vm-layout">
+        <div class="vm-form-card">
+          <div class="vm-form-head">
+            <h3>⚙ SYSTEM CONFIGURATION</h3>
+            <p>VOLTMATRIX PRO SIMULATOR</p>
+          </div>
+          <div class="vm-form-body">
+            <div class="vm-section-title">Facility Details</div>
+            <div class="vm-field-group">
+              <label class="vm-label">Facility Type</label>
+              <select class="vm-select" id="vm-facility">
+                <option value="factory">Factory / Manufacturing Plant</option>
+                <option value="textile">Textile / Garment Factory</option>
+                <option value="warehouse">Warehouse / Cold Storage</option>
+              </select>
+            </div>
+            <div class="vm-row">
+              <div class="vm-field-group"><label class="vm-label">Total Load (kW)</label><input type="number" class="vm-input" id="vm-load" value="150"></div>
+              <div class="vm-field-group"><label class="vm-label">Daily Usage (hrs)</label><input type="number" class="vm-input" id="vm-hours" value="12"></div>
+            </div>
+            <div class="vm-field-group">
+              <label class="vm-label">Location (Bangladesh)</label>
+              <select class="vm-select" id="vm-location">
+                <option value="dhaka">Dhaka — PSH 4.6 hrs</option>
+                <option value="chittagong">Chittagong — PSH 4.8 hrs</option>
+              </select>
+            </div>
+            
+            <div class="vm-divider"></div>
+            <div class="vm-section-title">Solar Array</div>
+            <div class="vm-row">
+              <div class="vm-field-group"><label class="vm-label">Solar Capacity (kWp)</label><input type="number" class="vm-input" id="vm-solar" value="100"></div>
+              <div class="vm-field-group">
+                <label class="vm-label">Panel Efficiency (%)</label>
+                <select class="vm-select" id="vm-eff">
+                  <option value="0.21" selected>21% — Mono PERC</option>
+                  <option value="0.22">22% — HJT Premium</option>
+                </select>
+              </div>
+            </div>
+            <div class="vm-field-group">
+              <label class="vm-label">Panel Orientation</label>
+              <div class="vm-radio-group">
+                <div class="vm-radio-btn"><input type="radio" name="orient" id="or1" value="south" checked><label for="or1">South</label></div>
+                <div class="vm-radio-btn"><input type="radio" name="orient" id="or2" value="se"><label for="or2">South-East</label></div>
+                <div class="vm-radio-btn"><input type="radio" name="orient" id="or3" value="sw"><label for="or3">South-West</label></div>
+                <div class="vm-radio-btn"><input type="radio" name="orient" id="or4" value="east"><label for="or4">East</label></div>
+              </div>
+            </div>
+
+            <div class="vm-divider"></div>
+            <div class="vm-section-title">Power Sources</div>
+            <div class="vm-row">
+              <div class="vm-field-group"><label class="vm-label">Grid Tariff (BDT/kWh)</label><input type="number" class="vm-input" id="vm-tariff" value="8.5"></div>
+              <div class="vm-field-group"><label class="vm-label">Generator Capacity (kVA)</label><input type="number" class="vm-input" id="vm-gen" value="200"></div>
+            </div>
+            <div class="vm-row">
+              <div class="vm-field-group"><label class="vm-label">Diesel Cost (BDT/L)</label><input type="number" class="vm-input" id="vm-diesel" value="110"></div>
+              <div class="vm-field-group"><label class="vm-label">Battery Storage (kWh)</label><input type="number" class="vm-input" id="vm-battery" value="0"></div>
+            </div>
+
+            <div class="vm-divider"></div>
+            <div class="vm-section-title">VoltMatrix Priority</div>
+            <div class="vm-field-group">
+              <div class="vm-radio-group">
+                <div class="vm-radio-btn"><input type="radio" name="priority" id="p1" value="solar_first" checked><label for="p1">☀️ Solar First</label></div>
+                <div class="vm-radio-btn"><input type="radio" name="priority" id="p2" value="eco"><label for="p2">🌿 Eco Mode</label></div>
+                <div class="vm-radio-btn"><input type="radio" name="priority" id="p3" value="cost"><label for="p3">💰 Cost Save</label></div>
+              </div>
+            </div>
+
+            <button class="btn-simulate" id="btn-sim">⚡ Run VoltMatrix Simulation</button>
+          </div>
+        </div>
+
+        <div class="vm-dashboard">
+          <div class="vm-powerflow">
+            <div class="vm-card-head">
+              <div class="vm-card-title">Live Power Flow</div>
+              <div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div>
+            </div>
+            <div class="pf-diagram">
+              <div class="pf-source active-src" id="pf-solar">
+                <span class="pf-src-icon">☀️</span>
+                <div class="pf-src-name">Solar</div>
+                <div class="pf-src-val solar-val" id="pf-solar-kw">0.0 kW</div>
+                <div class="pf-src-status st-active">Active</div>
+              </div>
+              <div class="pf-arrow"><div class="pf-arrow-kw" id="pf-kw1">→</div></div>
+              <div class="pf-center">
+                <div class="pf-center-label">VoltMatrix</div>
+                <div class="pf-center-status">AUTO ACTIVE</div>
+              </div>
+              <div class="pf-arrow"><div class="pf-arrow-kw" id="pf-kw2">→</div></div>
+              <div class="pf-source active-src" id="pf-load">
+                <span class="pf-src-icon">🏭</span>
+                <div class="pf-src-name">Facility Load</div>
+                <div class="pf-src-val load-val" id="pf-load-kw">0.0 kW</div>
+                <div class="pf-src-status st-active">Primary</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
+              <div class="pf-source" id="pf-grid-card">
+                <div class="pf-src-name">⚡ Grid</div>
+                <div class="pf-src-val grid-val" id="pf-grid-kw">0.0 kW</div>
+                <div class="pf-src-status" id="pf-grid-st">Standby</div>
+              </div>
+              <div class="pf-source" id="pf-gen-card">
+                <div class="pf-src-name">⚙️ Generator</div>
+                <div class="pf-src-val gen-val" id="pf-gen-kw">0.0 kW</div>
+                <div class="pf-src-status" id="pf-gen-st">Standby</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="vm-priority-row">
+            <div class="pri-card pri-solar">
+              <div class="pri-badge pb-solar">Priority 1 — Always First</div>
+              <div class="pri-title">☀️ Solar Power</div>
+              <div class="pri-kw" id="pri-solar-kw">0.0 kW</div>
+              <div class="pri-pct" id="pct-solar">0% of load</div>
+            </div>
+            <div class="pri-card pri-grid">
+              <div class="pri-badge pb-grid">Priority 2 — Supplement</div>
+              <div class="pri-title">🔌 Grid Power</div>
+              <div class="pri-kw" id="pri-grid-kw">0.0 kW</div>
+              <div class="pri-pct" id="pct-grid">0% of load</div>
+            </div>
+            <div class="pri-card pri-gen">
+              <div class="pri-badge pb-gen">Priority 3 — Emergency</div>
+              <div class="pri-title">⚙️ Generator</div>
+              <div class="pri-kw" id="pri-gen-kw">STANDBY</div>
+              <div class="pri-pct" id="pct-gen">On standby</div>
+            </div>
+          </div>
+
+          <div class="vm-kpi-row">
+            <div class="kpi-card">
+              <div class="kpi-val" id="kpi-savings">0 <span>BDT</span></div>
+              <div class="kpi-label">Monthly Savings</div>
+              <div class="kpi-trend">— run simulation</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-val" id="kpi-bill-red">0<span>%</span></div>
+              <div class="kpi-label">Bill Reduction</div>
+              <div class="kpi-trend">— run simulation</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-val" id="kpi-payback">—<span> yrs</span></div>
+              <div class="kpi-label">Payback Period</div>
+              <div class="kpi-trend">— run simulation</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-val" id="kpi-co2">0<span> T</span></div>
+              <div class="kpi-label">CO₂ Saved/yr</div>
+              <div class="kpi-trend">— run simulation</div>
+            </div>
+          </div>
+
+          <div class="vm-gauge-row">
+            <div class="gauge-card">
+              <div class="gauge-title">System Efficiency</div>
+              <svg class="gauge-svg" viewBox="0 0 140 80">
+                <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
+                <path id="gauge-eff-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#22c55e" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition: stroke-dashoffset 1s;"/>
+                <text x="70" y="65" text-anchor="middle" font-family="Oxanium" font-size="18" font-weight="bold" id="gauge-eff-txt">0%</text>
+              </svg>
+            </div>
+            <div class="gauge-card">
+              <div class="gauge-title">Solar Fraction</div>
+              <svg class="gauge-svg" viewBox="0 0 140 80">
+                <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
+                <path id="gauge-sf-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#f59e0b" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition: stroke-dashoffset 1s;"/>
+                <text x="70" y="65" text-anchor="middle" font-family="Oxanium" font-size="18" font-weight="bold" id="gauge-sf-txt">0%</text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="vm-chart-card">
+            <div class="vm-card-title">Monthly Energy Balance (kWh)</div>
+            <div class="vm-chart-wrap" id="vm-chart">RUN SIMULATION TO GENERATE CHART</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="{% static 'VoltMatrixApp/js/dashboard.js' %}"></script>
+</body>
+</html>

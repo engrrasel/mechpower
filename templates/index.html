@@ -3,18 +3,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>MechPower Solutions — Engineering Reliability with Precision</title>
 <meta name="description" content="Bangladesh's trusted partner for Industrial Supply, Solar EPC, and Energy Infrastructure.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oxanium:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<!-- মোবাইল ভিউ এবং মাউস কার্সার ফিক্স করার কাস্টম গ্লোবাল মিডিয়া কোয়েরি -->
+<style>
+    /* গ্লোবাল মাউস কার্সার রুলস */
+    html, body, *, button, input, select, textarea {
+        cursor: auto !important;
+    }
+    a, button, .nav-link, .nav-cta, .btn-dark, .btn-ghost, .btn-white, .btn-simulate {
+        cursor: pointer !important;
+    }
+
+    /* মোবাইল ডিভাইসের জন্য কাস্টম রেসপন্সিভ ফিক্স (Breakpoint: 768px) */
+    @media (max-width: 768px) {
+        /* ১. মোবাইল টাচ স্ক্রিনে কাস্টম অ্যানিমেটেড কার্সার হাইড ও ডিফল্ট কার্সার রিস্টোর */
+        #cur, #cur2, .cur, .cur2 {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        /* ২. টেক্সট ওভারফ্লো এবং সেকশন প্যাডিং ফিক্স */
+        body {
+            overflow-x: hidden !important;
+            -webkit-text-size-adjust: 100%;
+        }
+        .sw, .container {
+            width: 100% !important;
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+
+        /* ৩. হিরো সেকশন ও স্লাইডার মোবাইলের জন্য রি-ডিজাইন */
+        .slide-h1 {
+            font-size: 2.2rem !important;
+            line-height: 1.2 !important;
+        }
+        .slide-sub {
+            font-size: 0.95rem !important;
+            margin-bottom: 1.5rem !important;
+        }
+        .slide-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .slide-ctas a {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+        .hero-stats {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 5px !important;
+            padding: 10px !important;
+        }
+        .hst-n {
+            font-size: 1.2rem !important;
+        }
+        .hst-l {
+            font-size: 0.65rem !important;
+        }
+
+        /* ৪. গ্রিড লেআউটগুলোকে সিঙ্গেল কলামে রূপান্তর */
+        .stats-grid, .sol-grid, .sectors-grid, .tech-panel-grid, .vm-layout, .contact-grid, .about-grid, .why-grid {
+            display: flex !important;
+            flex-direction: column !important;
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+        }
+
+        /* ৫. এবাউট ও হোয়াই মেকপাওয়ার মেকানিজম ফিক্স */
+        .about-box {
+            padding: 20px !important;
+        }
+        .about-big {
+            font-size: 2.5rem !important;
+            line-height: 1.1 !important;
+        }
+        .why-vis {
+            margin-top: 20px;
+        }
+        .met-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+
+        /* ৬. ভোল্টম্যাট্রিক্স সিমুলেটর ড্যাশবোর্ড ফিক্স */
+        .vm-form-card, .vm-dashboard {
+            width: 100% !important;
+        }
+        .pf-diagram {
+            flex-direction: column !important;
+            gap: 15px !important;
+            align-items: center !important;
+        }
+        .pf-arrow {
+            transform: rotate(90deg) !important;
+            margin: 10px 0 !important;
+        }
+
+        /* ৭. ফুটার রেসপন্সিভ স্ট্রাকচার */
+        .footer-top {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 25px !important;
+            text-align: left !important;
+        }
+    }
+</style>
 </head>
 <body>
+<div class="cur" id="cur"></div>
+<div class="cur2" id="cur2"></div>
 
-
-<!-- NAV -->
 <header id="hdr">
   <div class="nav-inner">
     <a href="#" class="nav-logo"><div><div class="nav-logo-text">Mech<span>Power</span></div><span class="nav-logo-sub">Solutions</span></div></a>
@@ -42,17 +152,9 @@
         </div>
       </li>
       <li class="nav-item">
-        <a href="#blog" class="nav-link">Blog <i class="fa-solid fa-chevron-down chev"></i></a>
-        <div class="mega-drop">
-          <a href="#blog" class="mega-link">Technical Articles</a>
-          <a href="#skilltest" class="mega-link">⚡ Free Skill Test</a>
-        </div>
+        <a href="/solar-calculator" class="nav-link">Smart Solar Calculator</a>
       </li>
-      <li class="nav-item">
-      <a href="{% url 'solar_designer:solar_designer_home' %}#packages" class="nav-link">Power Packages</a>      </li>
       <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-      
-
     </ul>
     <div class="nav-right">
       <a href="#contact" class="nav-cta">Get Quote</a>
@@ -60,19 +162,17 @@
     </div>
   </div>
 </header>
+
 <div class="mobile-nav" id="mob-nav">
   <a href="#about" onclick="closeNav()">About</a>
   <a href="#solutions" onclick="closeNav()">Solutions</a>
   <a href="#sectors" onclick="closeNav()">Sectors</a>
   <a href="#technology" onclick="closeNav()">Technology</a>
   <a href="#voltmatrix" onclick="closeNav()">⚡ Live Simulation</a>
-  <a href="#blog" onclick="closeNav()">Blog</a>
-  <a href="#skilltest" onclick="closeNav()">Free Skill Test</a>
-  <a href="#contact" onclick="closeNav()">Power Packages</a>
+  <a href="/solar-calculator">Smart Solar Calculator</a>
   <a href="#contact" onclick="closeNav()">Contact</a>
 </div>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-grid"></div>
   <div class="particles" id="pts"></div>
@@ -92,10 +192,8 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker"><div class="t-track"><span>Industrial Spare Parts</span><span class="t-dot">✦</span><span>Solar EPC Contracting</span><span class="t-dot">✦</span><span>Energy Infrastructure</span><span class="t-dot">✦</span><span>VoltMatrix Simulation</span><span class="t-dot">✦</span><span>Rapid Parts Delivery</span><span class="t-dot">✦</span><span>Power Solutions</span><span class="t-dot">✦</span><span>Engineering Reliability</span><span class="t-dot">✦</span><span>EPC Turnkey Projects</span><span class="t-dot">✦</span><span>Industrial Spare Parts</span><span class="t-dot">✦</span><span>Solar EPC Contracting</span><span class="t-dot">✦</span><span>Energy Infrastructure</span><span class="t-dot">✦</span><span>VoltMatrix Simulation</span><span class="t-dot">✦</span><span>Rapid Parts Delivery</span><span class="t-dot">✦</span><span>Power Solutions</span><span class="t-dot">✦</span><span>Engineering Reliability</span><span class="t-dot">✦</span><span>EPC Turnkey Projects</span><span class="t-dot">✦</span></div></div>
 
-<!-- STATS -->
 <section class="stats-sec" id="stats">
   <div class="stats-grid">
     <div class="stat-c" data-aos="fade-up" data-aos-delay="0"><div class="s-num"><span class="counter" data-target="6">0</span><span class="s-unit">+</span></div><div class="s-lbl">Service Verticals</div><div class="s-desc">End-to-end industrial coverage</div></div>
@@ -106,7 +204,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="about-sec" id="about">
   <div class="sw">
     <div class="about-grid">
@@ -130,7 +227,6 @@
   </div>
 </section>
 
-<!-- SOLUTIONS -->
 <section class="solutions-sec" id="solutions">
   <div class="sw">
     <p class="sec-lbl dark-lbl reveal">What We Deliver</p>
@@ -147,7 +243,6 @@
   </div>
 </section>
 
-<!-- WHY US -->
 <section class="why-sec" id="why">
   <div class="sw">
     <div class="why-grid">
@@ -178,7 +273,6 @@
   </div>
 </section>
 
-<!-- SECTORS -->
 <section class="sectors-sec" id="sectors">
   <div class="sw">
     <p class="sec-lbl dark-lbl reveal">Industries We Serve</p>
@@ -192,7 +286,6 @@
   </div>
 </section>
 
-<!-- TECHNOLOGY TABS -->
 <section class="tech-sec" id="technology">
   <div class="sw">
     <p class="sec-lbl dark-lbl reveal">Our Capabilities</p>
@@ -213,7 +306,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS (dark) -->
 <section class="test-sec" id="testimonials">
   <div class="sw"><p class="sec-lbl dark-lbl reveal">Customer Voice</p><h2 class="sec-title on-dark reveal" style="margin-bottom:2rem">Our Clients <span style="color:var(--or)">Trust Us</span></h2></div>
   <div class="test-slider"><div class="test-track">
@@ -228,28 +320,22 @@
   </div></div>
 </section>
 
-<!-- === THEME BRIDGE: DARK → LIGHT === -->
 <div class="theme-bridge"></div>
 
-<!-- CTA BANNER (orange — bridging dark to light) -->
 <div class="cta-banner">
   <div class="cta-title">Ready to Power Your<br>Next Project?</div>
   <p class="cta-sub">Let's discuss how MechPower Solutions can become your long-term industrial partner.</p>
   <a href="#contact" class="btn-white">Start a Conversation →</a>
 </div>
 
-<!-- ════════════════════════════════════
-     VOLTMATRIX SIMULATION SECTION (LIGHT)
-════════════════════════════════════ -->
 <section class="vm-sec" id="voltmatrix">
   <div class="sw">
     <div class="vm-badge"><div class="vm-badge-dot"></div> Live System Active — Powered by VoltMatrix</div>
     <p class="sec-lbl lt-lbl reveal">3-Source Energy Intelligence</p>
     <h2 class="sec-title on-light reveal">System <span style="color:var(--or)">Simulation</span></h2>
-    <p class="sec-sub on-light reveal">Configure your facility parameters and instantly simulate Solar · Grid · Generator energy balance using the VoltMatrix AI priority engine. Trusted by industrial facilities worldwide.</p>
+    <p class="sec-sub on-light reveal">Configure your facility parameters and instantly simulate Solar · Grid · Generator energy balance using the VoltMatrix AI priority engine.</p>
 
     <div class="vm-layout reveal">
-      <!-- LEFT: Configuration Form -->
       <div class="vm-form-card">
         <div class="vm-form-head">
           <h3>⚙ System Configuration</h3>
@@ -257,45 +343,13 @@
         </div>
         <div class="vm-form-body">
           <div class="vm-section-title">Facility Details</div>
-          <div class="vm-field-group"><label class="vm-label">Facility Type</label><select class="vm-select" id="vm-facility"><option value="factory">Factory / Manufacturing Plant</option><option value="textile">Textile / Garment Factory</option><option value="warehouse">Warehouse / Cold Storage</option><option value="commercial">Commercial Building</option><option value="hospital">Hospital / Critical Facility</option><option value="telecom">Telecom Tower / BTS</option><option value="hotel">Hotel / Hospitality</option></select></div>
+          <div class="vm-field-group"><label class="vm-label">Facility Type</label><select class="vm-select" id="vm-facility"><option value="factory">Factory / Manufacturing Plant</option><option value="textile">Textile / Garment Factory</option><option value="warehouse">Warehouse / Cold Storage</option><option value="commercial">Commercial Building</option><option value="hospital">Hospital / Critical Facility</option></select></div>
           <div class="vm-row">
             <div class="vm-field-group"><label class="vm-label">Total Load (kW)</label><input type="number" class="vm-input" id="vm-load" value="150" min="5" max="10000"></div>
             <div class="vm-field-group"><label class="vm-label">Daily Usage (hrs)</label><input type="number" class="vm-input" id="vm-hours" value="12" min="1" max="24"></div>
           </div>
-          <div class="vm-field-group"><label class="vm-label">Location (Bangladesh)</label><select class="vm-select" id="vm-location"><option value="dhaka">Dhaka — PSH 4.6 hrs</option><option value="chittagong">Chittagong — PSH 4.8 hrs</option><option value="gazipur">Gazipur — PSH 4.7 hrs</option><option value="narayanganj">Narayanganj — PSH 4.5 hrs</option><option value="sylhet">Sylhet — PSH 4.4 hrs</option><option value="rajshahi">Rajshahi — PSH 5.0 hrs</option><option value="khulna">Khulna — PSH 4.9 hrs</option></select></div>
+          <div class="vm-field-group"><label class="vm-label">Location (Bangladesh)</label><select class="vm-select" id="vm-location"><option value="dhaka">Dhaka — PSH 4.6 hrs</option><option value="chittagong">Chittagong — PSH 4.8 hrs</option></select></div>
           <div class="vm-divider"></div>
-          <div class="vm-section-title">Solar Array</div>
-          <div class="vm-row">
-            <div class="vm-field-group"><label class="vm-label">Solar Capacity (kWp)</label><input type="number" class="vm-input" id="vm-solar" value="100" min="0" max="10000"></div>
-            <div class="vm-field-group"><label class="vm-label">Panel Efficiency (%)</label><select class="vm-select" id="vm-eff"><option value="0.22">22% — HJT Premium</option><option value="0.21" selected>21% — Mono PERC Hi</option><option value="0.20">20% — Mono PERC Std</option><option value="0.19">19% — Poly Standard</option></select></div>
-          </div>
-          <div class="vm-field-group"><label class="vm-label">Panel Orientation</label>
-            <div class="vm-radio-group">
-              <div class="vm-radio-btn"><input type="radio" name="orient" id="or1" value="south" checked><label for="or1">South</label></div>
-              <div class="vm-radio-btn"><input type="radio" name="orient" id="or2" value="se"><label for="or2">South-East</label></div>
-              <div class="vm-radio-btn"><input type="radio" name="orient" id="or3" value="sw"><label for="or3">South-West</label></div>
-              <div class="vm-radio-btn"><input type="radio" name="orient" id="or4" value="east"><label for="or4">East</label></div>
-            </div>
-          </div>
-          <div class="vm-divider"></div>
-          <div class="vm-section-title">Power Sources</div>
-          <div class="vm-row">
-            <div class="vm-field-group"><label class="vm-label">Grid Tariff (BDT/kWh)</label><input type="number" class="vm-input" id="vm-tariff" value="8.5" min="1" max="30" step="0.1"></div>
-            <div class="vm-field-group"><label class="vm-label">Generator Capacity (kVA)</label><input type="number" class="vm-input" id="vm-gen" value="200" min="0" max="5000"></div>
-          </div>
-          <div class="vm-row">
-            <div class="vm-field-group"><label class="vm-label">Diesel Cost (BDT/L)</label><input type="number" class="vm-input" id="vm-diesel" value="110" min="50" max="300"></div>
-            <div class="vm-field-group"><label class="vm-label">Battery Storage (kWh)</label><input type="number" class="vm-input" id="vm-battery" value="0" min="0" max="5000"></div>
-          </div>
-          <div class="vm-divider"></div>
-          <div class="vm-section-title">VoltMatrix Priority</div>
-          <div class="vm-field-group"><label class="vm-label">Source Priority Mode</label>
-            <div class="vm-radio-group">
-              <div class="vm-radio-btn"><input type="radio" name="priority" id="p1" value="solar_first" checked><label for="p1">☀ Solar First</label></div>
-              <div class="vm-radio-btn"><input type="radio" name="priority" id="p2" value="eco"><label for="p2">🌿 Eco Mode</label></div>
-              <div class="vm-radio-btn"><input type="radio" name="priority" id="p3" value="cost"><label for="p3">💰 Cost Save</label></div>
-            </div>
-          </div>
           <button class="btn-simulate" id="btn-sim" onclick="runSimulation()">
             <span class="btn-txt">⚡ Run VoltMatrix Simulation</span>
             <span class="spin">↻</span>
@@ -303,133 +357,15 @@
         </div>
       </div>
 
-      <!-- RIGHT: Live Dashboard -->
       <div class="vm-dashboard" id="vm-dashboard">
-        <!-- Power Flow -->
         <div class="vm-powerflow">
-          <div class="vm-card-head">
-            <div class="vm-card-title">Live Power Flow</div>
-            <div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div>
-          </div>
+          <div class="vm-card-head"><div class="vm-card-title">Live Power Flow</div><div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div></div>
           <div class="pf-diagram">
-            <div class="pf-source active-src" id="pf-solar">
-              <span class="pf-src-icon">☀️</span>
-              <div class="pf-src-name">Solar</div>
-              <div class="pf-src-val solar-val" id="pf-solar-kw">0.0 kW</div>
-              <div class="pf-src-status st-active" id="pf-solar-st">Active</div>
-            </div>
-            <div class="pf-arrow"><div class="pf-arrow-line flowing" id="pf-line1"></div><div class="pf-arrow-kw" id="pf-kw1">→</div></div>
-            <div class="pf-center">
-              <div style="font-size:1.4rem;margin-bottom:4px">⚡</div>
-              <div class="pf-center-label">VoltMatrix</div>
-              <div class="pf-center-status" id="pf-status">AUTO ACTIVE</div>
-            </div>
-            <div class="pf-arrow"><div class="pf-arrow-line flowing" id="pf-line2"></div><div class="pf-arrow-kw" id="pf-kw2">→</div></div>
-            <div class="pf-source active-src" id="pf-load">
-              <span class="pf-src-icon">🏭</span>
-              <div class="pf-src-name">Facility Load</div>
-              <div class="pf-src-val load-val" id="pf-load-kw">0.0 kW</div>
-              <div class="pf-src-status st-active">Primary</div>
-            </div>
-          </div>
-          <!-- Extra sources row -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem">
-            <div class="pf-source" id="pf-grid-card" style="text-align:center;padding:.8rem">
-              <span class="pf-src-icon" style="font-size:1.4rem">⚡</span>
-              <div class="pf-src-name">Grid</div>
-              <div class="pf-src-val grid-val" id="pf-grid-kw">0.0 kW</div>
-              <div class="pf-src-status" id="pf-grid-st">Standby</div>
-            </div>
-            <div class="pf-source" id="pf-gen-card" style="text-align:center;padding:.8rem">
-              <span class="pf-src-icon" style="font-size:1.4rem">⚙️</span>
-              <div class="pf-src-name">Generator</div>
-              <div class="pf-src-val gen-val" id="pf-gen-kw">0.0 kW</div>
-              <div class="pf-src-status" id="pf-gen-st">Standby</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Priority Cards -->
-        <div class="vm-priority-row">
-          <div class="pri-card pri-solar">
-            <div class="pri-badge pb-solar">Priority 1 — Always First</div>
-            <div class="pri-icon">☀️</div>
-            <div class="pri-title">Solar Power</div>
-            <div class="pri-kw solar-kw" id="pri-solar-kw">0.0 kW</div>
-            <div class="pri-bar-wrap"><div class="pri-bar bar-solar" id="bar-solar" style="width:0%"></div></div>
-            <div class="pri-pct" id="pct-solar">0% of load</div>
-          </div>
-          <div class="pri-card pri-grid">
-            <div class="pri-badge pb-grid">Priority 2 — Supplement</div>
-            <div class="pri-icon">🔌</div>
-            <div class="pri-title">Grid Power</div>
-            <div class="pri-kw grid-kw" id="pri-grid-kw">0.0 kW</div>
-            <div class="pri-bar-wrap"><div class="pri-bar bar-grid" id="bar-grid" style="width:0%"></div></div>
-            <div class="pri-pct" id="pct-grid">0% of load</div>
-          </div>
-          <div class="pri-card pri-gen">
-            <div class="pri-badge pb-gen">Priority 3 — Emergency</div>
-            <div class="pri-icon">⚙️</div>
-            <div class="pri-title">Generator</div>
-            <div class="pri-kw gen-kw" id="pri-gen-kw">Standby</div>
-            <div class="pri-bar-wrap"><div class="pri-bar bar-gen" id="bar-gen" style="width:0%"></div></div>
-            <div class="pri-pct" id="pct-gen">On standby</div>
-          </div>
-        </div>
-
-        <!-- KPI Row -->
-        <div class="vm-kpi-row">
-          <div class="kpi-card"><div class="kpi-icon">💰</div><div class="kpi-val" id="kpi-savings">0<span> BDT</span></div><div class="kpi-label">Monthly Savings</div><div class="kpi-trend trend-up" id="kpi-savings-trend">— run simulation</div></div>
-          <div class="kpi-card"><div class="kpi-icon">📉</div><div class="kpi-val" id="kpi-bill-red">0<span>%</span></div><div class="kpi-label">Bill Reduction</div><div class="kpi-trend trend-up" id="kpi-bill-trend">— run simulation</div></div>
-          <div class="kpi-card"><div class="kpi-icon">📅</div><div class="kpi-val" id="kpi-payback">—<span> yrs</span></div><div class="kpi-label">Payback Period</div><div class="kpi-trend" id="kpi-payback-trend" style="color:var(--tx-faint)">— run simulation</div></div>
-          <div class="kpi-card"><div class="kpi-icon">🌱</div><div class="kpi-val" id="kpi-co2">0<span> T</span></div><div class="kpi-label">CO₂ Saved/yr</div><div class="kpi-trend trend-up" id="kpi-co2-trend">— run simulation</div></div>
-        </div>
-
-        <!-- Monthly Energy Chart -->
-        <div class="vm-chart-card">
-          <div class="vm-card-head">
-            <div class="vm-card-title">Monthly Energy Balance (kWh)</div>
-            <div style="font-family:'Oxanium';font-size:.58rem;letter-spacing:1px;color:var(--tx-faint)">Estimated — 12 months</div>
-          </div>
-          <div class="vm-chart-wrap" id="vm-chart">
-            <div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:var(--tx-faint);font-family:'Oxanium';font-size:.7rem;letter-spacing:2px;text-transform:uppercase">Run simulation to generate chart</div>
-          </div>
-          <div class="chart-legend" id="vm-legend" style="display:none">
-            <div class="cl-dot" style="background:#f59e0b"></div>Solar Generation</div>
-            <div class="cl-item"><div class="cl-dot" style="background:#3b82f6"></div>Grid Consumption</div>
-          </div>
-        </div>
-
-        <!-- Gauges Row -->
-        <div class="vm-gauge-row">
-          <div class="gauge-card">
-            <div class="vm-card-head" style="margin-bottom:.5rem"><div class="vm-card-title">System Efficiency</div></div>
-            <svg class="gauge-svg" viewBox="0 0 140 80" id="gauge-eff-svg">
-              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
-              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#e5e7eb" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="0"/>
-              <path id="gauge-eff-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="url(#geff)" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition:stroke-dashoffset 1.5s ease"/>
-              <defs><linearGradient id="geff" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#22c55e"/></linearGradient></defs>
-              <text x="70" y="68" text-anchor="middle" font-family="Bebas Neue" font-size="22" fill="#0B1622" id="gauge-eff-txt">—</text>
-            </svg>
-            <div class="gauge-sub">Performance Ratio</div>
-          </div>
-          <div class="gauge-card">
-            <div class="vm-card-head" style="margin-bottom:.5rem"><div class="vm-card-title">Solar Fraction</div></div>
-            <svg class="gauge-svg" viewBox="0 0 140 80" id="gauge-sf-svg">
-              <path d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="#eee" stroke-width="12" stroke-linecap="round"/>
-              <path id="gauge-sf-arc" d="M10 70 A60 60 0 0 1 130 70" fill="none" stroke="url(#gsf)" stroke-width="12" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5" style="transition:stroke-dashoffset 1.5s ease"/>
-              <defs><linearGradient id="gsf" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient></defs>
-              <text x="70" y="68" text-anchor="middle" font-family="Bebas Neue" font-size="22" fill="#0B1622" id="gauge-sf-txt">—</text>
-            </svg>
-            <div class="gauge-sub">% Load from Solar</div>
-          </div>
-        </div>
-
-        <!-- Event Log -->
-        <div class="vm-log">
-          <div class="vm-card-head"><div class="vm-card-title">System Event Log</div><div class="vm-live-badge"><div class="vm-live-dot"></div> LIVE</div></div>
-          <div class="log-list" id="vm-log-list">
-            <div class="log-item info"><span class="log-time">--:--:--</span><span class="log-msg">Configure system parameters and run simulation</span><span class="log-badge lb-info">READY</span></div>
+            <div class="pf-source active-src" id="pf-solar"><span class="pf-src-icon">☀️</span><div class="pf-src-name">Solar</div><div class="pf-src-val solar-val" id="pf-solar-kw">0.0 kW</div></div>
+            <div class="pf-arrow"><div class="pf-arrow-line flowing"></div></div>
+            <div class="pf-center"><div class="pf-center-label">VoltMatrix</div></div>
+            <div class="pf-arrow"><div class="pf-arrow-line flowing"></div></div>
+            <div class="pf-source active-src" id="pf-load"><span class="pf-src-icon">🏭</span><div class="pf-src-name">Facility Load</div><div class="pf-src-val load-val" id="pf-load-kw">0.0 kW</div></div>
           </div>
         </div>
       </div>
@@ -437,125 +373,41 @@
   </div>
 </section>
 
-<!-- BLOG (LIGHT) -->
-<section class="blog-sec" id="blog">
-  <div class="sw">
-    <p class="sec-lbl lt-lbl reveal">Knowledge Hub</p>
-    <h2 class="sec-title on-light reveal">Technical <span style="color:var(--or)">Blog</span></h2>
-    <p class="sec-sub on-light reveal">Deep-dive engineering articles, industry guides, and video references — written by MechPower's certified engineers.</p>
-    <div class="blog-grid reveal" id="blog-grid"></div>
-  </div>
-</section>
-
-<!-- Blog Modal -->
-<div class="bm-overlay" id="bm-overlay" onclick="bmOverlayClick(event)">
-  <div class="bm-modal" id="bm-modal">
-    <div class="bm-hero" id="bm-hero"></div>
-    <button class="bm-close" onclick="closeBM()">✕</button>
-    <div class="bm-content">
-      <div class="bm-cat" id="bm-cat"></div>
-      <div class="bm-title" id="bm-title"></div>
-      <div class="bm-body" id="bm-body"></div>
-    </div>
-  </div>
-</div>
-
-<!-- FAQ (LIGHT) -->
 <section class="faq-sec" id="faq">
   <div class="sw">
     <p class="sec-lbl lt-lbl reveal">Common Questions</p>
     <h2 class="sec-title on-light reveal">Frequently Asked <span style="color:var(--or)">Questions</span></h2>
     <div class="faq-grid reveal">
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What industries do you serve in Bangladesh?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">We serve manufacturing, textile & garment, construction, food & beverage, pharmaceutical, power utilities, and commercial real estate. Any industry requiring industrial parts, energy solutions, or EPC services can benefit from MechPower.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How quickly can you deliver emergency spare parts?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">For locally stocked items, dispatch within hours. For internationally sourced parts, we use priority freight to minimise lead time. Mark your inquiry as urgent and our team responds within hours.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you handle the full solar project from start to finish?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Yes — complete turnkey EPC. Site survey, system design, procurement, installation, commissioning, net metering application with BREB/DPDC/DESCO, and O&M support. One contact, full accountability.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the VoltMatrix simulation tool?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">VoltMatrix is an intelligent 3-source energy automation platform — Solar first, Grid second, Generator only as last resort. Our simulation tool lets you enter your facility parameters and instantly calculate energy balance, savings, ROI, and payback period before committing to any investment.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the typical ROI for industrial solar in Bangladesh?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">Industrial solar projects in Bangladesh typically achieve simple payback of 3–5 years with IRR of 20–30%. Monthly electricity bills commonly reduce by 35–65%. We provide full financial modelling as part of our proposal.</div></div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What equipment brands do you work with?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">We are brand-agnostic and select equipment based on client budget, project requirements, and long-term reliability. We work with internationally certified brands and can supply OEM-certified spare parts for major industrial equipment manufacturers.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What industries do you serve in Bangladesh?<span class="faq-ico">+</span></button><div class="faq-ans"><div class="faq-ans-inner">We serve manufacturing, textile & garment, construction, and utilities.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- SKILL TEST (LIGHT) -->
-<section class="skill-sec" id="skilltest">
-  <div class="sw">
-    <p class="sec-lbl lt-lbl reveal">Knowledge Assessment</p>
-    <h2 class="sec-title on-light reveal">Free <span style="color:var(--or)">Skill Test</span></h2>
-    <p class="sec-sub on-light reveal" style="margin-bottom:.5rem">Test your electrical and industrial engineering knowledge across 3 professional modules. Instant feedback. Email your scored certificate on completion — free, no login required.</p>
-    <div id="quiz-home-screen"><div class="quiz-topics-grid reveal" id="quiz-topics-grid"></div></div>
-    <div id="quiz-active-screen">
-      <div class="quiz-back-bar"><button class="btn-qback" onclick="backToHome()">← All Topics</button><div class="q-active-title" id="q-active-title"></div></div>
-      <div class="q-prog-wrap"><div class="q-prog-info"><span id="q-counter">Question 1 of 15</span><span id="q-score">Score: 0/0</span></div><div class="q-prog-track"><div class="q-prog-fill" id="q-pbar" style="width:0%"></div></div></div>
-      <div class="q-card" id="q-card"><div class="q-num-lbl" id="q-num">QUESTION 1</div><div class="q-text" id="q-text"></div><div class="q-opts" id="q-opts"></div><div class="q-exp-box" id="q-exp"></div></div>
-      <div class="quiz-nav-row"><button class="btn-qnav" id="btn-prev" onclick="prevQ()">← Prev</button><button class="btn-qnav primary" id="btn-next" onclick="nextQ()">Next →</button></div>
-    </div>
-    <div id="quiz-result-screen">
-      <div class="result-card" id="result-card"><div class="res-label-sm">YOUR SCORE</div><span class="res-emoji" id="res-emoji"></span><div class="res-pct" id="res-pct"></div><div class="res-verdict" id="res-verdict"></div></div>
-      <div class="res-stats-row"><div class="rstat"><div class="rv" id="rs-c">0</div><div class="rl">Correct</div></div><div class="rstat"><div class="rv" id="rs-w">0</div><div class="rl">Wrong</div></div><div class="rstat"><div class="rv" id="rs-p">0%</div><div class="rl">Score</div></div></div>
-      <div class="email-box"><h3>📩 Get Your <span>Score Certificate</span></h3><p>Enter your details to receive a personalised score certificate and full performance breakdown direct to your inbox.</p><div class="email-row"><input class="cert-inp" id="cert-email" type="email" placeholder="Your Email Address *"><input class="cert-inp" id="cert-phone" type="tel" placeholder="Phone / WhatsApp *"></div><button class="btn-cert" id="btn-cert" onclick="sendCert()">📨 &nbsp;Email My Score Certificate Now</button><div class="cert-sent" id="cert-sent">✅ <strong>Certificate sent!</strong> Check your inbox. Thank you for the MechPower Skill Assessment.</div></div>
-      <div class="review-wrap"><h3>Full Answer Review</h3><div id="review-wrap"></div></div>
-      <div class="result-actions"><button class="btn-qback" onclick="backToHome()">← All Topics</button><button class="btn-qnav primary" id="btn-retry">🔁 Retry This Test</button></div>
-    </div>
-  </div>
-</section>
 
-<!-- CONTACT (LIGHT) -->
+
 <section class="contact-sec" id="contact">
   <div class="sw">
     <p class="sec-lbl lt-lbl reveal">Get In Touch</p>
     <h2 class="sec-title on-light reveal">Request a <span style="color:var(--or)">Consultation</span></h2>
-    <div class="contact-grid reveal">
-      <div class="c-info">
-        <p style="color:var(--tx-muted);font-size:.88rem;line-height:1.8">Whether you need an industrial component urgently, want to explore a solar project, or need a full EPC partner — we're ready to engage.</p>
-        <div class="ci-item"><div class="ci-ico">📍</div><div><div class="ci-label">Head Office</div><div class="ci-val">Dhaka, Bangladesh</div></div></div>
-        <div class="ci-item"><div class="ci-ico">📞</div><div><div class="ci-label">Phone / WhatsApp</div><div class="ci-val">+880 — [To be updated]</div></div></div>
-        <div class="ci-item"><div class="ci-ico">📧</div><div><div class="ci-label">Email</div><div class="ci-val">info@mechpowersolutions.com</div></div></div>
-        <div class="ci-item"><div class="ci-ico">🕐</div><div><div class="ci-label">Business Hours</div><div class="ci-val">Sun – Thu: 9:00 AM – 6:00 PM</div></div></div>
-        <div class="emerg-box"><div class="emerg-title">EMERGENCY INQUIRIES</div><p class="emerg-text">For urgent industrial parts or critical project needs, we offer priority response. Mark your inquiry as urgent and we'll respond within hours.</p></div>
-      </div>
-      <div class="c-form">
-        <div class="cf-row"><div class="cf-grp"><label class="cf-lbl">Full Name</label><input class="cf-inp" type="text" placeholder="Your full name"></div><div class="cf-grp"><label class="cf-lbl">Company</label><input class="cf-inp" type="text" placeholder="Company name"></div></div>
-        <div class="cf-row"><div class="cf-grp"><label class="cf-lbl">Email</label><input class="cf-inp" type="email" placeholder="your@email.com"></div><div class="cf-grp"><label class="cf-lbl">Phone / WhatsApp</label><input class="cf-inp" type="tel" placeholder="+880 ..."></div></div>
-        <div class="cf-grp"><label class="cf-lbl">Service Interest</label><select class="cf-sel cf-inp"><option value="">— Select a service —</option><option>Industrial Spare Parts Supply</option><option>Industrial Solar System</option><option>EPC Contract</option><option>Energy & Power Solutions</option><option>Rooftop Solar</option><option>VoltMatrix Energy Simulation</option><option>Emergency Parts Delivery</option><option>General Inquiry</option></select></div>
-        <div class="cf-grp"><label class="cf-lbl">Project Details / Message</label><textarea class="cf-ta" placeholder="Describe your project, requirement, or inquiry..."></textarea></div>
-        <button class="btn-csub" onclick="alert('Thank you! We will contact you within 24 hours.')">Send Inquiry →</button>
-      </div>
-    </div>
+    <div class="contact-grid reveal"></div>
   </div>
 </section>
 
-<!-- FOOTER (dark) -->
 <footer>
   <div class="footer-top">
     <div>
       <span class="fb-name">Mech<span>Power</span> Solutions</span>
-      <p class="fb-tag">Engineering Reliability with Precision. Bangladesh's trusted industrial and energy solutions partner.</p>
-      <div class="fb-badge"><div class="fb-dot"></div> Active · 2026</div>
-      <div class="f-social">
-        <a href="#" class="f-sb"><i class="fa-brands fa-facebook-f"></i></a>
-        <a href="#" class="f-sb"><i class="fa-brands fa-linkedin-in"></i></a>
-        <a href="#" class="f-sb"><i class="fa-brands fa-whatsapp"></i></a>
-        <a href="#" class="f-sb"><i class="fa-brands fa-youtube"></i></a>
-      </div>
+      <p class="fb-tag">Engineering Reliability with Precision.</p>
     </div>
-    <div><div class="fc-title">Solutions</div><ul class="fc-list"><li><a href="#solutions">Industrial Supply</a></li><li><a href="#solutions">Solar Systems</a></li><li><a href="#solutions">EPC Contracts</a></li><li><a href="#solutions">Energy Solutions</a></li><li><a href="#solutions">Emergency Logistics</a></li></ul></div>
-    <div><div class="fc-title">Company</div><ul class="fc-list"><li><a href="#about">About Us</a></li><li><a href="#why">Why MechPower</a></li><li><a href="#sectors">Sectors</a></li><li><a href="#technology">Technology</a></li><li><a href="#contact">Contact</a></li></ul></div>
-    <div><div class="fc-title">Resources</div><ul class="fc-list"><li><a href="#blog">Technical Articles</a></li><li><a href="#voltmatrix">⚡ Live Simulation</a></li><li><a href="#skilltest">Free Skill Test</a></li><li><a href="#faq">FAQ</a></li></ul></div>
-    <div><div class="fc-title">Newsletter</div><p style="font-size:.8rem;color:var(--mi);line-height:1.7;margin-bottom:.6rem">Engineering updates and industry insights.</p><div class="nl-form"><input class="nl-inp" type="email" placeholder="Your email"><button class="nl-btn">Subscribe</button></div></div>
-  </div>
-  <div class="footer-bottom">
-    <p class="f-copy">© 2026 <span>MechPower Solutions</span>. All rights reserved.</p>
-    <div class="f-links"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a><a href="#">Complaint Reporting</a></div>
+    <div><div class="fc-title">Solutions</div><ul class="fc-list"><li><a href="#solutions">Industrial Supply</a></li><li><a href="#solutions">Solar Systems</a></li><li><a href="#solutions">EPC Contracts</a></li></ul></div>
+    <div><div class="fc-title">Company</div><ul class="fc-list"><li><a href="#about">About Us</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div><div class="fc-title">Resources</div><ul class="fc-list"><li><a href="#voltmatrix">⚡ Live Simulation</a></li><li><a href="#faq">FAQ</a></li></ul></div>
   </div>
 </footer>
 
-<!-- Floating Buttons -->
-<div class="float-btns">
-  <a href="https://wa.me/880" class="float-btn f-wa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
-  <button class="float-btn f-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-chevron-up"></i></button>
-</div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="{% static 'js/script.js' %}"></script>
+<!-- বুটস্ট্র্যাপ জাভাস্ক্রিপ্ট বান্ডেল প্লাগইন সংযোগ -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

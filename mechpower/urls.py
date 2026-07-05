@@ -23,9 +23,5 @@ urlpatterns = [
     ),
 ]
 
-# ডেভলপমেন্ট মোডে স্ট্যাটিক এবং মিডিয়া ফাইল সার্ভ করার জন্য ঠিক করা কোড
-if settings.DEBUG:
-    # স্ট্যাটিক ফাইলের জন্য পাথ যুক্ত করা হলো (যা মিসিং ছিল)
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    # মিডিয়া ফাইলের জন্য পাথ
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

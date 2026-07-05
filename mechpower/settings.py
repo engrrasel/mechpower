@@ -1,8 +1,5 @@
 from pathlib import Path
 import os
-
-from pathlib import Path
-import os
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -18,7 +15,8 @@ SECRET_KEY = os.getenv(
     "django-insecure-dev-key"
 )
 
-DEBUG = False
+# পরিবেশ অনুযায়ী ডায়নামিকলি DEBUG সেট হবে (এনভায়রনমেন্টে না থাকলে ডিফল্ট True থাকবে লোকালের জন্য)
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = [
     "mechpower.net",
@@ -26,8 +24,7 @@ ALLOWED_HOSTS = [
     "site-poszoi.hostnin.com",
     "localhost",
     "127.0.0.1",
-    "192.168.0.59"
-    ,
+    "192.168.0.59",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
@@ -50,7 +47,6 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 # ==================================
 
 INSTALLED_APPS = [
-
     "jazzmin",
 
     "django.contrib.admin",
@@ -74,10 +70,9 @@ INSTALLED_APPS = [
 # ==================================
 
 MIDDLEWARE = [
-
     "django.middleware.security.SecurityMiddleware",
     
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # স্ট্যাটিক ফাইল হ্যান্ডেল করার জন্য
 
     "django.contrib.sessions.middleware.SessionMiddleware",
 
@@ -100,22 +95,13 @@ ROOT_URLCONF = "mechpower.urls"
 
 TEMPLATES = [
     {
-        "BACKEND":
-        "django.template.backends.django.DjangoTemplates",
-
-        "DIRS": [
-            BASE_DIR / "templates"
-        ],
-
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
-
         "OPTIONS": {
             "context_processors": [
-
                 "django.template.context_processors.request",
-
                 "django.contrib.auth.context_processors.auth",
-
                 "django.contrib.messages.context_processors.messages",
             ],
         },
@@ -141,20 +127,16 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME":
-        "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME":
-        "django.contrib.auth.password_validation.MinimumLengthValidator",
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        "NAME":
-        "django.contrib.auth.password_validation.CommonPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        "NAME":
-        "django.contrib.auth.password_validation.NumericPasswordValidator",
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
@@ -171,15 +153,20 @@ USE_I18N = True
 USE_TZ = True
 
 # ==================================
-# STATIC FILES
+# STATIC FILES (DYNAMIC CONFIGURATION)
 # ==================================
 
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
-STATIC_ROOT = '/home/siteposz/mechpower/staticfiles'
+if DEBUG:
+    # লোকাল কম্পিউটারে রান করার সময় সরাসরি এখান থেকে সিএসএস লোড হবে
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]
+else:
+    # লাইভ সার্ভারে রান করার সময় হোয়াইটনয়েজ এখান থেকে ক্যাশড সিএসএস লোড করবে
+    STATIC_ROOT = '/home/siteposz/mechpower/staticfiles'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # ==================================

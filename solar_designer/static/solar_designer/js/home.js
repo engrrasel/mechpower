@@ -1,192 +1,225 @@
-/* home.js (ইমেজ আইকন ও সেটিংসের সাথে পুরোপুরি অপ্টিমাইজড) */
+// home.js - অ্যাকর্ডিয়ন বেজড সোলার ক্যালকুলেটর লজিক
 
-const searchInput = document.getElementById('searchAppliance');
-const dropdownResults = document.getElementById('dropdownResults');
-const selectedList = document.getElementById('selected-appliances-list');
-const emptyStateMsg = document.getElementById('empty-state-msg');
+document.addEventListener("DOMContentLoaded", function () {
+    // ১. জ্যাঙ্গো থেকে পাঠানো ক্যাটাগরি ম্যাপিং
+    // আপনার ডাটাবেজের ক্যাটাগরি নামের সাথে মিল রেখে নিচের ম্যাপটি চেক করে নিন
+    const categoryMapping = {
+        'lighting': 'lighting-sub',
+        'fan': 'fan-sub',
+        'ac': 'ac-sub',
+        'kitchen': 'kitchen-sub'
+    };
 
-// ১. সেফটি গার্ড: যদি জ্যাঙ্গো থেকে ডাটা না আসে
-if (typeof dbAppliances === 'undefined') {
-    window.dbAppliances = [];
-    console.error("Django থেকে appliances_json ডাটা জাভাস্ক্রিপ্টে পৌঁছায়নি!");
-}
-
-// ২. রেসিডেন্সিয়াল / ইন্ডাস্ট্রিয়াল ফিল্টার চেঞ্জ লজিক
-document.querySelectorAll('.segment-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        document.querySelectorAll('.segment-btn').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        currentCategory = this.getAttribute('data-category');
-        searchInput.value = ''; 
-        dropdownResults.style.display = 'none';
-        
-        // ক্যাটাগরি পরিবর্তনের সাথে সাথে তালিকা পরিষ্কার করে নতুন ডিফল্ট আইটেম লোড করা
-        selectedList.innerHTML = '';
-        loadDefaultAppliances();
-    });
-});
-
-// ৩. রিয়েল-টাইম লাইভ সার্চ এবং ড্রপডাউন জেনারেটর (ইমেজ আইকন সহ)
-searchInput.addEventListener('input', function() {
-    const query = this.value.toLowerCase().trim();
-    dropdownResults.innerHTML = '';
-    
-    if (query.length === 0) {
-        dropdownResults.style.display = 'none';
-        return;
-    }
-
-    const filtered = dbAppliances.filter(item => 
-        item.category.toLowerCase() === currentCategory && 
-        (item.name.toLowerCase().includes(query) || (item.variant_name && item.variant_name.toLowerCase().includes(query)))
-    );
-
-    if (filtered.length > 0) {
-        filtered.forEach(item => {
-            const div = document.createElement('div');
-            div.className = 'search-result-item d-flex justify-content-between align-items-center';
-            div.innerHTML = `
-                <div>
-                    <img src="${item.icon_url}" alt="${item.name}" class="me-2" style="width: 22px; height: 22px; object-fit: contain;">
-                    <strong>${item.name}</strong> 
-                    ${item.variant_name ? `<span class="badge bg-light text-dark ms-1">${item.variant_name}</span>` : ''}
-                </div>
-                <small class="text-muted">${item.watt} W</small>
-            `;
-            div.addEventListener('click', () => {
-                addApplianceRow(item);
-                searchInput.value = '';
-                dropdownResults.style.display = 'none';
-            });
-            dropdownResults.appendChild(div);
+    // ২. অ্যাকর্ডিয়নের ভেতরে লোড লিস্ট জেনারেট করা
+    function renderApplianceRows() {
+        // শুরুতে সব সাব-কন্টেইনার খালি করা
+        Object.values(categoryMapping).forEach(id => {
+            const container = document.getElementById(id);
+            if (container) container.innerHTML = '';
         });
-        dropdownResults.style.display = 'block';
-    } else {
-        dropdownResults.innerHTML = `<div class="p-3 text-muted small text-center">কোনো অ্যাপ্লায়েন্স পাওয়া যায়নি।</div>`;
-        dropdownResults.style.display = 'block';
-    }
-});
 
-// ৪. ডাইনামিক রো অ্যাড করার মূল ফাংশন (ইমেজ আইকন সহ)
-function addApplianceRow(item) {
-    if(emptyStateMsg) emptyStateMsg.style.display = 'none';
-
-    const row = document.createElement('div');
-    row.className = 'selected-item-row row g-2 align-items-center';
-    
-    row.innerHTML = `
-        <div class="col-md-3 col-12">
-            <span class="fw-semibold text-dark">
-                <img src="${item.icon_url}" alt="${item.name}" class="me-2" style="width: 24px; height: 24px; object-fit: contain;">
-                ${item.name}
-            </span>
-            <small class="text-muted d-block ms-4">${item.variant_name ? item.variant_name : 'Default Variant'}</small>
-        </div>
-        <div class="col-md-3 col-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-text bg-light text-muted" style="font-size:0.75rem;">Watt</span>
-                <input type="number" class="form-control watt-input" value="${item.watt}" min="1">
-            </div>
-        </div>
-        <div class="col-md-3 col-4">
-            <div class="input-group input-group-sm">
-                <span class="input-group-text bg-light text-muted" style="font-size:0.75rem;">Qty</span>
-                <input type="number" class="form-control qty-input" value="1" min="1">
-            </div>
-        </div>
-        <div class="col-md-2 col-3">
-            <div class="input-group input-group-sm">
-                <span class="input-group-text bg-light text-muted" style="font-size:0.75rem;">Hr</span>
-                <input type="number" class="form-control hour-input" value="4" min="0" max="24">
-            </div>
-        </div>
-        <div class="col-md-1 col-1 text-end">
-            <button class="btn btn-sm btn-link text-danger p-0 btn-delete-row"><i class="fa-solid fa-trash-can fs-5"></i></button>
-        </div>
-    `;
-
-    selectedList.appendChild(row);
-    updateTotalCount();
-    calculateLoad();
-}
-
-// ৫. এডমিন থেকে টিক দেওয়া প্রতিটি নির্দিষ্ট ভ্যারিয়েন্ট লোড করার ফাংশন
-function loadDefaultAppliances() {
-    dbAppliances.forEach(item => {
-        // যদি ঐ নির্দিষ্ট ভ্যারিয়েন্টটিতে এডমিন প্যানেলে টিক দেওয়া থাকে এবং ক্যাটাগরি মিলে যায়
-        if (item.is_default && item.category.toLowerCase() === currentCategory) {
-            // কোনো ফিল্টার ছাড়াই সরাসরি প্রত্যেকটি সিলেক্টেড ভ্যারিয়েন্টকে তালিকায় যোগ করবে
-            addApplianceRow(item);
+        if (!dbAppliances || dbAppliances.length === 0) {
+            return;
         }
+
+        // প্রতিটি অ্যাপ্লায়েন্সের জন্য মাল্টি-লাইন ইনপুট রো তৈরি
+        dbAppliances.forEach(appliance => {
+            // ডাটাবেজের ক্যাটাগরি ছোট হাতের অক্ষরে রূপান্তর
+            const dbCat = (appliance.category || '').toLowerCase();
+            
+            // সঠিক সাব-কন্টেইনার আইডি খুঁজে বের করা
+            let targetContainerId = categoryMapping[dbCat];
+            
+            // যদি হুবহু ম্যাচ না করে, তবে আংশিক ম্যাচ খোঁজা (যেমন: air conditioner এর জন্য ac)
+            if (!targetContainerId) {
+                if (dbCat.includes('light') || dbCat.includes('আলো')) targetContainerId = 'lighting-sub';
+                else if (dbCat.includes('fan') || dbCat.includes('ফ্যান')) targetContainerId = 'fan-sub';
+                else if (dbCat.includes('ac') || dbCat.includes('conditioner')) targetContainerId = 'ac-sub';
+                else if (dbCat.includes('kitchen') || dbCat.includes('রান্না')) targetContainerId = 'kitchen-sub';
+            }
+
+            const container = document.getElementById(targetContainerId);
+
+            if (container) {
+                const rowHtml = `
+                    <div class="appliance-row d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2 py-3 border-bottom" data-id="${appliance.id}">
+                        <div class="d-flex align-items-center gap-2" style="min-width: 200px;">
+                            <span class="fw-bold text-dark" style="font-size: 0.95rem;">${appliance.name}</span>
+                        </div>
+                        
+                        <div class="d-flex flex-wrap align-items-center gap-3 justify-content-start justify-content-md-end w-100">
+                            <!-- সংখ্যা বা কোয়ান্টিটি কন্ট্রোল -->
+                            <div class="d-flex align-items-center bg-light border rounded p-1">
+                                <button type="button" class="btn btn-sm btn-light btn-qty-control fw-bold qty-minus">-</button>
+                                <input type="text" class="form-control form-control-sm border-0 bg-transparent input-qty-box text-center qty-input" value="0" style="width: 35px; font-weight: 700;" readonly>
+                                <button type="button" class="btn btn-sm btn-light btn-qty-control fw-bold qty-plus">+</button>
+                            </div>
+                            
+                            <!-- ওয়াট ইনপুট -->
+                            <div class="d-flex align-items-center gap-1">
+                                <input type="number" class="form-control form-control-sm text-center watt-input" value="${appliance.default_watt || 0}" style="width: 70px;">
+                                <span class="small text-muted">W</span>
+                            </div>
+                            
+                            <!-- দৈনিক ঘণ্টা ইনপুট -->
+                            <div class="d-flex align-items-center gap-1">
+                                <input type="number" class="form-control form-control-sm text-center hours-input" value="${appliance.default_hours || 0}" style="width: 60px;">
+                                <span class="small text-muted">Hrs</span>
+                            </div>
+
+                            <!-- এই লাইনের দৈনিক হিসাব -->
+                            <div class="text-end" style="min-width: 90px;">
+                                <span class="fw-bold text-secondary item-calc-val" style="font-size: 0.85rem;">0 Wh/d</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', rowHtml);
+            }
+        });
+
+        // সব কন্টেইনারে রো ঢোকানো শেষে যদি কোনোটি খালি থাকে, সেখানে মেসেজ দেখানো
+        Object.values(categoryMapping).forEach(id => {
+            const container = document.getElementById(id);
+            if (container && container.innerHTML === '') {
+                container.innerHTML = '<p class="text-muted small mb-0 py-2 text-center">এই ক্যাটাগরিতে কোনো ডাটা নেই।</p>';
+            }
+        });
+
+        // ইভেন্ট লিসেনারগুলো যুক্ত করা
+        initRowEvents();
+    }
+
+    // ৩. কোয়ান্টিটি বাটন এবং ইনপুট পরিবর্তনের লিসেনার
+    function initRowEvents() {
+        const containers = Object.values(categoryMapping).map(id => document.getElementById(id)).filter(el => el);
+
+        containers.forEach(container => {
+            container.addEventListener('click', function (e) {
+                // ইভেন্ট বাবলিং যেন অ্যাকর্ডিয়ন মেইন বারকে বন্ধ না করে দেয়
+                e.stopPropagation();
+
+                const row = e.target.closest('.appliance-row');
+                if (!row) return;
+
+                const qtyInput = row.querySelector('.qty-input');
+                let currentQty = parseInt(qtyInput.value) || 0;
+
+                if (e.target.classList.contains('qty-plus')) {
+                    qtyInput.value = currentQty + 1;
+                    calculateCalculations();
+                } else if (e.target.classList.contains('qty-minus')) {
+                    if (currentQty > 0) {
+                        qtyInput.value = currentQty - 1;
+                        calculateCalculations();
+                    }
+                }
+            });
+
+            // ওয়াট বা ঘণ্টা টাইপ করে চেঞ্জ করলে রিয়েল-টাইম হিসাব
+            container.addEventListener('input', function (e) {
+                if (e.target.classList.contains('watt-input') || e.target.classList.contains('hours-input')) {
+                    calculateCalculations();
+                }
+            });
+        });
+    }
+
+    // ৪. সোলার ক্যালকুলেশন এবং সামারি আপডেট ইঞ্জিন
+    function calculateCalculations() {
+        let totalConnectedLoad = 0;
+        let totalDailyEnergyWh = 0;
+        let selectedItemsCount = 0;
+
+        // প্রতিটি ক্যাটাগরি ভিত্তিক সামারি ট্র্যাকিং
+        const catTotals = { 'lighting-sub': 0, 'fan-sub': 0, 'ac-sub': 0, 'kitchen-sub': 0 };
+
+        const rows = document.querySelectorAll('.appliance-row');
+        rows.forEach(row => {
+            const qty = parseInt(row.querySelector('.qty-input').value) || 0;
+            const watt = parseFloat(row.querySelector('.watt-input').value) || 0;
+            const hours = parseFloat(row.querySelector('.hours-input').value) || 0;
+
+            const lineLoad = qty * watt;
+            const lineEnergyWh = lineLoad * hours;
+
+            // লাইনের পাশে ইন্ডিভিজুয়াল রেজাল্ট আপডেট
+            row.querySelector('.item-calc-val').innerText = `${Math.round(lineEnergyWh)} Wh/d`;
+
+            if (qty > 0) {
+                totalConnectedLoad += lineLoad;
+                totalDailyEnergyWh += lineEnergyWh;
+                selectedItemsCount += qty;
+
+                // কোন ক্যাটাগরির আন্ডারে এই রো-টি আছে তার টোটালে যোগ করা
+                const parentContainer = row.closest('.sub-load-container');
+                if (parentContainer && catTotals.hasOwnProperty(parentContainer.id)) {
+                    catTotals[parentContainer.id] += lineEnergyWh;
+                }
+            }
+        });
+
+        // ৫. অ্যাকর্ডিয়ন বারের পাশে ক্যাটাগরি ভিত্তিক মোট হিসাব দেখানো
+        document.getElementById('lighting-total-val').innerText = `${Math.round(catTotals['lighting-sub'])} Wh/day`;
+        document.getElementById('fan-total-val').innerText = `${Math.round(catTotals['fan-sub'])} Wh/day`;
+        document.getElementById('ac-total-val').innerText = `${Math.round(catTotals['ac-sub'])} Wh/day`;
+        document.getElementById('kitchen-total-val').innerText = `${Math.round(catTotals['kitchen-sub'])} Wh/day`;
+
+        // ৬. রাইট সাইড ড্যাশবোর্ড সামারি আপডেট
+        const dailyEnergykWh = totalDailyEnergyWh / 1000;
+        const monthlyEnergykWh = dailyEnergykWh * 30;
+
+        document.getElementById('total-items-count').innerText = `${selectedItemsCount} Items Selected`;
+        document.getElementById('connected-load').innerText = `${totalConnectedLoad} W`;
+        document.getElementById('peak-load').innerText = `${totalConnectedLoad} W`; // সিম্পল পিক লোড লজিক
+        document.getElementById('daily-energy').innerText = `${dailyEnergykWh.toFixed(2)} kWh`;
+        document.getElementById('monthly-energy').innerText = `${monthlyEnergykWh.toFixed(2)} kWh`;
+
+        // ৭. সোলার সিস্টেম রিকমেন্ডেশন অ্যালগরিদম (আপনার রুল অনুযায়ী টিউন করতে পারেন)
+        let solarKw = 0;
+        let inverterKw = 0;
+        let batteryAh = 0;
+        let estCost = 0;
+
+        if (totalConnectedLoad > 0) {
+            // প্যানেল সাইজ = (দৈনিক এনার্জি Wh / ৪.৫ পিক আওয়ার) * ১.২৫ সেফটি ফ্যাক্টর
+            solarKw = (totalDailyEnergyWh / 4.5) * 1.25 / 1000;
+            // ইনভার্টার সাইজ = কানেক্টেড লোড * ১.২ সেফটি ফ্যাক্টর
+            inverterKw = (totalConnectedLoad * 1.2) / 1000;
+            
+            // একটি সক্রিয় ব্যাকআপ মান বাটন থেকে নেওয়ার লজিক (ডিফল্ট ২ ঘণ্টা ধরলাম)
+            const activeBackupBtn = document.querySelector('[data-backup].active');
+            const backupHours = activeBackupBtn ? parseInt(activeBackupBtn.getAttribute('data-backup')) : 2;
+            
+            // ব্যাটারি Ah = (দৈনিক ওয়াট-আওয়ার * ব্যাকআপ ঘণ্টা) / (১২V * ০.৭ এফিশিয়েন্সি)
+            batteryAh = (totalConnectedLoad * backupHours) / (12 * 0.7);
+            
+            // আনুমানিক খরচ (ডামি হিসাব, আপনার রেট অনুযায়ী পরিবর্তন করতে পারেন)
+            estCost = (solarKw * 85000) + (inverterKw * 40000) + ((batteryAh / 200) * 22000);
+        }
+
+        document.getElementById('solar-size').innerText = `${solarKw.toFixed(2)} kW`;
+        document.getElementById('inverter-size').innerText = `${inverterKw.toFixed(2)} kW`;
+        document.getElementById('battery-size').innerText = `${Math.round(batteryAh)} Ah`;
+        document.getElementById('estimated-cost').innerText = `৳ ${Math.round(estCost).toLocaleString('bn-BD')}`;
+    }
+
+    // সব ক্যাটাগরি একসাথে এক্সপ্যান্ড করার বাটন লজিক
+    document.getElementById('expand-all-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const containers = document.querySelectorAll('.sub-load-container');
+        const icons = document.querySelectorAll('.load-category-item .fa-chevron-right');
+        
+        const isAnyClosed = Array.from(containers).some(c => c.style.display !== "block");
+        
+        containers.forEach((c, index) => {
+            c.style.display = isAnyClosed ? "block" : "none";
+            if (icons[index]) icons[index].style.transform = isAnyClosed ? "rotate(90deg)" : "rotate(0deg)";
+        });
+        
+        this.innerText = isAnyClosed ? "সব ক্যাটাগরি বন্ধ করুন" : "সব ক্যাটাগরি খুলুন";
     });
 
-    updateTotalCount();
-    calculateLoad();
-}
-
-// ৬. ইভেন্ট ডেলিগেশন (ইনপুট চেঞ্জ এবং ডিলিট)
-selectedList.addEventListener('input', function(e) {
-    if(e.target.matches('.watt-input, .qty-input, .hour-input')) {
-        calculateLoad();
-    }
-});
-
-selectedList.addEventListener('click', function(e) {
-    if(e.target.closest('.btn-delete-row')) {
-        e.target.closest('.selected-item-row').remove();
-        updateTotalCount();
-        calculateLoad();
-    }
-});
-
-// ড্রপডাউন বন্ধ করার লজিক
-document.addEventListener('click', function(e) {
-    if (!searchInput.contains(e.target) && !dropdownResults.contains(e.target)) {
-        dropdownResults.style.display = 'none';
-    }
-});
-
-function updateTotalCount() {
-    const rows = document.querySelectorAll('.selected-item-row').length;
-    document.getElementById('total-items-count').innerText = `${rows} Items`;
-    
-    if(rows === 0) {
-        if(!document.getElementById('empty-state-msg')) {
-            const msg = document.createElement('div');
-            msg.id = 'empty-state-msg';
-            msg.className = 'text-center py-5 text-muted bg-white rounded-3 border border-dashed';
-            msg.innerHTML = `<i class="fa-solid fa-search fs-2 mb-2 text-secondary"></i><p class="mb-0">উপরের সার্চ বারে অ্যাপ্লায়েন্সের নাম লিখে তালিকায় যোগ করুন।</p>`;
-            selectedList.appendChild(msg);
-        } else {
-            document.getElementById('empty-state-msg').style.display = 'block';
-        }
-    }
-}
-
-// ৭. লাইভ ক্যালকুলেশন কোর ফাংশন
-function calculateLoad() {
-    let connectedLoad = 0;
-    let dailyEnergyWh = 0;
-
-    document.querySelectorAll('.selected-item-row').forEach(row => {
-        const watt = parseFloat(row.querySelector('.watt-input').value) || 0;
-        const qty = parseFloat(row.querySelector('.qty-input').value) || 0;
-        const hours = parseFloat(row.querySelector('.hour-input').value) || 0;
-
-        connectedLoad += (watt * qty);
-        dailyEnergyWh += (watt * qty * hours);
-    });
-
-    const dailyEnergykWh = dailyEnergyWh / 1000;
-    
-    // UI সামারি প্যানেল আপডেট
-    if(document.getElementById('connected-load')) document.getElementById('connected-load').innerText = connectedLoad + " W";
-    if(document.getElementById('peak-load')) document.getElementById('peak-load').innerText = connectedLoad + " W";
-    if(document.getElementById('daily-energy')) document.getElementById('daily-energy').innerText = dailyEnergykWh.toFixed(2) + " kWh";
-    if(document.getElementById('monthly-energy')) document.getElementById('monthly-energy').innerText = (dailyEnergykWh * 30).toFixed(2) + " kWh";
-}
-
-// পেজ ফার্স্ট টাইম লোড হওয়ার সাথে সাথে ডিফল্ট আইটেম জেনারেট করা
-document.addEventListener("DOMContentLoaded", function() {
-    loadDefaultAppliances();
+    // ইনিশিয়াল রান
+    renderApplianceRows();
 });

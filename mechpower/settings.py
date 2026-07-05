@@ -18,11 +18,7 @@ SECRET_KEY = os.getenv(
     "django-insecure-dev-key"
 )
 
-DEBUG = os.getenv(
-    "DEBUG",
-    "False"
-) == "True"
-
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "mechpower.net",
@@ -80,7 +76,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
     "django.middleware.security.SecurityMiddleware",
-
+    
     "whitenoise.middleware.WhiteNoiseMiddleware",
 
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -183,8 +179,8 @@ STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = '/home/siteposz/mechpower/staticfiles'
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # ==================================
 # MEDIA FILES

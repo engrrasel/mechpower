@@ -11,7 +11,8 @@ function processBackendData(variants) {
       categoriesMap[catKey] = {
         key: catKey,
         label: v.category_name,
-        icon: v.category_emoji || '🔌',
+        // 💡 জ্যাঙ্গো ব্যাক-এন্ড থেকে পাঠানো নতুন ইমেজ URL রিসিভ করার ফিক্স
+        icon: v.category_icon || '',
         itemsMap: {}
       };
     }
@@ -71,7 +72,7 @@ const PACKAGES = [
   { id:'alap',     tier:'Starter',    tierBn:'🌱 স্টার্টার',    kw:1.5,nameBn:'আলাপ',   nameEn:'Introduction', tagline:'সাশ্রয়ের নতুন শুরু', users:'বিদ্যুৎ বিল কমাতে ইচ্ছুক পরিবার', dailyMin:6, dailyMax:7,  suitable:'ছোট শহর ও গ্রামীণ পরিবার', equipment:['ফ্যান','লাইট','টিভি','ফ্রিজ','ল্যাপটপ','Wi-Fi'], priceMin:105000, priceMax:135000 },
   { id:'bondhon',  tier:'Family',     tierBn:'🏡 ফ্যামিলি',     kw:2,  nameBn:'বন্ধন',  nameEn:'Family Bond',  tagline:'পরিবারের নির্ভরতার শক্তি', users:'মধ্যবিত্ত পরিবার', dailyMin:8, dailyMax:10, suitable:'৩–৫ সদস্যের পরিবার', equipment:['ফ্রিজ','টিভি','৬–৮টি ফ্যান','লাইট','কম্পিউটার'], priceMin:140000, priceMax:180000 },
   { id:'songsar',  tier:'Family',     tierBn:'🏡 ফ্যামিলি',     kw:3,  nameBn:'সংসার',  nameEn:'Household',    tagline:'প্রতিদিনের বিদ্যুৎ, নিশ্চিন্ত জীবন', users:'আধুনিক পরিবার', dailyMin:12, dailyMax:15, suitable:'শহর ও উপশহরের পরিবার', equipment:['১টি ১ টন AC (দিনে)','ফ্রিজ','ফ্যান','লাইট','টিভি'], priceMin:210000, priceMax:270000, popular:true },
-  { id:'somriddhi',tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:5,  nameBn:'সমৃদ্ধি',nameEn:'Prosperity',   tagline:'স্মার্ট জীবনের স্মার্ট শক্তি', users:'উentered জীবনযাপনকারী পরিবার', dailyMin:20, dailyMax:25, suitable:'বড় পরিবার, ছোট ব্যবসা', equipment:['২টি AC','ফ্রিজ','ওয়াশিং মেশিন','পানি পাম্প','অফিস লোড'], priceMin:350000, priceMax:450000 },
+  { id:'somriddhi',tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:5,  nameBn:'সমৃদ্ধি',nameEn:'Prosperity',   tagline:'স্মার্ট জীবনের SMART শক্তি', users:'উentered জীবনযাপনকারী পরিবার', dailyMin:20, dailyMax:25, suitable:'বড় পরিবার, ছোট ব্যবসা', equipment:['২টি AC','ফ্রিজ','ওয়াশিং মেশিন','পানি পাম্প','অফিস লোড'], priceMin:350000, priceMax:450000 },
   { id:'unnoti',   tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:6,  nameBn:'উন্নতি', nameEn:'Progress',     tagline:'উন্নয়নের নির্ভরযোগ্য সঙ্গী', users:'উচ্চ বিদ্যুৎ ব্যবহারকারী', dailyMin:24, dailyMax:30, suitable:'שורום, দোকান, অফিস', equipment:['একাধিক AC','কম্পিউটার','CCTV','ব্যবসায়িক লোড'], priceMin:420000, priceMax:540000 },
   { id:'durbar',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:8,  nameBn:'দুর্বার',nameEn:'Unstoppable',  tagline:'ব্যবসার গতিতে শক্তির যোগান', users:'বৃহৎ পরিবার ও SME', dailyMin:32, dailyMax:40, suitable:'ডুপ্লেক্স, রেস্টুরেন্ট, office', equipment:['৩–৪টি AC','ভারী লোড','ব্যাকআপ সুবিধা'], priceMin:560000, priceMax:720000 },
   { id:'biswas',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:10, nameBn:'বিশ্বাস',nameEn:'Trust',       tagline:'প্রতিটি ইউনিটে আস্থা', users:'মাঝারি ব্যবসা', dailyMin:40, dailyMax:50, suitable:'SME, ক্লিনিক, শিক্ষা প্রতিষ্ঠান', equipment:['অধিক বিদ্যুৎ সাশ্রয়','দ্রুত ROI'], priceMin:700000, priceMax:900000 },
@@ -89,15 +90,19 @@ const taka = n => '৳' + bnNum(Math.round(n));
 function buildLoadAccordion(){
   const wrap = document.getElementById('loadAccordion');
   if(!LOAD_CATEGORIES.length) {
-    wrap.innerHTML = `<p class="text-center text-ink-700/60 p-5">কোনো ডাটা পাওয়া যায়নি। অ্যাডমিন প্যানেল থেকে ক্যাটাগরি ও আইটেম যুক্ত করুন।</p>`;
+    wrap.innerHTML = `<p class="text-center text-ink-700/60 p-5">কোনো ডাটা পাওয়া যায়নি। অ্যাডমিন প্যানেল থেকে ক্যাটাগরি ও আইটেম যুক্ত করুন।</p>`;
     return;
   }
   wrap.innerHTML = LOAD_CATEGORIES.map(cat => `
     <div class="cat-card border border-leaf-100 rounded-2xl bg-white shadow-card overflow-hidden" data-cat="${cat.key}">
-      <!-- 👈 ক্যাটাগরি হেডার ও টেক্সট বড় করা হয়েছে (text-xl, text-lg) -->
-      <div class="cat-header flex items-center justify-between px-5 sm:px-6 py-4.5 bg-leaf-50">
+      <div class="cat-header flex items-center justify-between px-5 sm:px-6 py-4.5 bg-leaf-50 cursor-pointer">
         <span class="flex items-center gap-3 font-semibold text-xl text-ink-800">
-          <span class="text-2xl">${cat.icon}</span> ${cat.label}
+          <!-- 💡 ক্যাটাগরি ইমেজের জন্য রেন্ডারিং ফিক্স এবং সেফটি ফ্যালব্যাক চেক -->
+          ${cat.icon && cat.icon !== '' ? 
+            `<img src="${cat.icon}" class="w-7 h-7 object-contain inline-block" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" alt="${cat.label}" /><span class="text-2xl hidden">🔌</span>` 
+            : '<span class="text-2xl">🔌</span>'
+          } 
+          ${cat.label}
         </span>
         <span class="flex items-center gap-4">
           <span class="cat-subtotal text-base sm:text-lg text-leaf-700 font-semibold">০ Wh/day</span>
@@ -118,7 +123,6 @@ function itemRowHtml(it){
   return `
   <label class="block relative cursor-pointer border-b border-leaf-50 last:border-b-0">
     <input type="checkbox" class="item-check sr-only" data-item="${it.key}" ${it.defQty > 0 ? 'checked' : ''}>
-    <!-- 👈 আইটেম লিস্টিং রো এর টেক্সট এবং ড্রপডাউন সাইজ বড় করা হয়েছে -->
     <div class="item-row grid sm:grid-cols-[32px_1.6fr_1fr_0.9fr_0.9fr_1fr] gap-4 items-center px-6 py-4.5">
       <span class="item-dot w-3.5 h-3.5 rounded-full bg-leaf-100 border border-leaf-200"></span>
       <span class="text-base font-semibold text-ink-800 flex items-center gap-3">
@@ -145,7 +149,6 @@ function itemRowHtml(it){
 
 function buildRadioGroup(containerId, options, name){
   const el = document.getElementById(containerId);
-  // 👈 রেডিও বাটনগুলোর টেক্সট ও প্যাডিং বড় করা হয়েছে (text-lg, text-base, py-4)
   el.innerHTML = options.map((o,i) => `
     <label class="pill-radio cursor-pointer">
       <input type="radio" name="${name}" value="${o.key}" class="sr-only" ${i===0?'checked':''}>

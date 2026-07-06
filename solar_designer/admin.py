@@ -1,55 +1,60 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import ApplianceCategory, Appliance, ApplianceVariant
 
-# ১. ক্যাটাগরি ম্যানেজমেন্ট এডমিন
 @admin.register(ApplianceCategory)
 class ApplianceCategoryAdmin(admin.ModelAdmin):
-    # এডমিন লিস্ট ভিউতে যা যা কলাম শো করবে
-    list_display = ('id', 'name', 'slug', 'icon_emoji')
-    
-    # সার্চ করার সুবিধা (নাম এবং স্ল্যাগ দিয়ে)
+    # Displays fields in the admin list view
+    list_display = ('id', 'name', 'slug', 'display_icon')
     search_fields = ('name', 'slug')
-    
-    # নাম (বাংলা/ইংরেজি) টাইপ করলে স্ল্যাগটি যাতে অটোমেটিক ফিল হয়ে যায়
     prepopulated_fields = {'slug': ('name',)}
     
-    # ইন্টারফেস সুন্দর করার জন্য ফিল্ডসেট গ্রুপিং
     fieldsets = (
-        ('ক্যাটাগরি ইনফো', {
+        ('Category Info', {
             'fields': ('name', 'slug')
         }),
-        ('ডিসপ্লে এবং ডিজাইন', {
-            'fields': ('icon_emoji',),
-            'description': 'UI-তে অ্যাকর্ডিয়ন হেডার আইকন হিসেবে এই ইমোজিটি শো করবে। (যেমন: 💡, 🌀, ❄️)'
+        ('Display & Design', {
+            'fields': ('icon_image',),
+            'description': 'This image will be displayed as the accordion header icon in the UI. (SVG or transparent PNG is preferred)'
         }),
     )
 
+    # Image preview method for admin list
+    @admin.display(description='Icon Preview')
+    def display_icon(self, obj):
+        if obj.icon_image:
+            return format_html('<img src="{}" style="width: 30px; height: 30px; object-fit: contain;" />', obj.icon_image.url)
+        return "No Icon"
 
-# ২. অ্যাপ্লায়েন্সের ভেতরেই যাতে এক ক্লিকে ভ্যারিয়েন্ট অ্যাড করা যায় (Inline Form)
+
+# Inline form to add variants directly inside the Appliance form
 class ApplianceVariantInline(admin.TabularInline):
     model = ApplianceVariant
-    extra = 1  # ডিফল্টভাবে ১টি ফাঁকা ভ্যারিয়েন্ট ইনপুট বক্স সবসময় রেডি থাকবে
+    extra = 1  # One empty variant input box will always be ready by default
     fields = ('variant_name', 'default_watt', 'default_hours', 'is_default')
-    verbose_name = "ভ্যারিয়েন্ট"
-    verbose_name_plural = "ভ্যারিয়েন্ট সমূহ"
+    verbose_name = "Variant"
+    verbose_name_plural = "Variants"
 
 
-# ৩. অ্যাপ্লায়েন্স ম্যানেজমেন্ট এডমিন
+# Appliance Management Admin Configuration
 @admin.register(Appliance)
 class ApplianceAdmin(admin.ModelAdmin):
-    # এডমিন লিস্ট ভিউ কনফিগারেশন
+    # Admin list view configuration
     list_display = ('id', 'name', 'get_category_name')
     
-    # ডানপাশে ফিল্টারিং অপশন (ক্যাটাগরি অনুযায়ী ফিল্টার করা যাবে)
+    # Right-side filtering options
     list_filter = ('category',)
     
-    # অ্যাপ্লায়েন্সের নাম ধরে সার্চ করার সুবিধা
+    # Search functionality by appliance name
     search_fields = ('name',)
     
-    # ইনলাইন ফর্মটি এখানে যুক্ত করা হলো
+    # Inlining the variant form
     inlines = [ApplianceVariantInline]
 
-    # কাস্টম মেথড: লিস্টে ক্যাটাগরির নাম সুন্দরভাবে দেখানোর জন্য
-    @admin.display(ordering='category__name', description='ক্যাটাগরি')
+    # Custom method to display category name along with its icon in the list view
+    @admin.display(ordering='category__name', description='Category')
     def get_category_name(self, obj):
-        return f"{obj.category.icon_emoji} {obj.category.name}"
+        # Updated from icon_emoji to icon_image to match your new model structure
+        if obj.category and obj.category.icon_image:
+            return format_html('<span style="display: flex; align-items: center; gap: 8px;"><img src="{}" style="width: 20px; height: 20px; object-fit: contain;" /> {}</span>', obj.category.icon_image.url, obj.category.name)
+        return obj.category.name if obj.category else "No Category"

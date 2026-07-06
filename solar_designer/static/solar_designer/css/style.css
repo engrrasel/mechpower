@@ -102,10 +102,6 @@
 }
 
 /* Item Rows Interaction */
-.item-row {
-    transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
-}
-
 .item-check:checked ~ .item-row {
     background: #F2FBF5;
     box-shadow: inset 4px 0 0 #3CAE66;
@@ -189,4 +185,113 @@ select.cap-select {
 
 .nav-link:hover::after {
     width: 100%;
+}
+
+
+/* ================== GLOBAL CARD HEIGHT CONFIGS ================== */
+/* 💻 ডেস্কটপ এবং বড় স্ক্রিনের জন্য আইটেম কার্ডের হাইট বৃদ্ধি */
+@media (min-width: 641px) {
+    .item-row {
+        transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
+        padding-top: 24px !important;    /* ডেস্কটপে হাইট বাড়ানোর মূল প্যাডিং */
+        padding-bottom: 24px !important; /* ডেস্কটপে হাইট বাড়ানোর মূল প্যাডিং */
+    }
+}
+
+
+/* ================== MOBILE OPTIMIZATIONS (UPGRADED) ================== */
+@media (max-width: 640px) {
+    /* মূল রো কে ফ্লেক্স গ্রিডে রূপান্তর */
+    .item-row {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr; /* ২ কলামের লেআউট */
+        gap: 16px 8px !important;        /* ভেতরের উপাদানগুলোর গ্যাপ বৃদ্ধি */
+        padding: 22px 14px !important;   /* 📱 মোবাইলেও কার্ডের হাইট বড় করার প্যাডিং */
+        align-items: center;
+        transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+
+    /* প্রথম লাইনে নাম পুরো জায়গা জুড়ে থাকবে */
+    .item-row > span:nth-child(2) {
+        grid-column: span 2;
+        font-size: 15px;
+        border-b: 1px dashed #e3f7ea;
+        padding-bottom: 4px;
+    }
+
+    /* ডট হাইড করা (মোবাইলে দরকার নেই) */
+    .item-dot {
+        display: none !important;
+    }
+
+    /* ইনপুট ফিল্ড কন্টেইনার অ্যাডজাস্টমেন্ট */
+    .item-fields {
+        opacity: 1;
+        width: 100% !important;
+    }
+
+    /* ড্রপডাউন সাইজ */
+    select.cap-select {
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
+        font-size: 14px !important;
+    }
+
+    /* প্লাস-মাইনাস কাউন্টার এবং ঘন্টা একই সাথে কমপ্যাক্ট করা */
+    .item-row flex.items-center,
+    .item-fields.flex {
+        justify-content: center;
+        gap: 4px !important;
+    }
+
+    .qty-minus, .qty-plus {
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 15px !important;
+    }
+
+    .qty-input {
+        width: 36px !important;
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        font-size: 14px !important;
+    }
+
+    .hours-input {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+        font-size: 14px !important;
+    }
+
+    /* ওয়াটআওয়ার (Wh) হিসাবের টেক্সট ডান পাশে সুন্দরভাবে পুশ করা */
+    .item-wh {
+        grid-column: span 2;
+        text-align: right;
+        font-size: 14px !important;
+        color: #236F40 !important;
+        background: #f2fbf5;
+        padding: 4px 8px;
+        border-radius: 8px;
+    }
+    
+    /* ২. ব্যাকআপের সময়কাল গ্রুপ গ্রিড মোবাইলের জন্য */
+    #backupGroup, #houseGroup {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+    
+    .pill-label {
+        padding: 10px 6px !important;
+        border-radius: 12px !important;
+    }
+    
+    .pill-label .font-bold {
+        font-size: 15px !important;
+    }
+    
+    .pill-sub {
+        font-size: 12px !important;
+        margin-top: 2px !important;
+    }
 }

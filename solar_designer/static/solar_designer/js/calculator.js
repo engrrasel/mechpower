@@ -76,9 +76,9 @@ const PACKAGES = [
   { id:'unnoti',   tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:6,  nameBn:'উন্নতি', nameEn:'Progress',     tagline:'উন্নয়নের নির্ভরযোগ্য সঙ্গী', users:'উচ্চ বিদ্যুৎ ব্যবহারকারী', dailyMin:24, dailyMax:30, suitable:'שורום, দোকান, অফিস', equipment:['একাধিক AC','কম্পিউটার','CCTV','ব্যবসায়িক লোড'], priceMin:420000, priceMax:540000 },
   { id:'durbar',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:8,  nameBn:'দুর্বার',nameEn:'Unstoppable',  tagline:'ব্যবসার গতিতে শক্তির যোগান', users:'বৃহৎ পরিবার ও SME', dailyMin:32, dailyMax:40, suitable:'ডুপ্লেক্স, রেস্টুরেন্ট, office', equipment:['৩–৪টি AC','ভারী লোড','ব্যাকআপ সুবিধা'], priceMin:560000, priceMax:720000 },
   { id:'biswas',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:10, nameBn:'বিশ্বাস',nameEn:'Trust',       tagline:'প্রতিটি ইউনিটে আস্থা', users:'মাঝারি ব্যবসা', dailyMin:40, dailyMax:50, suitable:'SME, ক্লিনিক, শিক্ষা প্রতিষ্ঠান', equipment:['অধিক বিদ্যুৎ সাশ্রয়','দ্রুত ROI'], priceMin:700000, priceMax:900000 },
-  { id:'shokti',   tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:12, nameBn:'শক্তি',  nameEn:'Power',       tagline:'শিল্প ও প্রতিষ্ঠানের শক্তিশালী সমাধান', users:'বাণিজ্যিক প্রতিষ্ঠান', dailyMin:48, dailyMax:60, suitable:'ক্লিনিক, office, কারখানা', equipment:['২৪/৭ নির্ভরযোগ্য বিদ্যুৎ','কম অপারেটিং খরচ'], priceMin:840000, priceMax:1080000 },
-  { id:'uday',     tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:15, nameBn:'উদয়',   nameEn:'Sunrise',     tagline:'সবুজ শক্তিতে নতুন সম্ভাবনা', users:'বড় ব্যবসা', dailyMin:60, dailyMax:75, suitable:'শিল্প প্রতিষ্ঠান, গুদাম, অফিস', equipment:['উচ্চ ক্ষমতা','ভবিষ্যৎ সম্প্রসারণ উপযোগী'], priceMin:1050000, priceMax:1350000 },
-  { id:'swapno',   tier:'Ultimate',   tierBn:'👑 আল্টিমেট',    kw:20, nameBn:'স্বপ্ন', nameEn:'Dream',       tagline:'ভবিষ্যতের জন্য সর্বোচ্চ সৌর সমাধান', users:'প্রিমিয়াম হোম ও বৃহৎ প্রতিষ্ঠান', dailyMin:80, dailyMax:100,suitable:'বড় বাড়ি, কারখানা, হাসপাতাল, হোটেল', equipment:['সর্বোচ্চ বিদ্যুৎ সাশ্রয়','দীর্ঘমেয়াদি বিনিয়োগ','বাণিজ্যিক গ্রেড সিস্টেম'], priceMin:1400000, priceMax:1800000 },
+  { id:'shokti',   tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:12, nameBn:'শক্তি',  nameEn:'Power',       tagline:'শিল্প ও প্রতিষ্ঠানের শক্তিশালী সমাধান', users:'বাণিজ্যিক প্রতিষ্ঠান', dailyMin:48, dailyMax:60, suitable:'ক্লিনিক, office, कारखाना', equipment:['২৪/৭ নির্ভরযোগ্য বিদ্যুৎ','কম অপারেটিং খরচ'], priceMin:840000, priceMax:1080000 },
+  { id:'uday',     tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:15, nameBn:'উদয়',   nameEn:'Sunrise',     tagline:'সবুজ শক্তিতে নতুন সম্ভাবনা', users:'বড় ব্যবসা', dailyMin:60, dailyMax:75, suitable:'শিল্প প্রতিষ্ঠান, গুদাম, office', equipment:['উচ্চ ক্ষমতা','ভবিষ্যৎ সম্প্রসারণ উপযোগী'], priceMin:1050000, priceMax:1350000 },
+  { id:'swapno',   tier:'Ultimate',   tierBn:'👑 আল্টিমেট',    kw:20, nameBn:'স্বপ্ন', nameEn:'Dream',       tagline:'ভবিষ্যতের জন্য সর্বোচ্চ সৌর সমাধান', users:'প্রিমিয়াম হোম ও বৃহৎ প্রতিষ্ঠান', dailyMin:80, dailyMax:100,suitable:'বড় বাড়ি, कारखाना, হাসপাতাল, হোটেল', equipment:['সর্বোচ্চ বিদ্যুৎ সাশ্রয়','দীর্ঘমেয়াদি বিনিয়োগ','বাণিজ্যিক গ্রেড সিস্টেম'], priceMin:1400000, priceMax:1800000 },
 ];
 
 const TIER_ORDER = ['Starter','Family','Comfort','Premium','Enterprise','Ultimate'];
@@ -120,10 +120,11 @@ function buildLoadAccordion(){
 }
 
 function itemRowHtml(it){
+  // 💡 ফিক্স: টেইলউইন্ডের 'py-4.5' পরিবর্তন করে 'py-6' (ডেস্কটপ) এবং 'sm:py-6' করা হলো যাতে কার্ডের হাইট বাড়ে
   return `
   <label class="block relative cursor-pointer border-b border-leaf-50 last:border-b-0">
     <input type="checkbox" class="item-check sr-only" data-item="${it.key}" ${it.defQty > 0 ? 'checked' : ''}>
-    <div class="item-row grid sm:grid-cols-[32px_1.6fr_1fr_0.9fr_0.9fr_1fr] gap-4 items-center px-6 py-4.5">
+    <div class="item-row grid sm:grid-cols-[32px_1.6fr_1fr_0.9fr_0.9fr_1fr] gap-4 items-center px-6 py-6">
       <span class="item-dot w-3.5 h-3.5 rounded-full bg-leaf-100 border border-leaf-200"></span>
       <span class="text-base font-semibold text-ink-800 flex items-center gap-3">
         <img src="${it.icon_url}" class="w-6 h-6 object-contain inline" onerror="this.style.display='none'">

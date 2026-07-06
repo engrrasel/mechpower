@@ -119,31 +119,41 @@ function buildLoadAccordion(){
   `).join('');
 }
 
-function itemRowHtml(it){
-  // 💡 ফিক্স: টেইলউইন্ডের 'py-4.5' পরিবর্তন করে 'py-6' (ডেস্কটপ) এবং 'sm:py-6' করা হলো যাতে কার্ডের হাইট বাড়ে
+function itemRowHtml(it) {
   return `
   <label class="block relative cursor-pointer border-b border-leaf-50 last:border-b-0">
     <input type="checkbox" class="item-check sr-only" data-item="${it.key}" ${it.defQty > 0 ? 'checked' : ''}>
     <div class="item-row grid sm:grid-cols-[32px_1.6fr_1fr_0.9fr_0.9fr_1fr] gap-4 items-center px-6 py-6">
       <span class="item-dot w-3.5 h-3.5 rounded-full bg-leaf-100 border border-leaf-200"></span>
+      
       <span class="text-base font-semibold text-ink-800 flex items-center gap-3">
         <img src="${it.icon_url}" class="w-6 h-6 object-contain inline" onerror="this.style.display='none'">
         ${it.label}
       </span>
+
       <span class="item-fields">
+        <label class="block text-[10px] text-ink-600 uppercase font-bold mb-0.5 sm:hidden">ওয়াট</label>
         <select class="cap-select text-base font-medium border border-leaf-200 rounded-xl px-3 py-2.5 w-full bg-white" data-item="${it.key}">
           ${it.caps.map((c,i) => `<option value="${c}" ${i===it.defCapIdx?'selected':''}>${c}W</option>`).join('')}
         </select>
       </span>
+
       <span class="item-fields flex items-center gap-1.5">
+        <label class="block text-[10px] text-ink-600 uppercase font-bold absolute -mt-10 sm:hidden">সংখ্যা</label>
         <button type="button" class="qty-minus w-8 h-8 rounded-full bg-leaf-50 hover:bg-leaf-100 text-leaf-700 text-lg font-bold shrink-0" data-item="${it.key}">−</button>
         <input type="number" min="0" value="${it.defQty}" class="qty-input w-12 text-center border border-leaf-200 rounded-lg py-1.5 text-base font-semibold" data-item="${it.key}">
         <button type="button" class="qty-plus w-8 h-8 rounded-full bg-leaf-50 hover:bg-leaf-100 text-leaf-700 text-lg font-bold shrink-0" data-item="${it.key}">+</button>
       </span>
+
       <span class="item-fields">
+        <label class="block text-[10px] text-ink-600 uppercase font-bold mb-0.5 sm:hidden">ঘণ্টা/দিন</label>
         <input type="number" min="0" step="0.1" value="${it.defHours}" class="hours-input w-full text-center border border-leaf-200 rounded-lg py-2 text-base font-semibold" data-item="${it.key}">
       </span>
-      <span class="item-fields item-wh text-base font-bold text-leaf-800" data-item="${it.key}">০</span>
+
+      <span class="item-fields item-wh text-base font-bold text-leaf-800" data-item="${it.key}">
+        <label class="block text-[10px] text-ink-600 uppercase font-bold mb-0.5 sm:hidden">WH/দিন</label>
+        ০
+      </span>
     </div>
   </label>`;
 }

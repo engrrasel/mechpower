@@ -1,719 +1,204 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>সৌর প্যাকেজ সিলেক্টর | MechPower Solutions</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          leaf:   { 50:'#F2FBF5', 100:'#E3F7EA', 200:'#BFEBCE', 300:'#8FDAAA', 400:'#5FC585', 500:'#3CAE66', 600:'#2C8F52', 700:'#236F40', 800:'#1B4332', 900:'#123326' },
-          sun:    { 50:'#FFF6ED', 100:'#FFE8D3', 200:'#FFCB9C', 300:'#FFA75C', 400:'#FB923C', 500:'#F2730E', 600:'#D85F08', 700:'#B14B08' },
-          gold:   { 300:'#FBE08D', 400:'#F2C94C', 500:'#E0AE1F' },
-          ink:    { 700:'#33403A', 800:'#22302A', 900:'#15201B' }
-        },
-        fontFamily: {
-          display: ['"Baloo Da 2"','sans-serif'],
-          body: ['"Hind Siliguri"','sans-serif']
-        },
-        boxShadow: {
-          soft: '0 10px 30px -10px rgba(27,67,50,0.18)',
-          card: '0 2px 10px rgba(27,67,50,0.08)'
-        }
-      }
-    }
-  }
-</script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Hind Siliguri', sans-serif; background:#fff; color:#22302A; }
-  .font-display { font-family: 'Baloo Da 2', sans-serif; }
-  ::selection { background: #BFEBCE; }
-
-  /* ---- Solar dial signature element ---- */
-  .dial-track { stroke: #E3F7EA; }
-  .dial-arc {
-    stroke: url(#dialGradient);
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.7s cubic-bezier(.4,0,.2,1);
-  }
-  @keyframes spin-slow { to { transform: rotate(360deg); } }
-  .ray { animation: spin-slow 22s linear infinite; transform-origin: center; }
-
-  /* ---- chip / pill controls ---- */
-  .pill-radio input:checked + .pill-label {
-    background:#1B4332; color:#fff; box-shadow: 0 6px 14px -6px rgba(27,67,50,.55);
-  }
-  .pill-radio input:checked + .pill-label .pill-sub { color:#BFEBCE; }
-  .pill-label { transition: all .2s ease; }
-
-  .equip-card { transition: all .18s ease; }
-  .equip-check:checked ~ .equip-card {
-    border-color:#3CAE66; background:#F2FBF5; box-shadow: 0 6px 18px -10px rgba(60,174,102,.6);
-  }
-  .equip-check:checked ~ .equip-card .equip-dot { background:#3CAE66; }
-  .qty-box { transition: opacity .15s ease, max-height .25s ease; }
-
-  /* ---- detailed load accordion (3D-style depth) ---- */
-  .cat-card { transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease; }
-  .cat-card:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -18px rgba(27,67,50,.35); }
-  .cat-header { cursor:pointer; }
-  .cat-chevron { transition: transform .25s ease; }
-  .cat-card.open .cat-chevron { transform: rotate(90deg); }
-  .cat-body { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-  .cat-card.open .cat-body { max-height: 3000px; }
-  .item-row { transition: background .15s ease, box-shadow .15s ease, transform .15s ease; }
-  .item-check:checked ~ .item-row {
-    background:#F2FBF5; box-shadow: inset 3px 0 0 #3CAE66;
-  }
-  .item-check:checked ~ .item-row .item-fields { opacity:1; pointer-events:auto; }
-  .item-fields { opacity:.35; pointer-events:none; transition: opacity .15s ease; }
-  .item-row:hover { transform: translateZ(2px); }
-  select.cap-select { -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23236F40'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right .6rem center; }
-
-  /* package cards */
-  .pkg-card { transition: transform .25s ease, box-shadow .25s ease; }
-  .pkg-card:hover { transform: translateY(-6px); box-shadow: 0 24px 40px -20px rgba(27,67,50,.35); }
-  .pkg-highlight { animation: glow 1.8s ease-in-out 2; }
-  @keyframes glow {
-    0%,100% { box-shadow: 0 0 0 0 rgba(242,115,14,0); }
-    50% { box-shadow: 0 0 0 8px rgba(242,115,14,.18); }
-  }
-
-  /* modal */
-  .modal-overlay { backdrop-filter: blur(4px); }
-  .modal-card { animation: pop .25s ease; }
-  @keyframes pop { from { opacity:0; transform: translateY(10px) scale(.98);} to {opacity:1; transform:none;} }
-
-  /* toast */
-  #toast { transition: opacity .3s ease, transform .3s ease; }
-
-  /* scrollbar-ish nav underline */
-  .nav-link { position:relative; }
-  .nav-link::after {
-    content:''; position:absolute; left:0; bottom:-6px; height:2px; width:0%;
-    background:#F2730E; transition: width .2s ease;
-  }
-  .nav-link:hover::after { width:100%; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সৌর প্যাকেজ সিলেক্টর | MechPower Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS Link -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'solar_designer/css/style.css' %}">
 </head>
 <body class="antialiased">
 
 <!-- ============ NAV ============ -->
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-leaf-100">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sun-400 to-leaf-500 flex items-center justify-center text-white font-display text-sm">☀</div>
-      <span class="font-display text-lg text-leaf-800">MechPower <span class="text-sun-500">Solutions</span></span>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <div class="w-9 h-9 rounded-full bg-gradient-to-br from-sun-400 to-leaf-500 flex items-center justify-center text-white font-display text-sm">☀</div>
+            <span class="font-display text-lg text-leaf-800">MechPower <span class="text-sun-500">Solutions</span></span>
+        </div>
+        <nav class="hidden md:flex items-center gap-8 text-ink-700 font-medium">
+            <a href="#home" class="nav-link">হোম</a>
+            <a href="#calculator" class="nav-link">ক্যালকুলেটর</a>
+            <a href="#packages" class="nav-link">প্যাকেজ</a>
+            <a href="#contact" class="nav-link">যোগাযোগ</a>
+        </nav>
+        <a href="#calculator" class="bg-leaf-700 hover:bg-leaf-800 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-card">প্যাকেজ খুঁজুন</a>
     </div>
-    <nav class="hidden md:flex items-center gap-8 text-ink-700 font-medium">
-      <a href="#home" class="nav-link">হোম</a>
-      <a href="#calculator" class="nav-link">ক্যালকুলেটর</a>
-      <a href="#packages" class="nav-link">প্যাকেজ</a>
-      <a href="#contact" class="nav-link">যোগাযোগ</a>
-    </nav>
-    <a href="#calculator" class="bg-leaf-700 hover:bg-leaf-800 text-white text-sm font-semibold px-4 py-2 rounded-full shadow-card">প্যাকেজ খুঁজুন</a>
-  </div>
 </header>
 
 <!-- ============ HERO ============ -->
-<section id="home" class="relative overflow-hidden bg-gradient-to-b from-leaf-50 to-white">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
-    <div>
-      <span class="inline-block text-sun-600 bg-sun-100 text-xs font-semibold tracking-wide px-3 py-1 rounded-full mb-4">আপনার বাসার জন্য সঠিক সোলার প্যাকেজ</span>
-      <h1 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-leaf-900">
-        এক মিনিটে খুঁজে নিন<br><span class="text-sun-500">পারফেক্ট সৌর প্যাকেজ</span>
-      </h1>
-      <p class="mt-5 text-ink-700 text-base sm:text-lg max-w-md">
-        আপনার বাসার ফ্যান, লাইট, ফ্রিজ, এসি আর ব্যাকআপের চাহিদা বলুন — আমাদের ক্যালকুলেটর হিসেব করে দেখাবে ঠিক কোন প্যাকেজে আপনার সংসার সবচেয়ে নিরাপদ ও সাশ্রয়ী থাকবে।
-      </p>
-      <div class="mt-7 flex flex-wrap gap-3">
-        <a href="#calculator" class="bg-sun-500 hover:bg-sun-600 text-white font-semibold px-6 py-3 rounded-full shadow-soft">নিজের প্যাকেজ বের করুন</a>
-        <a href="#packages" class="bg-white border border-leaf-200 hover:bg-leaf-50 text-leaf-800 font-semibold px-6 py-3 rounded-full">সব প্যাকেজ দেখুন</a>
-      </div>
+<section id="home" class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="inline-block text-sun-600 bg-sun-100 text-xs font-semibold tracking-wide px-3 py-1 rounded-full mb-4">আপনার বাসার জন্য সঠিক সোলার প্যাকেজ</span>
+            <h1 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight text-leaf-900">
+                এক মিনিটে খুঁজে নিন<br><span class="text-sun-500">পারফেক্ট সৌর প্যাকেজ</span>
+            </h1>
+            <p class="mt-5 text-ink-700 text-base sm:text-lg max-w-md">
+                আপনার বাসার ফ্যান, লাইট, ফ্রিজ, এসি আর ব্যাকআপের চাহিদা বলুন — আমাদের ক্যালকুলেটর হিসেব করে দেখাবে ঠিক কোন প্যাকেজে আপনার সংসার সবচেয়ে নিরাপদ ও সাশ্রয়ী থাকবে।
+            </p>
+<div class="mt-7 flex">
+    <!-- bg-[#1B4332] বক্সটিকে inline-flex করায় এটি শুধু বাটনের মাপে কালার হবে, পুরো স্ক্রিন জুড়ে নয় -->
+    <div class="inline-flex flex-wrap items-center gap-3 bg-[#1B4332] p-2.5 rounded-3xl shadow-lg">
+        <a href="#calculator" class="bg-sun-500 hover:bg-sun-600 text-white font-semibold px-6 py-3 rounded-full shadow-soft whitespace-nowrap">নিজের প্যাকেজ বের করুন</a>
+        <a href="#packages" class="bg-white hover:bg-leaf-50 text-leaf-800 font-semibold px-6 py-3 rounded-full whitespace-nowrap">সব প্যাকেজ দেখুন</a>
     </div>
-
-    <!-- signature solar dial -->
-    <div class="flex justify-center">
-      <div class="relative w-64 h-64 sm:w-80 sm:h-80">
-        <svg viewBox="0 0 200 200" class="w-full h-full ray">
-          <g opacity="0.5">
-            <line x1="100" y1="6" x2="100" y2="22" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="100" y1="178" x2="100" y2="194" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="6" y1="100" x2="22" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="178" y1="100" x2="194" y2="100" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="35" y1="35" x2="47" y2="47" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="153" y1="153" x2="165" y2="165" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="35" y1="165" x2="47" y2="153" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-            <line x1="153" y1="47" x2="165" y2="35" stroke="#FFCB9C" stroke-width="4" stroke-linecap="round"/>
-          </g>
-        </svg>
-        <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full -rotate-90">
-          <defs>
-            <linearGradient id="dialGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#3CAE66"/>
-              <stop offset="100%" stop-color="#F2730E"/>
-            </linearGradient>
-          </defs>
-          <circle cx="100" cy="100" r="82" fill="none" stroke-width="14" class="dial-track"/>
-          <circle id="heroDialArc" cx="100" cy="100" r="82" fill="none" stroke-width="14" stroke-dasharray="515" stroke-dashoffset="515" class="dial-arc"/>
-        </svg>
-        <div class="absolute inset-0 flex flex-col items-center justify-center">
-          <span class="text-xs text-ink-700/70">আনুমানিক চাহিদা</span>
-          <span id="heroDialValue" class="font-display text-3xl sm:text-4xl text-leaf-800">০.০</span>
-          <span class="text-xs text-ink-700/70">ইউনিট (kWh)/দিন</span>
+</div>
         </div>
-      </div>
+
+        <!-- ==================== ফিক্সড এবং রেসপন্সিভ লাইভ মিটার ==================== -->
+<div class="fixed bottom-4 right-4 md:bottom-auto md:top-1/4 md:right-6 lg:right-12 z-50">
+    <!-- মোবাইলে w-28 (১১২px) এবং ডেস্কটপে মাঝারি সাইজ md:w-44 (১৭৬px) করা হয়েছে -->
+    <div class="relative w-28 h-28 md:w-44 md:h-44 bg-white/95 backdrop-blur-md p-2 rounded-full shadow-2xl border border-leaf-200/60 transition-all duration-300 hover:scale-105">
+        
+        <!-- অ্যানিমেটেড সূর্য রশ্মি -->
+        <svg viewBox="0 0 200 200" class="w-full h-full ray opacity-40">
+            <g>
+                <line x1="100" y1="6" x2="100" y2="22" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="100" y1="178" x2="100" y2="194" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="6" y1="100" x2="22" y2="100" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="178" y1="100" x2="194" y2="100" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="35" y1="35" x2="47" y2="47" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="153" y1="153" x2="165" y2="165" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="35" y1="165" x2="47" y2="153" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+                <line x1="153" y1="47" x2="165" y2="35" stroke="#F2730E" stroke-width="5" stroke-linecap="round"/>
+            </g>
+        </svg>
+
+        <!-- প্রোগ্রেস বার আর্কেড -->
+        <svg viewBox="0 0 200 200" class="absolute inset-0 w-full h-full -rotate-90">
+            <circle cx="100" cy="100" r="82" fill="none" stroke="#E3F7EA" stroke-width="15"/>
+            <circle id="heroDialArc" cx="100" cy="100" r="82" fill="none" stroke="url(#dialGradient)" stroke-width="15" stroke-linecap="round" stroke-dasharray="515" stroke-dashoffset="515" class="dial-arc"/>
+        </svg>
+
+        <!-- ভেতরের টেক্সট কাউন্টার (ডেস্কটপের জন্য টেক্সট সাইজ বাড়ানো হয়েছে) -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
+            <span class="text-[9px] md:text-xs font-bold text-ink-700/60 uppercase tracking-wider">আনুমানিক চাহিদা</span>
+            <span id="heroDialValue" class="font-display text-xl md:text-3xl font-black text-leaf-800 leading-none my-1">০.০</span>
+            <span class="text-[8px] md:text-xs font-semibold text-ink-700/60 leading-none">ইউনিট (kWh)/দিন</span>
+        </div>
     </div>
-  </div>
+</div>
+    </div>
 </section>
 
 <!-- ============ CALCULATOR ============ -->
-<section id="calculator" class="bg-leaf-50 py-16 md:py-20">
-  <div class="max-w-5xl mx-auto px-5 sm:px-8">
-    <div class="text-center mb-10">
-      <span class="text-sun-600 font-semibold text-sm">সেলফ-অ্যাসেসমেন্ট</span>
-      <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">আপনার বাসার চাহিদা জানান</h2>
-      <p class="text-ink-700 mt-2 max-w-xl mx-auto">যা চলবে, তা সিলেক্ট করুন — সংখ্যা ঠিক করুন — আর আমরা হিসেব করে আপনার জন্য সবচেয়ে উপযুক্ত প্যাকেজ বের করব।</p>
-    </div>
-
-    <div class="bg-white rounded-3xl shadow-soft p-6 sm:p-10">
-
-      <!-- equipment -->
-      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-        <h3 class="font-display text-lg text-leaf-800">১. কী কী চলবে? — বিস্তারিত লোড লিস্ট</h3>
-        <button id="expandAllBtn" type="button" class="text-sm font-semibold text-leaf-700 hover:text-leaf-900 underline">সব ক্যাটাগরি খুলুন</button>
-      </div>
-      <div id="loadAccordion" class="space-y-3"></div>
-
-      <!-- backup -->
-      <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">২. ব্যাকআপের সময়কাল</h3>
-      <div id="backupGroup" class="flex flex-wrap gap-3"></div>
-
-      <!-- house type -->
-      <h3 class="font-display text-lg text-leaf-800 mt-10 mb-4">৩. বাসার ধরন</h3>
-      <div id="houseGroup" class="flex flex-wrap gap-3"></div>
-
-      <!-- live preview -->
-      <div class="mt-10 rounded-2xl bg-leaf-50 border border-leaf-100 p-5 flex items-center gap-5">
-        <svg viewBox="0 0 100 100" class="w-16 h-16 -rotate-90 shrink-0">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#E3F7EA" stroke-width="9"/>
-          <circle id="liveDialArc" cx="50" cy="50" r="40" fill="none" stroke="url(#dialGradient)" stroke-width="9" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251" style="transition:stroke-dashoffset .4s ease;"/>
-        </svg>
-        <div>
-          <p class="text-sm text-ink-700">আনুমানিক দৈনিক চাহিদা</p>
-          <p class="font-display text-2xl text-leaf-800"><span id="livekWh">০.০</span> ইউনিট (kWh)/দিন</p>
+<section id="calculator" class="py-16 md:py-20">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8"> <!-- 👈 কন্টেইনার বড় করা হয়েছে (max-w-7xl) -->
+        <div class="text-center mb-10">
+            <span class="text-sun-600 font-semibold text-base">সেলফ-অ্যাসেসমেন্ট</span>
+            <h2 class="font-display text-3xl sm:text-4xl text-leaf-900 mt-1">আপনার বাসার চাহিদা জানান</h2>
+            <p class="text-ink-700 text-base sm:text-lg mt-2 max-w-2xl mx-auto">যা চলবে, তা সিলেক্ট করুন — সংখ্যা ঠিক করুন — আর আমরা হিসেব করে আপনার জন্য সবচেয়ে উপযুক্ত প্যাকেজ বের করব।</p>
         </div>
-      </div>
 
-      <button id="findPackageBtn" class="mt-8 w-full sm:w-auto bg-sun-500 hover:bg-sun-600 text-white font-semibold px-8 py-3.5 rounded-full shadow-soft">প্যাকেজ দেখুন</button>
-      <p id="formError" class="text-sun-700 text-sm mt-3 hidden">অনুগ্রহ করে অন্তত একটি ইকুইপমেন্ট সিলেক্ট করুন।</p>
-    </div>
+        <div class="bg-white rounded-3xl shadow-soft p-6 sm:p-12 border border-leaf-100">
+            <div class="flex items-center justify-between mb-6 flex-wrap gap-2">
+                <h3 class="font-display text-xl sm:text-2xl text-leaf-800">১. কী কী চলবে? — বিস্তারিত লোড লিস্ট</h3> <!-- 👈 টেক্সট সাইজ বড় করা হয়েছে -->
+                <button id="expandAllBtn" type="button" class="text-base font-semibold text-leaf-700 hover:text-leaf-900 underline">সব ক্যাটাগরি খুলুন</button>
+            </div>
+            <div id="loadAccordion" class="space-y-4"></div>
 
-    <!-- result -->
-    <div id="resultBox" class="hidden mt-10 bg-white rounded-3xl shadow-soft border-2 border-gold-400 p-6 sm:p-8">
-      <span class="inline-block bg-gold-400 text-leaf-900 text-xs font-bold px-3 py-1 rounded-full">আপনার জন্য সুপারিশ করা প্যাকেজ</span>
-      <div id="resultContent" class="mt-4"></div>
+            <h3 class="font-display text-xl sm:text-2xl text-leaf-800 mt-12 mb-6">২. ব্যাকআপের সময়কাল</h3> <!-- 👈 টেক্সট সাইজ বড় করা হয়েছে -->
+            <div id="backupGroup" class="flex flex-wrap gap-4"></div>
+
+            <h3 class="font-display text-xl sm:text-2xl text-leaf-800 mt-12 mb-6">৩. বাসার ধরন</h3> <!-- 👈 টেক্সট সাইজ বড় করা হয়েছে -->
+            <div id="houseGroup" class="flex flex-wrap gap-4"></div>
+
+            <div class="mt-12 rounded-2xl bg-leaf-50 border border-leaf-100 p-6 flex items-center gap-6">
+                <svg viewBox="0 0 100 100" class="w-20 h-20 -rotate-90 shrink-0">
+                    <circle cx="50" cy="50" r="40" fill="none" stroke="#E3F7EA" stroke-width="9"/>
+                    <circle id="liveDialArc" cx="50" cy="50" r="40" fill="none" stroke="url(#dialGradient)" stroke-width="9" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="251"/>
+                </svg>
+                <div>
+                    <p class="text-base text-ink-700">আনুমানিক দৈনিক চাহিদা</p>
+                    <p class="font-display text-3xl text-leaf-800"><span id="livekWh">০.০</span> ইউনিট (kWh)/দিন</p>
+                </div>
+            </div>
+
+            <button id="findPackageBtn" class="mt-10 w-full sm:w-auto bg-sun-500 hover:bg-sun-600 text-white font-semibold text-lg px-10 py-4 rounded-full shadow-soft">প্যাকেজ দেখুন</button>
+            <p id="formError" class="text-sun-700 text-base mt-3 hidden">অনুগ্রহ করে অন্তত একটি ইকুইপমেন্ট সিলেক্ট করুন।</p>
+        </div>
+
+        <div id="resultBox" class="hidden mt-12 bg-white rounded-3xl shadow-soft border-2 border-gold-400 p-6 sm:p-10">
+            <span class="inline-block bg-gold-400 text-leaf-900 text-sm font-bold px-4 py-1.5 rounded-full">আপনার জন্য সুপারিশ করা প্যাকেজ</span>
+            <div id="resultContent" class="mt-6"></div>
+        </div>
     </div>
-  </div>
 </section>
 
 <!-- ============ PACKAGES ============ -->
 <section id="packages" class="py-16 md:py-20">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8">
-    <div class="text-center mb-12">
-      <span class="text-sun-600 font-semibold text-sm">আমাদের সমাধান</span>
-      <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">সব সৌর প্যাকেজ</h2>
-      <p class="text-ink-700 mt-2 max-w-xl mx-auto">ছোট পরিবার থেকে শিল্প প্রতিষ্ঠান — প্রতিটি প্রয়োজনের জন্য আলাদা প্যাকেজ।</p>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="text-center mb-12">
+            <span class="text-sun-600 font-semibold text-sm">আমাদের সমাধান</span>
+            <h2 class="font-display text-2xl sm:text-3xl text-leaf-900 mt-1">সব সৌর প্যাকেজ</h2>
+            <p class="text-ink-700 mt-2 max-w-xl mx-auto">ছোট পরিবার থেকে শিল্প প্রতিষ্ঠান — প্রতিটি প্রয়োজনের জন্য আলাদা প্যাকেজ।</p>
+        </div>
+        <div id="tierContainer" class="space-y-12"></div>
     </div>
-    <div id="tierContainer" class="space-y-12"></div>
-  </div>
 </section>
 
-<!-- ============ CONTACT / FOOTER ============ -->
+<!-- ============ FOOTER ============ -->
 <footer id="contact" class="bg-leaf-900 text-leaf-100 py-14">
-  <div class="max-w-7xl mx-auto px-5 sm:px-8 grid sm:grid-cols-3 gap-8">
-    <div>
-      <p class="font-display text-xl text-white">MechPower <span class="text-sun-400">Solutions</span></p>
-      <p class="text-leaf-300 mt-2 text-sm">উত্তরা, ঢাকা, বাংলাদেশ</p>
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 grid sm:grid-cols-3 gap-8">
+        <div>
+            <p class="font-display text-xl text-white">MechPower <span class="text-sun-400">Solutions</span></p>
+            <p class="text-leaf-300 mt-2 text-sm">উত্তরা, ঢাকা, বাংলাদেশ</p>
+        </div>
+        <div>
+            <p class="font-semibold text-white mb-2">যোগাযোগ</p>
+            <p class="text-leaf-300 text-sm">ফোন: ০১৭০০-০০০০০০</p>
+            <p class="text-leaf-300 text-sm">ইমেইল: info@mechpowersolutions.com</p>
+        </div>
+        <div>
+            <p class="font-semibold text-white mb-2">নোট</p>
+            <p class="text-leaf-300 text-sm">এই ক্যালকুলেটরের ফলাফল আনুমানিক। সঠিক মাপজোক ও মূল্যের জন্য আমাদের একজন বিশেষজ্ঞ আপনার বাসা/প্রতিষ্ঠান সরাসরি ভিজিট করবেন।</p>
+        </div>
     </div>
-    <div>
-      <p class="font-semibold text-white mb-2">যোগাযোগ</p>
-      <p class="text-leaf-300 text-sm">ফোন: ০১৭০০-০০০০০০</p>
-      <p class="text-leaf-300 text-sm">ইমেইল: info@mechpowersolutions.com</p>
-    </div>
-    <div>
-      <p class="font-semibold text-white mb-2">নোট</p>
-      <p class="text-leaf-300 text-sm">এই ক্যালকুলেটরের ফলাফল আনুমানিক। সঠিক মাপজোক ও মূল্যের জন্য আমাদের একজন বিশেষজ্ঞ আপনার বাসা/প্রতিষ্ঠান সরাসরি ভিজিট করবেন।</p>
-    </div>
-  </div>
-  <p class="text-center text-leaf-400 text-xs mt-10">© ২০২৬ MechPower Solutions. সর্বস্বত্ব সংরক্ষিত।</p>
+    <p class="text-center text-leaf-400 text-xs mt-10">© ২০২৬ MechPower Solutions. সর্বস্বত্ব সংরক্ষিত।</p>
 </footer>
 
 <!-- ============ MODAL ============ -->
 <div id="contactModal" class="fixed inset-0 z-50 hidden items-center justify-center modal-overlay bg-black/40 p-4">
-  <div class="modal-card bg-white w-full max-w-md rounded-3xl shadow-soft p-6 sm:p-8 relative">
-    <button id="closeModal" class="absolute top-4 right-4 text-ink-700/60 hover:text-ink-700 text-xl leading-none">✕</button>
-    <h3 class="font-display text-xl text-leaf-900" id="modalTitle">তথ্য দিন</h3>
-    <p class="text-ink-700 text-sm mt-1" id="modalSub">আমাদের একজন প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করবে।</p>
+    <div class="modal-card bg-white w-full max-w-md rounded-3xl shadow-soft p-6 sm:p-8 relative">
+        <button id="closeModal" class="absolute top-4 right-4 text-ink-700/60 hover:text-ink-700 text-xl leading-none">✕</button>
+        <h3 class="font-display text-xl text-leaf-900" id="modalTitle">তথ্য দিন</h3>
+        <p class="text-ink-700 text-sm mt-1" id="modalSub">আমাদের একজন প্রতিনিধি শীঘ্রই আপনার সাথে যোগাযোগ করবে।</p>
 
-    <form id="contactForm" class="mt-6 space-y-4">
-      <div>
-        <label class="text-sm font-medium text-ink-700">নাম <span class="text-sun-500">*</span></label>
-        <input required id="inputName" type="text" placeholder="আপনার নাম লিখুন" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
-      </div>
-      <div>
-        <label class="text-sm font-medium text-ink-700">ফোন নাম্বার <span class="text-sun-500">*</span></label>
-        <input required id="inputPhone" type="tel" placeholder="01XXXXXXXXX" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
-        <p id="phoneError" class="text-sun-600 text-xs mt-1 hidden">সঠিক বাংলাদেশী ফোন নাম্বার দিন (যেমন 01XXXXXXXXX)।</p>
-      </div>
-      <div>
-        <label class="text-sm font-medium text-ink-700">ঠিকানা <span class="text-ink-700/50 font-normal">(ঐচ্ছিক)</span></label>
-        <input id="inputAddress" type="text" placeholder="এলাকা / শহর" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
-      </div>
-      <button type="submit" class="w-full bg-leaf-700 hover:bg-leaf-800 text-white font-semibold py-3 rounded-full mt-2">জমা দিন</button>
-    </form>
-  </div>
+        <form id="contactForm" class="mt-6 space-y-4">
+            <div>
+                <label class="text-sm font-medium text-ink-700">নাম <span class="text-sun-500">*</span></label>
+                <input required id="inputName" type="text" placeholder="আপনার নাম লিখুন" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+            </div>
+            <div>
+                <label class="text-sm font-medium text-ink-700">ফোন নাম্বার <span class="text-sun-500">*</span></label>
+                <input required id="inputPhone" type="tel" placeholder="01XXXXXXXXX" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+                <p id="phoneError" class="text-sun-600 text-xs mt-1 hidden">সঠিক বাংলাদেশী ফোন নাম্বার দিন (যেমন 01XXXXXXXXX)।</p>
+            </div>
+            <div>
+                <label class="text-sm font-medium text-ink-700">ঠিকানা <span class="text-ink-700/50 font-normal">(ঐচ্ছিক)</span></label>
+                <input id="inputAddress" type="text" placeholder="এলাকা / শহর" class="mt-1 w-full border border-leaf-200 focus:border-leaf-500 focus:ring-2 focus:ring-leaf-100 rounded-xl px-4 py-2.5 outline-none">
+            </div>
+            <button type="submit" class="w-full bg-leaf-700 hover:bg-leaf-800 text-white font-semibold py-3 rounded-full mt-2">জমা দিন</button>
+        </form>
+    </div>
 </div>
 
-<!-- toast -->
 <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-leaf-800 text-white px-6 py-3 rounded-full shadow-soft opacity-0 translate-y-4 pointer-events-none z-50 text-sm"></div>
 
+<!-- Django Database JSON Object & Script Injection -->
 <script>
-/* ================== DATA ================== */
-const LOAD_CATEGORIES = [
-  { key:'lighting', label:'আলো', labelEn:'Lighting', icon:'💡', items:[
-    { key:'ceiling_light', label:'সিলিং লাইট', labelEn:'Ceiling Light', caps:[8,12,18,24], defCapIdx:1, defQty:6, defHours:6 },
-    { key:'wall_light',    label:'ওয়াল লাইট',  labelEn:'Wall Light',    caps:[5,9,12],    defCapIdx:1, defQty:0, defHours:5 },
-    { key:'tube_light',    label:'টিউব লাইট',  labelEn:'Tube Light',    caps:[18,36,40],  defCapIdx:0, defQty:0, defHours:5 },
-    { key:'downlight',     label:'ডাউনলাইট / স্পট লাইট', labelEn:'Downlight / Spot Light', caps:[5,7,10,12], defCapIdx:1, defQty:0, defHours:5 },
-  ]},
-  { key:'fan', label:'ফ্যান', labelEn:'Fan', icon:'🌀', items:[
-    { key:'ceiling_fan', label:'সিলিং ফ্যান', labelEn:'Ceiling Fan', caps:[50,60,75], defCapIdx:1, defQty:3, defHours:8 },
-    { key:'stand_fan',   label:'স্ট্যান্ড ফ্যান', labelEn:'Stand Fan', caps:[55,65,75], defCapIdx:1, defQty:0, defHours:6 },
-    { key:'exhaust_fan', label:'এগজস্ট ফ্যান', labelEn:'Exhaust Fan', caps:[25,35,45], defCapIdx:0, defQty:0, defHours:2 },
-  ]},
-  { key:'ac', label:'এয়ার কন্ডিশনার', labelEn:'Air Conditioner', icon:'❄️', items:[
-    { key:'ac_1',   label:'এসি ১.০ টন', labelEn:'AC 1.0 Ton', caps:[900,1000,1100], defCapIdx:1, defQty:0, defHours:6 },
-    { key:'ac_1_5', label:'এসি ১.৫ টন', labelEn:'AC 1.5 Ton', caps:[1350,1500,1650], defCapIdx:1, defQty:0, defHours:6 },
-    { key:'ac_2',   label:'এসি ২.০ টন', labelEn:'AC 2.0 Ton', caps:[1800,2000,2200], defCapIdx:1, defQty:0, defHours:6 },
-  ]},
-  { key:'kitchen', label:'রান্নাঘর সরঞ্জাম', labelEn:'Kitchen Appliances', icon:'🍳', items:[
-    { key:'fridge',       label:'ফ্রিজ', labelEn:'Refrigerator', caps:[100,150,200], defCapIdx:1, defQty:1, defHours:9, hint:'কম্প্রেসার রান-টাইম' },
-    { key:'microwave',    label:'মাইক্রোওয়েভ ওভেন', labelEn:'Microwave Oven', caps:[700,900,1200], defCapIdx:1, defQty:0, defHours:0.3 },
-    { key:'electric_oven',label:'ইলেকট্রিক ওভেন', labelEn:'Electric Oven', caps:[1000,1500,2000], defCapIdx:1, defQty:0, defHours:0.3 },
-    { key:'rice_cooker',  label:'রাইস কুকার', labelEn:'Rice Cooker', caps:[400,500,700], defCapIdx:1, defQty:0, defHours:0.5 },
-    { key:'kettle',       label:'ইলেকট্রিক কেটলি', labelEn:'Electric Kettle', caps:[1000,1500], defCapIdx:0, defQty:0, defHours:0.2 },
-    { key:'blender',      label:'ব্লেন্ডার / মিক্সার', labelEn:'Blender', caps:[300,400,600], defCapIdx:1, defQty:0, defHours:0.1 },
-    { key:'toaster',      label:'টোস্টার', labelEn:'Toaster', caps:[700,900], defCapIdx:0, defQty:0, defHours:0.1 },
-  ]},
-  { key:'entertainment', label:'বিনোদন', labelEn:'Entertainment', icon:'📺', items:[
-    { key:'tv32',         label:'টেলিভিশন ৩২"', labelEn:'TV 32"', caps:[50,60,80], defCapIdx:1, defQty:0, defHours:5 },
-    { key:'tv43',         label:'টেলিভিশন ৪৩"', labelEn:'TV 43"', caps:[90,110,130], defCapIdx:1, defQty:1, defHours:5 },
-    { key:'settop',       label:'ডিশ রিসিভার / সেটআপ বক্স', labelEn:'Dish Receiver / Set-top Box', caps:[10,15], defCapIdx:0, defQty:0, defHours:6 },
-    { key:'sound_system', label:'সাউন্ড সিস্টেম', labelEn:'Sound System', caps:[30,50,80], defCapIdx:1, defQty:0, defHours:2 },
-  ]},
-  { key:'office', label:'কম্পিউটার ও অফিস', labelEn:'Computer & Office', icon:'💻', items:[
-    { key:'desktop', label:'ডেস্কটপ কম্পিউটার', labelEn:'Desktop PC', caps:[150,200,300], defCapIdx:1, defQty:0, defHours:6 },
-    { key:'laptop',  label:'ল্যাপটপ', labelEn:'Laptop', caps:[45,65,90], defCapIdx:1, defQty:1, defHours:5 },
-    { key:'router',  label:'রাউটার / মডেম', labelEn:'Router/Modem', caps:[8,10,15], defCapIdx:1, defQty:1, defHours:24 },
-    { key:'printer', label:'প্রিন্টার', labelEn:'Printer', caps:[20,30,50], defCapIdx:1, defQty:0, defHours:0.1 },
-  ]},
-  { key:'others', label:'অন্যান্য', labelEn:'Others', icon:'🔌', items:[
-    { key:'washing_machine', label:'ওয়াশিং মেশিন', labelEn:'Washing Machine', caps:[400,500,800], defCapIdx:1, defQty:0, defHours:0.5 },
-    { key:'iron',            label:'ইস্ত্রি মেশিন', labelEn:'Iron', caps:[1000,1200,1600], defCapIdx:1, defQty:0, defHours:0.3 },
-    { key:'water_pump',      label:'ওয়াটার পাম্প', labelEn:'Water Pump', caps:[370,550,750], defCapIdx:0, defQty:0, defHours:1 },
-    { key:'phone_charger',   label:'মোবাইল চার্জার', labelEn:'Phone Charger', caps:[5,10,18], defCapIdx:1, defQty:2, defHours:3 },
-    { key:'intercom',        label:'ইন্টারকম / ডোরবেল', labelEn:'Intercom / Doorbell', caps:[5,8], defCapIdx:0, defQty:0, defHours:24 },
-  ]},
-];
-
-const BACKUP_OPTIONS = [
-  { key:'2h', label:'২ ঘণ্টা', sub:'ছোট লোডশেডিং', mult:1.00 },
-  { key:'4h', label:'৪ ঘণ্টা', sub:'মাঝারি ব্যাকআপ', mult:1.10 },
-  { key:'6h', label:'৬ ঘণ্টা', sub:'বড় ব্যাকআপ', mult:1.20 },
-  { key:'full', label:'ফুল নাইট', sub:'সারারাত নিরাপদ', mult:1.35 },
-];
-
-const HOUSE_OPTIONS = [
-  { key:'flat', label:'ফ্ল্যাট বাড়ি', sub:'অ্যাপার্টমেন্ট', mult:1.00 },
-  { key:'villa', label:'স্বাধীন ভিলা/বিল্ডিং', sub:'আলাদা ছাদ ও জায়গা', mult:1.15 },
-];
-
-const PACKAGES = [
-  { id:'noksha',   tier:'Starter',    tierBn:'🌱 স্টার্টার',    kw:1,  nameBn:'নকশা',   nameEn:'Blueprint',     tagline:'সৌরশক্তির প্রথম পদক্ষেপ', users:'নতুন সৌরবিদ্যুৎ ব্যবহারকারী', dailyMin:4, dailyMax:5,  suitable:'ছোট পরিবার, গ্রামীণ বাসা', equipment:['৪–৬টি ফ্যান','৮–১০টি LED লাইট','টিভি','Wi-Fi','মোবাইল চার্জিং'], priceMin:70000, priceMax:90000 },
-  { id:'alap',     tier:'Starter',    tierBn:'🌱 স্টার্টার',    kw:1.5,nameBn:'আলাপ',   nameEn:'Introduction', tagline:'সাশ্রয়ের নতুন শুরু', users:'বিদ্যুৎ বিল কমাতে ইচ্ছুক পরিবার', dailyMin:6, dailyMax:7,  suitable:'ছোট শহর ও গ্রামীণ পরিবার', equipment:['ফ্যান','লাইট','টিভি','ফ্রিজ','ল্যাপটপ','Wi-Fi'], priceMin:105000, priceMax:135000 },
-  { id:'bondhon',  tier:'Family',     tierBn:'🏡 ফ্যামিলি',     kw:2,  nameBn:'বন্ধন',  nameEn:'Family Bond',  tagline:'পরিবারের নির্ভরতার শক্তি', users:'মধ্যবিত্ত পরিবার', dailyMin:8, dailyMax:10, suitable:'৩–৫ সদস্যের পরিবার', equipment:['ফ্রিজ','টিভি','৬–৮টি ফ্যান','লাইট','কম্পিউটার'], priceMin:140000, priceMax:180000 },
-  { id:'songsar',  tier:'Family',     tierBn:'🏡 ফ্যামিলি',     kw:3,  nameBn:'সংসার',  nameEn:'Household',    tagline:'প্রতিদিনের বিদ্যুৎ, নিশ্চিন্ত জীবন', users:'আধুনিক পরিবার', dailyMin:12, dailyMax:15, suitable:'শহর ও উপশহরের পরিবার', equipment:['১টি ১ টন AC (দিনে)','ফ্রিজ','ফ্যান','লাইট','টিভি'], priceMin:210000, priceMax:270000, popular:true },
-  { id:'somriddhi',tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:5,  nameBn:'সমৃদ্ধি',nameEn:'Prosperity',   tagline:'স্মার্ট জীবনের স্মার্ট শক্তি', users:'উন্টারপ্রাইজ', dailyMin:20, dailyMax:25, suitable:'বড় পরিবার, ছোট ব্যবসা', equipment:['২টি AC','ফ্রিজ','ওয়াশিং মেশিন','পানি পাম্প','অফিস লোড'], priceMin:350000, priceMax:450000 },
-  { id:'unnoti',   tier:'Comfort',    tierBn:'🌞 কমফোর্ট',     kw:6,  nameBn:'উন্নতি', nameEn:'Progress',     tagline:'উন্নয়নের নির্ভরযোগ্য সঙ্গী', users:'উচ্চ বিদ্যুৎ ব্যবহারকারী', dailyMin:24, dailyMax:30, suitable:'শোরুম, দোকান, অফিস', equipment:['একাধিক AC','কম্পিউটার','CCTV','ব্যবসায়িক লোড'], priceMin:420000, priceMax:540000 },
-  { id:'durbar',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:8,  nameBn:'দুর্বার',nameEn:'Unstoppable',  tagline:'ব্যবসার গতিতে শক্তির যোগান', users:'বৃহৎ পরিবার ও SME', dailyMin:32, dailyMax:40, suitable:'ডুপ্লেক্স, রেস্টুরেন্ট, অফিস', equipment:['৩–৪টি AC','ভারী লোড','ব্যাকআপ সুবিধা'], priceMin:560000, priceMax:720000 },
-  { id:'biswas',   tier:'Premium',    tierBn:'💎 প্রিমিয়াম',   kw:10, nameBn:'বিশ্বাস',nameEn:'Trust',       tagline:'প্রতিটি ইউনিটে আস্থা', users:'মাঝারি ব্যবসা', dailyMin:40, dailyMax:50, suitable:'SME, ক্লিনিক, শিক্ষা প্রতিষ্ঠান', equipment:['অধিক বিদ্যুৎ সাশ্রয়','দ্রুত ROI'], priceMin:700000, priceMax:900000 },
-  { id:'shokti',   tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:12, nameBn:'শক্তি',  nameEn:'Power',       tagline:'শিল্প ও প্রতিষ্ঠানের শক্তিশালী সমাধান', users:'বাণিজ্যিক প্রতিষ্ঠান', dailyMin:48, dailyMax:60, suitable:'ক্লিনিক, অফিস, কারখানা', equipment:['২৪/৭ নির্ভরযোগ্য বিদ্যুৎ','কম অপারেটিং খরচ'], priceMin:840000, priceMax:1080000 },
-  { id:'uday',     tier:'Enterprise', tierBn:'🏭 এন্টারপ্রাইজ', kw:15, nameBn:'উদয়',   nameEn:'Sunrise',     tagline:'সবুজ শক্তিতে নতুন সম্ভাবনা', users:'বড় ব্যবসা', dailyMin:60, dailyMax:75, suitable:'শিল্প প্রতিষ্ঠান, গুদাম, অফিস', equipment:['উচ্চ ক্ষমতা','ভবিষ্যৎ সম্প্রসারণ উপযোগী'], priceMin:1050000, priceMax:1350000 },
-  { id:'swapno',   tier:'Ultimate',   tierBn:'👑 আল্টিমেট',    kw:20, nameBn:'স্বপ্ন', nameEn:'Dream',       tagline:'ভবিষ্যতের জন্য সর্বোচ্চ সৌর সমাধান', users:'প্রিমিয়াম হোম ও বৃহৎ প্রতিষ্ঠান', dailyMin:80, dailyMax:100,suitable:'বড় বাড়ি, কারখানা, হাসপাতাল, হোটেল', equipment:['সর্বোচ্চ বিদ্যুৎ সাশ্রয়','দীর্ঘমেয়াদি বিনিয়োগ','বাণিজ্যিক গ্রেড সিস্টেম'], priceMin:1400000, priceMax:1800000 },
-];
-
-const TIER_ORDER = ['Starter','Family','Comfort','Premium','Enterprise','Ultimate'];
-
-/* ================== HELPERS ================== */
-const bnNum = n => n.toLocaleString('bn-BD');
-const taka = n => '৳' + bnNum(Math.round(n));
-
-function buildLoadAccordion(){
-  const wrap = document.getElementById('loadAccordion');
-  wrap.innerHTML = LOAD_CATEGORIES.map(cat => `
-    <div class="cat-card border border-leaf-100 rounded-2xl bg-white shadow-card overflow-hidden" data-cat="${cat.key}">
-      <div class="cat-header flex items-center justify-between px-4 sm:px-5 py-3.5 bg-leaf-50">
-        <span class="flex items-center gap-2 font-semibold text-ink-800">
-          <span class="text-lg">${cat.icon}</span> ${cat.label} <span class="text-ink-700/50 text-sm">(${cat.labelEn})</span>
-        </span>
-        <span class="flex items-center gap-3">
-          <span class="cat-subtotal text-xs sm:text-sm text-leaf-700 font-semibold">০ Wh/day</span>
-          <svg class="cat-chevron w-3 h-3 text-leaf-700" viewBox="0 0 10 10" fill="none"><path d="M2 1l6 4-6 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-      </div>
-      <div class="cat-body">
-        <!-- column headers (desktop) -->
-        <div class="hidden sm:grid grid-cols-[28px_1.6fr_1fr_0.8fr_0.9fr_1fr] gap-3 px-5 py-2 text-xs text-ink-700/50 border-b border-leaf-50">
-          <span></span><span>আইটেম</span><span>ক্যাপাসিটি (W)</span><span>পরিমাণ</span><span>ঘণ্টা/দিন</span><span>দৈনিক শক্তি (Wh/day)</span>
-        </div>
-        ${cat.items.map(it => itemRowHtml(it)).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-function itemRowHtml(it){
-  return `
-  <label class="block relative cursor-pointer border-b border-leaf-50 last:border-b-0">
-    <input type="checkbox" class="item-check sr-only" data-item="${it.key}" ${it.defQty > 0 ? 'checked' : ''}>
-    <div class="item-row grid sm:grid-cols-[28px_1.6fr_1fr_0.8fr_0.9fr_1fr] gap-3 items-center px-5 py-3">
-      <span class="item-dot w-3 h-3 rounded-full bg-leaf-100 border border-leaf-200"></span>
-      <span class="text-sm font-medium text-ink-800">${it.label} <span class="text-ink-700/45 text-xs">(${it.labelEn})</span>${it.hint ? `<br><span class="text-[11px] text-ink-700/40">${it.hint}</span>` : ''}</span>
-      <span class="item-fields">
-        <select class="cap-select text-sm border border-leaf-200 rounded-lg px-2 py-1.5 w-full" data-item="${it.key}">
-          ${it.caps.map((c,i) => `<option value="${c}" ${i===it.defCapIdx?'selected':''}>${c}W</option>`).join('')}
-        </select>
-      </span>
-      <span class="item-fields flex items-center gap-1">
-        <button type="button" class="qty-minus w-6 h-6 rounded-full bg-leaf-50 hover:bg-leaf-100 text-leaf-700 text-sm font-bold shrink-0" data-item="${it.key}">−</button>
-        <input type="number" min="0" value="${it.defQty}" class="qty-input w-10 text-center border border-leaf-200 rounded-lg py-1 text-sm" data-item="${it.key}">
-        <button type="button" class="qty-plus w-6 h-6 rounded-full bg-leaf-50 hover:bg-leaf-100 text-leaf-700 text-sm font-bold shrink-0" data-item="${it.key}">+</button>
-      </span>
-      <span class="item-fields">
-        <input type="number" min="0" step="0.1" value="${it.defHours}" class="hours-input w-full text-center border border-leaf-200 rounded-lg py-1.5 text-sm" data-item="${it.key}">
-      </span>
-      <span class="item-fields item-wh text-sm font-semibold text-leaf-800" data-item="${it.key}">০</span>
-    </div>
-  </label>`;
-}
-
-function buildRadioGroup(containerId, options, name){
-  const el = document.getElementById(containerId);
-  el.innerHTML = options.map((o,i) => `
-    <label class="pill-radio cursor-pointer">
-      <input type="radio" name="${name}" value="${o.key}" class="sr-only" ${i===0?'checked':''}>
-      <div class="pill-label bg-leaf-50 hover:bg-leaf-100 rounded-2xl px-5 py-3 text-center min-w-[120px]">
-        <div class="font-semibold text-ink-800">${o.label}</div>
-        <div class="pill-sub text-xs text-ink-700/60 mt-0.5">${o.sub}</div>
-      </div>
-    </label>
-  `).join('');
-}
-
-function findItemMeta(key){
-  for (const cat of LOAD_CATEGORIES){
-    const it = cat.items.find(i => i.key === key);
-    if (it) return { item: it, cat };
-  }
-  return null;
-}
-
-function getSelectedLoadItems(){
-  const checks = document.querySelectorAll('.item-check:checked');
-  return Array.from(checks).map(c => {
-    const key = c.dataset.item;
-    const meta = findItemMeta(key).item;
-    const cap = parseFloat(document.querySelector(`.cap-select[data-item="${key}"]`).value || '0');
-    const qty = Math.max(0, parseInt(document.querySelector(`.qty-input[data-item="${key}"]`).value || '0', 10));
-    const hours = Math.max(0, parseFloat(document.querySelector(`.hours-input[data-item="${key}"]`).value || '0'));
-    return { key, cap, qty, hours, wh: cap * qty * hours };
-  });
-}
-
-function getMultiplier(name, list){
-  const checked = document.querySelector(`input[name="${name}"]:checked`);
-  const opt = list.find(o => o.key === (checked ? checked.value : list[0].key));
-  return opt.mult;
-}
-
-function calcDailykWh(){
-  const items = getSelectedLoadItems();
-  const wh = items.reduce((sum, i) => sum + i.wh, 0);
-  const houseMult = getMultiplier('house', HOUSE_OPTIONS);
-  const backupMult = getMultiplier('backup', BACKUP_OPTIONS);
-  return (wh * houseMult * backupMult) / 1000;
-}
-
-function refreshLoadDisplays(){
-  document.querySelectorAll('.item-check').forEach(cb => {
-    const key = cb.dataset.item;
-    const whEl = document.querySelector(`.item-wh[data-item="${key}"]`);
-    if (!whEl) return;
-    if (!cb.checked){ whEl.textContent = '০'; return; }
-    const cap = parseFloat(document.querySelector(`.cap-select[data-item="${key}"]`).value || '0');
-    const qty = Math.max(0, parseInt(document.querySelector(`.qty-input[data-item="${key}"]`).value || '0', 10));
-    const hours = Math.max(0, parseFloat(document.querySelector(`.hours-input[data-item="${key}"]`).value || '0'));
-    whEl.textContent = bnNum(Math.round(cap * qty * hours));
-  });
-  document.querySelectorAll('.cat-card').forEach(card => {
-    const catKey = card.dataset.cat;
-    const cat = LOAD_CATEGORIES.find(c => c.key === catKey);
-    let sub = 0;
-    cat.items.forEach(it => {
-      const cb = document.querySelector(`.item-check[data-item="${it.key}"]`);
-      if (cb && cb.checked){
-        const cap = parseFloat(document.querySelector(`.cap-select[data-item="${it.key}"]`).value || '0');
-        const qty = Math.max(0, parseInt(document.querySelector(`.qty-input[data-item="${it.key}"]`).value || '0', 10));
-        const hours = Math.max(0, parseFloat(document.querySelector(`.hours-input[data-item="${it.key}"]`).value || '0'));
-        sub += cap * qty * hours;
-      }
-    });
-    card.querySelector('.cat-subtotal').textContent = `${bnNum(Math.round(sub))} Wh/day`;
-  });
-}
-
-function matchPackage(neededkWh){
-  const sorted = [...PACKAGES].sort((a,b) => a.kw - b.kw);
-  for (const p of sorted){
-    if (neededkWh <= p.dailyMax) return p;
-  }
-  return sorted[sorted.length - 1];
-}
-
-function setDial(arcEl, valueEl, kWh, maxScale, circumference){
-  const ratio = Math.min(kWh / maxScale, 1);
-  arcEl.setAttribute('stroke-dashoffset', String(circumference * (1 - ratio)));
-  if (valueEl) valueEl.textContent = kWh.toLocaleString('bn-BD', { maximumFractionDigits: 1, minimumFractionDigits: 1 });
-}
-
-function refreshLivePreview(){
-  refreshLoadDisplays();
-  const kWh = calcDailykWh();
-  setDial(document.getElementById('liveDialArc'), document.getElementById('livekWh'), kWh, 50, 251);
-  setDial(document.getElementById('heroDialArc'), document.getElementById('heroDialValue'), kWh, 50, 515);
-}
-
-/* ================== PACKAGE CARDS ================== */
-function renderPackages(){
-  const wrap = document.getElementById('tierContainer');
-  wrap.innerHTML = TIER_ORDER.map(tier => {
-    const items = PACKAGES.filter(p => p.tier === tier);
-    return `
-      <div>
-        <div class="flex items-center gap-3 mb-5">
-          <span class="font-display text-lg text-leaf-800">${items[0].tierBn}</span>
-          <span class="h-px flex-1 bg-leaf-100"></span>
-        </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          ${items.map(p => packageCardHtml(p)).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function packageCardHtml(p){
-  return `
-  <div id="card-${p.id}" class="pkg-card relative bg-white border border-leaf-100 rounded-3xl shadow-card overflow-hidden">
-    <div class="h-1.5 bg-gradient-to-r from-leaf-500 to-sun-400"></div>
-    ${p.popular ? `<span class="absolute top-4 right-4 bg-gold-400 text-leaf-900 text-[11px] font-bold px-3 py-1 rounded-full">সবচেয়ে জনপ্রিয়</span>` : ''}
-    <div class="p-6">
-      <span class="text-sun-600 font-semibold text-sm">${p.kw} kW</span>
-      <h3 class="font-display text-2xl text-leaf-900 mt-1">${p.nameBn}</h3>
-      <p class="text-ink-700/70 text-sm italic">"${p.nameBn}" — ${p.nameEn}</p>
-      <p class="text-ink-700 text-sm mt-2">${p.tagline}</p>
-
-      <ul class="mt-4 space-y-1.5 text-sm text-ink-800">
-        ${p.equipment.map(e => `<li class="flex gap-2"><span class="text-leaf-500">●</span>${e}</li>`).join('')}
-      </ul>
-
-      <div class="mt-4 flex items-center justify-between text-sm bg-leaf-50 rounded-xl px-3 py-2">
-        <span class="text-ink-700">দৈনিক উৎপাদন</span>
-        <span class="font-semibold text-leaf-800">${bnNum(p.dailyMin)}–${bnNum(p.dailyMax)} ইউনিট/দিন</span>
-      </div>
-
-      <div class="mt-4">
-        <p class="text-xs text-ink-700/60">আনুমানিক মূল্য</p>
-        <p class="font-display text-lg text-leaf-800">${taka(p.priceMin)} – ${taka(p.priceMax)}</p>
-      </div>
-
-      <button class="book-btn mt-5 w-full bg-leaf-700 hover:bg-leaf-800 text-white font-semibold py-2.5 rounded-full" data-pkg="${p.nameBn} (${p.kw}kW)">বুক করুন</button>
-    </div>
-  </div>`;
-}
-
-/* ================== RESULT ================== */
-function showResult(p, neededkWh){
-  const box = document.getElementById('resultBox');
-  const content = document.getElementById('resultContent');
-  content.innerHTML = `
-    <div class="grid sm:grid-cols-[1fr_auto] gap-6 items-center">
-      <div>
-        <p class="text-ink-700 text-sm">আপনার আনুমানিক প্রয়োজন: <span class="font-semibold text-leaf-800">${neededkWh.toLocaleString('bn-BD',{maximumFractionDigits:1})} ইউনিট/দিন</span></p>
-        <h3 class="font-display text-2xl text-leaf-900 mt-2">${p.nameBn} <span class="text-base text-ink-700/60">(${p.kw} kW) — ${p.nameEn}</span></h3>
-        <p class="text-ink-700 mt-1">${p.tagline}</p>
-        <p class="text-sm text-ink-700 mt-3"><strong>উপযুক্ত:</strong> ${p.suitable}</p>
-        <p class="font-display text-lg text-leaf-800 mt-2">${taka(p.priceMin)} – ${taka(p.priceMax)}</p>
-      </div>
-      <button id="resultBookBtn" data-pkg="${p.nameBn} (${p.kw}kW)" class="book-btn bg-sun-500 hover:bg-sun-600 text-white font-semibold px-6 py-3 rounded-full whitespace-nowrap">এই প্যাকেজ বুক করুন</button>
-    </div>
-  `;
-  box.classList.remove('hidden');
-  box.scrollIntoView({ behavior:'smooth', block:'center' });
-
-  const card = document.getElementById(`card-${p.id}`);
-  if (card){
-    setTimeout(() => {
-      card.classList.add('pkg-highlight', 'ring-2', 'ring-sun-400');
-    }, 600);
-  }
-}
-
-/* ================== MODAL / TOAST ================== */
-const modal = document.getElementById('contactModal');
-let modalPurpose = null; 
-let pendingBookPkg = null;
-
-function openModal(purpose, pkgName){
-  modalPurpose = purpose;
-  pendingBookPkg = pkgName || null;
-  document.getElementById('modalTitle').textContent = purpose === 'book' ? 'প্যাকেজ বুক করুন' : 'আপনার প্যাকেজ দেখার জন্য তথ্য দিন';
-  document.getElementById('modalSub').textContent = purpose === 'book'
-    ? `আপনি "${pkgName}" প্যাকেজের জন্য আগ্রহ প্রকাশ করছেন।`
-    : 'ফলাফল দেখানোর আগে আপনার যোগাযোগের তথ্যটি দিন।';
-  document.getElementById('contactForm').reset();
-  document.getElementById('phoneError').classList.add('hidden');
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
-}
-
-function closeModalFn(){
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.remove('opacity-0','translate-y-4');
-  setTimeout(() => t.classList.add('opacity-0','translate-y-4'), 3200);
-}
-
-document.getElementById('closeModal').addEventListener('click', closeModalFn);
-modal.addEventListener('click', e => { if (e.target === modal) closeModalFn(); });
-
-document.getElementById('contactForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const name = document.getElementById('inputName').value.trim();
-  const phone = document.getElementById('inputPhone').value.trim();
-  const phoneOk = /^01[3-9]\d{8}$/.test(phone);
-  if (!phoneOk){
-    document.getElementById('phoneError').classList.remove('hidden');
-    return;
-  }
-  document.getElementById('phoneError').classList.add('hidden');
-  closeModalFn();
-
-  if (modalPurpose === 'calculate'){
-    const kWh = calcDailykWh();
-    const pkg = matchPackage(kWh);
-    showResult(pkg, kWh);
-    showToast(`ধন্যবাদ ${name}! আপনার প্যাকেজ নিচে দেখানো হয়েছে।`);
-  } else {
-    showToast(`ধন্যবাদ ${name}! "${pendingBookPkg}" প্যাকেজের জন্য আমরা শীঘ্রই যোগাযোগ করব।`);
-  }
-});
-
-/* ================== EVENTS ================== */
-function attachLoadEvents(){
-  document.querySelectorAll('.cat-header').forEach(header => {
-    header.addEventListener('click', () => {
-      header.closest('.cat-card').classList.toggle('open');
-    });
-  });
-  document.getElementById('expandAllBtn').addEventListener('click', () => {
-    const cards = document.querySelectorAll('.cat-card');
-    const allOpen = Array.from(cards).every(c => c.classList.contains('open'));
-    cards.forEach(c => c.classList.toggle('open', !allOpen));
-    document.getElementById('expandAllBtn').textContent = allOpen ? 'সব ক্যাটাগরি খুলুন' : 'সব ক্যাটাগরি বন্ধ করুন';
-  });
-
-  document.querySelectorAll('.item-check').forEach(cb => {
-    cb.addEventListener('change', refreshLivePreview);
-  });
-  document.querySelectorAll('.cap-select, .hours-input').forEach(el => {
-    el.addEventListener('change', refreshLivePreview);
-    el.addEventListener('input', refreshLivePreview);
-  });
-  document.querySelectorAll('.qty-input').forEach(inp => inp.addEventListener('input', refreshLivePreview));
-  document.querySelectorAll('.qty-plus').forEach(btn => btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const inp = document.querySelector(`.qty-input[data-item="${btn.dataset.item}"]`);
-    inp.value = (parseInt(inp.value||'0',10) + 1);
-    const cb = document.querySelector(`.item-check[data-item="${btn.dataset.item}"]`);
-    if (cb && !cb.checked) cb.checked = true;
-    refreshLivePreview();
-  }));
-  document.querySelectorAll('.qty-minus').forEach(btn => btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const inp = document.querySelector(`.qty-input[data-item="${btn.dataset.item}"]`);
-    inp.value = Math.max(0, parseInt(inp.value||'0',10) - 1);
-    refreshLivePreview();
-  }));
-}
-
-function attachRadioEvents(){
-  document.querySelectorAll('input[name="house"], input[name="backup"]').forEach(r => {
-    r.addEventListener('change', refreshLivePreview);
-  });
-}
-
-function attachBookButtons(){
-  document.body.addEventListener('click', e => {
-    const btn = e.target.closest('.book-btn');
-    if (btn) openModal('book', btn.dataset.pkg);
-  });
-}
-
-document.getElementById('findPackageBtn').addEventListener('click', () => {
-  const items = getSelectedLoadItems();
-  const anySelected = items.length > 0;
-  const errEl = document.getElementById('formError');
-  if (!anySelected){
-    errEl.classList.remove('hidden');
-    return;
-  }
-  errEl.classList.add('hidden');
-  openModal('calculate');
-});
-
-/* ================== INIT ================== */
-buildLoadAccordion();
-buildRadioGroup('backupGroup', BACKUP_OPTIONS, 'backup');
-buildRadioGroup('houseGroup', HOUSE_OPTIONS, 'house');
-renderPackages();
-attachLoadEvents();
-attachRadioEvents();
-attachBookButtons();
-refreshLivePreview();
+    window.djangoBackendData = JSON.parse('{{ appliances_json|safe }}');
 </script>
+<script src="{% static 'solar_designer/js/calculator.js' %}"></script>
 </body>
 </html>

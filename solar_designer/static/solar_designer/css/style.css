@@ -1,433 +1,192 @@
-:root{
-    --primary:#2563eb;
-    --secondary:#0f172a;
-    --success:#22c55e;
-    --warning:#f59e0b;
-
-    --bg:#f6f8fc;
-    --card:#ffffff;
-    --text:#1e293b;
-
-    --radius:24px;
+/* ================== TAILWIND CUSTOM CONFIGS & OVERRIDES ================== */
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        font-family: 'Hind Siliguri', sans-serif;
+        background-color: #f3f4f6; /* 👈 ফুল পেজের কাস্টম ব্যাকগ্রাউন্ড কালার */
+        color: #22302A;
+    }
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+.font-display {
+    font-family: 'Baloo Da 2', sans-serif;
 }
 
-body{
-    font-family:'Outfit',sans-serif;
-    background:var(--bg);
-    color:var(--text);
+::selection {
+    background: #BFEBCE;
 }
 
-
-.hero-section{
-
-    padding:90px 0;
-
+/* Custom Tailwind Colors Configuration Simulation via Utility injection */
+:root {
+    --color-leaf-50: #F2FBF5;
+    --color-leaf-100: #E3F7EA;
+    --color-leaf-200: #BFEBCE;
+    --color-leaf-500: #3CAE66;
+    --color-leaf-700: #236F40;
+    --color-leaf-800: #1B4332;
+    --color-leaf-900: #123326;
+    --color-sun-400: #FB923C;
+    --color-sun-500: #F2730E;
+    --color-sun-600: #D85F08;
+    --color-gold-400: #F2C94C;
 }
 
-.hero-badge{
-
-    background:#E0F2FE;
-
-    color:#2563EB;
-
-    padding:12px 18px;
-
-    border-radius:50px;
-
-    font-weight:600;
-
+/* Dial & Ray Animations */
+.dial-track {
+    stroke: #E3F7EA;
 }
 
-.hero-title{
-
-    font-size:62px;
-
-    font-weight:800;
-
-    line-height:1.1;
-
-    margin-top:25px;
-
+.dial-arc {
+    stroke: url(#dialGradient);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.7s cubic-bezier(.4, 0, .2, 1);
 }
 
-.hero-title span{
-
-    color:#2563EB;
-
+@keyframes spin-slow {
+    to { transform: rotate(360deg); }
 }
 
-.hero-text{
-
-    font-size:20px;
-
-    color:#64748B;
-
-    margin-top:25px;
-
-    max-width:550px;
-
+.ray {
+    animation: spin-slow 22s linear infinite;
+    transform-origin: center;
 }
 
-.btn-start{
-
-    margin-top:35px;
-
-    background:linear-gradient(135deg,#2563EB,#4F46E5);
-
-    color:white;
-
-    padding:18px 36px;
-
-    border-radius:16px;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    transition:.3s;
-
+/* Radio Option Cards */
+.pill-radio input:checked + .pill-label {
+    background: #1B4332;
+    color: #fff;
+    box-shadow: 0 6px 14px -6px rgba(27, 67, 50, .55);
 }
 
-.btn-start:hover{
-
-    transform:translateY(-4px);
-
-    color:white;
-
+.pill-radio input:checked + .pill-label .pill-sub {
+    color: #BFEBCE;
 }
 
-.hero-image{
-
-    width:100%;
-
-    max-width:520px;
-
+.pill-label {
+    transition: all .2s ease;
 }
 
-.stats-section{
-
-    margin-top:-30px;
-
+/* Accordion Effects */
+.cat-card {
+    transform-style: preserve-3d;
+    transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.stat-card{
-
-    background:#fff;
-
-    border-radius:24px;
-
-    padding:30px;
-
-    text-align:center;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-    height:100%;
-
+.cat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 34px -18px rgba(27, 67, 50, .35);
 }
 
-.stat-card:hover{
-
-    transform:translateY(-8px);
-
+.cat-header {
+    cursor: pointer;
 }
 
-.icon{
-
-    width:70px;
-
-    height:70px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin:auto;
-
-    font-size:28px;
-
-    color:white;
-
-    margin-bottom:20px;
-
+.cat-chevron {
+    transition: transform .25s ease;
 }
 
-.blue{
-    background:#2563EB;
+.cat-card.open .cat-chevron {
+    transform: rotate(90deg);
 }
 
-.orange{
-    background:#F59E0B;
+.cat-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .35s ease;
 }
 
-.green{
-    background:#10B981;
+.cat-card.open .cat-body {
+    max-height: 3000px;
 }
 
-.purple{
-    background:#7C3AED;
+/* Item Rows Interaction */
+.item-row {
+    transition: background .15s ease, box-shadow .15s ease, transform .15s ease;
 }
 
-.stat-card h6{
-
-    color:#64748B;
-
-    margin-bottom:10px;
-
+.item-check:checked ~ .item-row {
+    background: #F2FBF5;
+    box-shadow: inset 4px 0 0 #3CAE66;
 }
 
-.stat-card h2{
-
-    font-size:34px;
-
-    font-weight:700;
-
+.item-check:checked ~ .item-row .item-fields {
+    opacity: 1;
+    pointer-events: auto;
 }
 
-.calculator-section{
-    background:#fff;
+.item-fields {
+    opacity: .35;
+    pointer-events: none;
+    transition: opacity .15s ease;
 }
 
-.appliance-card{
-
-    background:#fff;
-
-    border-radius:20px;
-
-    padding:30px 20px;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.06);
-
-    border:1px solid #EEF2F7;
-
+.item-row:hover {
+    transform: translateZ(2px);
 }
 
-.appliance-card:hover{
-
-    transform:translateY(-8px);
-
-    border-color:#2563EB;
-
+select.cap-select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23236F40'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right .8rem center;
 }
 
-.appliance-card i{
-
-    font-size:40px;
-
-    color:#2563EB;
-
-    margin-bottom:20px;
-
+/* Package Interaction */
+.pkg-card {
+    transition: transform .25s ease, box-shadow .25s ease;
 }
 
-.appliance-card h5{
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
+.pkg-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 40px -20px rgba(27, 67, 50, .35);
 }
 
-.appliance-card small{
-
-    color:#64748B;
-
+.pkg-highlight {
+    animation: glow 1.8s ease-in-out 2;
 }
 
-.quick-actions{
-
-    background:#fff;
-
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(242, 115, 14, 0); }
+    50% { box-shadow: 0 0 0 8px rgba(242, 115, 14, .18); }
 }
 
-.tool-card{
-
-    display:block;
-
-    text-decoration:none;
-
-    background:#fff;
-
-    border-radius:24px;
-
-    padding:35px 25px;
-
-    text-align:center;
-
-    color:#111827;
-
-    transition:.35s;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.06);
-
-    border:1px solid #EEF2F7;
-
+/* Modal Effects */
+.modal-overlay {
+    backdrop-filter: blur(4px);
 }
 
-.tool-card:hover{
-
-    transform:translateY(-10px);
-
-    color:#2563EB;
-
+.modal-card {
+    animation: pop .25s ease;
 }
 
-.tool-icon{
-
-    width:80px;
-
-    height:80px;
-
-    border-radius:20px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin:auto;
-
-    color:white;
-
-    font-size:32px;
-
-    margin-bottom:20px;
-
+@keyframes pop {
+    from { opacity: 0; transform: translateY(10px) scale(.98); }
+    to { opacity: 1; transform: none; }
 }
 
-.tool-card h4{
-
-    font-weight:700;
-
+#toast {
+    transition: opacity .3s ease, transform .3s ease;
 }
 
-.tool-card p{
-
-    color:#64748B;
-
-    margin-top:10px;
-
+/* Nav Links Animation */
+.nav-link {
+    position: relative;
 }
 
-.calculator-page{
-
-padding:70px 0;
-
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 0%;
+    background: #F2730E;
+    transition: width .2s ease;
 }
 
-.device-card{
-
-background:#fff;
-
-border-radius:24px;
-
-padding:30px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.08);
-
-transition:.35s;
-
-height:100%;
-
-}
-
-.device-card:hover{
-
-transform:translateY(-6px);
-
-}
-
-.device-top{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-}
-
-.device-icon{
-
-width:70px;
-
-height:70px;
-
-background:#2563EB;
-
-border-radius:20px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-color:white;
-
-font-size:28px;
-
-}
-
-.yellow{
-
-background:#F59E0B;
-
-}
-
-.device-footer{
-
-margin-top:20px;
-
-font-weight:700;
-
-color:#2563EB;
-
-}
-
-.summary-card{
-
-background:white;
-
-padding:35px;
-
-border-radius:24px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.08);
-
-position:sticky;
-
-top:100px;
-
-}
-
-.summary-item{
-
-display:flex;
-
-justify-content:space-between;
-
-margin:22px 0;
-
-font-size:18px;
-
+.nav-link:hover::after {
+    width: 100%;
 }

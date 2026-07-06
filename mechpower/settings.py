@@ -156,18 +156,22 @@ USE_TZ = True
 # STATIC FILES (DYNAMIC CONFIGURATION)
 # ==================================
 
+# ==================================
+# STATIC FILES (DYNAMIC CONFIGURATION)
+# ==================================
+
 STATIC_URL = "/static/"
 
 if DEBUG:
-    # লোকাল কম্পিউটারে রান করার সময় সরাসরি এখান থেকে সিএসএস লোড হবে
+    # লোকাল কম্পিউটারে রান করার সময় সরাসরি এখান থেকে সিএসএস লোড হবে
     STATICFILES_DIRS = [
         BASE_DIR / "static",
     ]
+    STATIC_ROOT = BASE_DIR / "staticfiles"
 else:
-    # লাইভ সার্ভারে রান করার সময় হোয়াইটনয়েজ এখান থেকে ক্যাশড সিএসএস লোড করবে
+    # লাইভ সার্ভারে রান করার সময় হোয়াইটনয়েজ এখান থেকে ক্যাশড সিএসএস লোড করবে
     STATIC_ROOT = '/home/siteposz/mechpower/staticfiles'
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # ==================================
 # MEDIA FILES
